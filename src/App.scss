@@ -1,7 +1,13 @@
-$body-bg: #ebe4e4;
-$body-color: #e9e2e2;
+// Importe os arquivos SCSS do Bootstrap e BootstrapVue
+@import '~bootstrap/scss/bootstrap.scss';
+@import '~bootstrap-vue/src/index.scss';
+
+
+$dark-body-bg:#ffffff;
+$dark-body-color:  #ffffff;
 $custom-control-indicator-size: 1rem;
 
-// Then import Bootstrap and BootstrapVue SCSS files (order is important)
-@import 'node_modules/bootstrap/scss/bootstrap.scss';
-@import 'node_modules/bootstrap-vue/src/index.scss';
+body {
+  background-color: #141414;
+  color: rgb(255 255 255 / 81%);
+}
