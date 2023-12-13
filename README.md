@@ -4,6 +4,7 @@
 ```
 npm install
 ```
+npm install bootstrap-vue bootstrap @fortawesome/fontawesome-svg-core @fortawesome/vue-fontawesome @fortawesome/free-solid-svg-icons @fortawesome/free-brands-svg-icons
 
 ### Compiles and hot-reloads for development
 ```

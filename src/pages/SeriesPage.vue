@@ -1,28 +1,31 @@
 <template>
-  <div>
-    <h1>Exemple text</h1>
-    <!--   <div>
-      <b-img src="https://i.postimg.cc/FHfw4rSw/round-6-jpg.webp" fluid-grow alt="Fluid-grow image"></b-img>
-    </div> -->
-    <movies-section :movies="movies" />
-    <div>
-  <b-embed
-    type="iframe"
-    aspect="16by9"
-    src="https://www.youtube.com/embed/zpOULjyy-n8?rel=0"
-    allowfullscreen
-  ></b-embed>
-</div>
+  <div class="seriesPage">
+    <carousel-component :slides="slides" />
+    <!--     <b-card-text>Titulo</b-card-text> -->
+    <categories-component :movies="movies" />
+    <!-- text -->
+    <movies-section :movies="movies" class="mt-5" />
+    <!--     <b-card-text>Titulo</b-card-text> -->
+    <movies-section :movies="movies" class="mt-5" />
+    <!--     <b-card-text>Titulo</b-card-text> -->
+    <movies-section :movies="movies" class="mt-5" />
+
+    <nav-bar />
   </div>
 </template>
 
-
 <script>
 import MoviesSection from '@/components/MoviesSection.vue'
+import CarouseComponent from '@/components/CarouseComponent.vue'
+import CategoriasComponentVue from '@/components/CategoriasComponent.vue'
+import NavBar from '@/components/NavBarComponent.vue'
 export default {
-  name: 'TrainingView',
+  name: 'SeriesPage',
   components: {
+    'categories-component': CategoriasComponentVue,
     'movies-section': MoviesSection,
+    'carousel-component': CarouseComponent,
+    'nav-bar': NavBar,
   },
   data() {
     return {
@@ -55,28 +58,28 @@ export default {
           banner:
             'https://4329028l.ha.azioncdn.net/img/2021/01/blog/97960/blog-deus-nao-esta-morto-1-easy-resize-com.jpg',
         },
-        { id: 1, banner: 'https://i.postimg.cc/FHfw4rSw/round-6-jpg.webp' },
+        { id: 7, banner: 'https://i.postimg.cc/FHfw4rSw/round-6-jpg.webp' },
         {
-          id: 2,
+          id: 8,
           banner: 'https://t.ctcdn.com.br/tVW4FExOvyqJxDqrLxPKJAbAwVc=/640x360/smart/i348994.jpeg',
         },
         {
-          id: 3,
+          id: 9,
           banner:
             'https://4329028l.ha.azioncdn.net/img/2021/01/blog/97961/blog-deus-nao-esta-morto-easy-resize-com.jpg',
         },
         {
-          id: 4,
+          id: 10,
           banner:
             'https://4329028l.ha.azioncdn.net/img/2021/01/blog/97960/blog-deus-nao-esta-morto-1-easy-resize-com.jpg',
         },
         {
-          id: 5,
+          id: 11,
           banner:
             'https://bibliotecadopregador.com.br/wp-content/uploads/2022/04/filme-evangelico-Eu-so-posso-imaginar.jpg',
         },
         {
-          id: 6,
+          id: 12,
           banner:
             'https://4329028l.ha.azioncdn.net/img/2021/01/blog/97960/blog-deus-nao-esta-morto-1-easy-resize-com.jpg',
         },
@@ -101,16 +104,8 @@ export default {
   },
 }
 </script>
-
-
-<style scoped>
-.img-fluid {
-  position: static;
-  margin-top: -5%;
-}
-
-.bg-transparent {
-  position: static;
-  top: 0;
+<style>
+.carousel-component {
+  z-index: 0;
 }
 </style>

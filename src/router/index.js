@@ -16,6 +16,26 @@ const routes = [
         name: 'home',
         component: HomeView,
       },
+      {
+        path: '/about',
+        name: 'about',
+        component: () => import(/* webpackChunkName: "about" */ '../views/AboutView.vue'),
+      },
+      {
+        path: '/training',
+        name: 'training',
+        component: () => import(/* webpackChunkName: "training" */ '../pages/TrainingView.vue'),
+      },
+      {
+        path: '/series',
+        name: 'SeriesPage',
+        component: () => import(/* webpackChunkName: "series" */ '../pages/SeriesPage.vue'),
+      },
+      {
+        path: '/movies',
+        name: 'MoviesPage',
+        component: () => import(/* webpackChunkName: "movies" */ '../pages/MoviesPage.vue'),
+      },
     ],
   },
 ]
