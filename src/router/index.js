@@ -1,42 +1,39 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import HomeView from '../views/HomeView.vue'
-import AppLayout from '../components/AppLayout.vue'
 
 Vue.use(VueRouter)
 
 const routes = [
   {
     path: '/',
-    name: 'AppLayout',
-    component: AppLayout,
-    children: [
-      {
-        path: '/',
-        name: 'home',
-        component: HomeView,
-      },
-      {
-        path: '/about',
-        name: 'about',
-        component: () => import(/* webpackChunkName: "about" */ '../views/AboutView.vue'),
-      },
-      {
-        path: '/training',
-        name: 'training',
-        component: () => import(/* webpackChunkName: "training" */ '../pages/TrainingView.vue'),
-      },
-      {
-        path: '/series',
-        name: 'SeriesPage',
-        component: () => import(/* webpackChunkName: "series" */ '../pages/SeriesPage.vue'),
-      },
-      {
-        path: '/movies',
-        name: 'MoviesPage',
-        component: () => import(/* webpackChunkName: "movies" */ '../pages/MoviesPage.vue'),
-      },
-    ],
+    name: 'home',
+    component: HomeView,
+  },
+  {
+    path: '/about',
+    name: 'about',
+    component: () => import(/* webpackChunkName: "about" */ '../views/AboutView.vue'),
+  },
+  {
+    path: '/training',
+    name: 'training',
+    component: () => import(/* webpackChunkName: "training" */ '../pages/TrainingView.vue'),
+  },
+  {
+    path: '/series',
+    name: 'SeriesPage',
+    component: () => import(/* webpackChunkName: "series" */ '../pages/SeriesPage.vue'),
+  },
+  {
+    path: '/movies',
+    name: 'MoviesPage',
+    component: () => import(/* webpackChunkName: "movies" */ '../pages/MoviesPage.vue'),
+  },
+  {
+    path: '/loginPage',
+    name: 'LoginPage',
+    component: () => import(/* webpackChunkName: "loginPage" */ '../pages/LoginPage.vue'),
   },
 ]
 
