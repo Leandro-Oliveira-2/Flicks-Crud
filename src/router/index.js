@@ -7,33 +7,45 @@ Vue.use(VueRouter)
 const routes = [
   {
     path: '/',
-    name: 'home',
-    component: HomeView,
-  },
-  {
-    path: '/about',
-    name: 'about',
-    component: () => import(/* webpackChunkName: "about" */ '../views/AboutView.vue'),
-  },
-  {
-    path: '/training',
-    name: 'training',
-    component: () => import(/* webpackChunkName: "training" */ '../pages/TrainingView.vue'),
-  },
-  {
-    path: '/series',
-    name: 'SeriesPage',
-    component: () => import(/* webpackChunkName: "series" */ '../pages/SeriesPage.vue'),
-  },
-  {
-    path: '/movies',
-    name: 'MoviesPage',
-    component: () => import(/* webpackChunkName: "movies" */ '../pages/MoviesPage.vue'),
+    name: 'AppLayout',
+    component: () => import(/* webpackChunkName: "appLayout" */ '../components/AppLayout.vue'),
+    children: [
+      {
+        path: '/',
+        name: 'home',
+        component: HomeView,
+      },
+      {
+        path: '/about',
+        name: 'about',
+        component: () => import(/* webpackChunkName: "about" */ '../views/AboutView.vue'),
+      },
+      {
+        path: '/training',
+        name: 'training',
+        component: () => import(/* webpackChunkName: "training" */ '../pages/TrainingView.vue'),
+      },
+      {
+        path: '/series',
+        name: 'SeriesPage',
+        component: () => import(/* webpackChunkName: "series" */ '../pages/SeriesPage.vue'),
+      },
+      {
+        path: '/movies',
+        name: 'MoviesPage',
+        component: () => import(/* webpackChunkName: "movies" */ '../pages/MoviesPage.vue'),
+      },
+    ],
   },
   {
     path: '/loginPage',
     name: 'LoginPage',
     component: () => import(/* webpackChunkName: "loginPage" */ '../pages/LoginPage.vue'),
+  },
+  {
+    path: '/registerPage',
+    name: 'RegisterUser',
+    component: () => import(/* webpackChunkName: "registerPage" */ '../pages/RegisterUser.vue'),
   },
 ]
 

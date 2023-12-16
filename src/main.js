@@ -11,20 +11,7 @@ import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 import { faCoffee } from '@fortawesome/free-solid-svg-icons'
 import { faFontAwesome } from '@fortawesome/free-brands-svg-icons'
 import { fas } from '@fortawesome/free-solid-svg-icons'
-import { initializeApp } from 'firebase/app'
-import { getAuth } from 'firebase/auth'
-const firebaseConfig = {
-  apiKey: 'AIzaSyDiD9azitPPfnTYGiuynjMxnWmXXXWizSc',
-  authDomain: 'snetflix-e23f0.firebaseapp.com',
-  projectId: 'snetflix-e23f0',
-  storageBucket: 'snetflix-e23f0.appspot.com',
-  messagingSenderId: '894512735645',
-  appId: '1:894512735645:web:34b40dc7c2d7fa63abbb74',
-  measurementId: 'G-LB7YHQM1CV',
-}
 
-const app = initializeApp(firebaseConfig)
-export const appAuth = getAuth(app)
 library.add(faCoffee, faFontAwesome)
 library.add(fas)
 Vue.component('font-awesome-icon', FontAwesomeIcon)

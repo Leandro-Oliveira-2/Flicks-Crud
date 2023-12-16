@@ -5,55 +5,78 @@
         <img center class="desktop-image" src="../../public/Images/Frame.png" alt="Kitten" />
         <span>Faça login e comece a usar</span>
       </b-navbar-brand>
-      <b-row class="form">
-        <b-col sm="12">
-          <div class="my-1">
-            <b-card-title>Endereço de e-mail</b-card-title>
-            <div class="input-icon">
-              <input
-                class="icon-input"
+      <b-form class="d-flex flex-column mb-3 justify-content-center">
+        <b-row class="mb-4">
+          <b-row>
+            <b-col>
+              <input-component
+                :icon="'envelope'"
+                :label="'E-mail'"
+                v-model="email"
                 type="email"
                 placeholder=" jhondoe@example.com"
+              />
+            </b-col>
+            <b-col>
+              <input-component :icon="'circle-user'" :label="'Nome'" v-model="password" />
+            </b-col>
+          </b-row>
+          <b-row>
+            <b-col>
+              <input-component
+                :icon="'address-card'"
+                :label="'CPF'"
+                placeholder="  ###.###.###-##"
                 v-model="email"
               />
-              <font-awesome-icon icon="envelope" class="icon" />
-            </div>
-          </div>
-        </b-col>
-        <b-col sm="12">
-          <div class="my-1">
-            <b-card-title>Sua senha</b-card-title>
-            <div class="input-icon">
-              <input
-                class="icon-input"
-                type="password"
+            </b-col>
+            <b-col>
+              <input-component
+                :icon="'calendar-xmark'"
+                :label="'Data Nascimento'"
                 placeholder=" jhondoe@example.com"
                 v-model="password"
               />
-              <font-awesome-icon icon="unlock" class="icon" />
-            </div>
-          </div>
-        </b-col>
-        <button v-on:click="login(email, password)">Login</button>
-        <div class="row g-0">
-          <div class="col-md-7 d-flex align-items-center">
-            <font-awesome-icon
-              icon="square-check"
-              style="color: #242629"
-              class="align-self-center"
-            />
-            <b-card-title class="ml-2">Continuar logado?</b-card-title>
-          </div>
-        </div>
-      </b-row>
+            </b-col>
+          </b-row>
+          <b-row>
+            <b-col>
+              <input-component
+                :icon="'unlock'"
+                aria-placeholder="***********"
+                :label="'Senha'"
+                v-model="email"
+                :type="password"
+              />
+            </b-col>
+            <b-col>
+              <input-component
+                :icon="'unlock'"
+                aria-placeholder="***********"
+                :label="'Confirme a Senha'"
+                v-model="email"
+                :type="password"
+              />
+            </b-col>
+          </b-row>
+        </b-row>
+        <b-row class="flex-column">
+          <ButtonComponent :body-text="'Continue'" @click="log()" class="mb-3" />
+          <ButtonComponent :body-text="'Voltar ao login'" :color="'input-theme'" @click="log()" />
+        </b-row>
+      </b-form>
     </b-container>
   </div>
 </template>
-
 <script>
-import login from '../services/fireBaseConfig.js'
+import InputComponet from '@/components/InputComponet.vue'
+import ButtonComponent from '@/components/ButtonComponent.vue'
 export default {
-  name: 'LoginPage',
+  name: 'RegisterUser',
+  components: {
+    'input-component': InputComponet,
+    ButtonComponent,
+  },
   data() {
     return {
       email: '',
@@ -61,14 +84,8 @@ export default {
     }
   },
   methods: {
-    async login(email, password) {
-      try {
-        const userCredential = await login(email, password)
-        localStorage.setItem('user', JSON.stringify(userCredential.user))
-        console.log(userCredential.user)
-      } catch (error) {
-        alert(error)
-      }
+    log() {
+      alert(this.email + ' ' + this.password)
     },
   },
 }
@@ -90,11 +107,9 @@ export default {
   align-items: center; /* Alinha verticalmente ao centro */
 }
 .login {
-  background-color: #ffffff;
-  width: 30vw;
+  background-color: #ffffff00;
+  width: 900px;
   height: 70vh;
-  border-radius: 10px;
-  border: 1px solid #000000;
 }
 .my-1 {
   color: black;
@@ -120,7 +135,7 @@ span {
   color: #7c7c8a;
 }
 input {
-  width: 100%;
+  width: 400px;
   height: 48px;
   padding: 12px 16px;
   border-radius: 4px;
