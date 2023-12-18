@@ -51,7 +51,7 @@
 </template>
 
 <script>
-import login from '../services/fireBaseConfig.js'
+import { login } from '@/services/fireBaseConfig'
 export default {
   name: 'LoginPage',
   data() {

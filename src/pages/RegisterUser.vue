@@ -13,7 +13,7 @@
                 :icon="'envelope'"
                 :label="'E-mail'"
                 v-model="email"
-                type="email"
+                type="text"
                 placeholder=" jhondoe@example.com"
               />
             </b-col>
@@ -27,7 +27,6 @@
                 :icon="'address-card'"
                 :label="'CPF'"
                 placeholder="  ###.###.###-##"
-                v-model="email"
               />
             </b-col>
             <b-col>
@@ -35,7 +34,6 @@
                 :icon="'calendar-xmark'"
                 :label="'Data Nascimento'"
                 placeholder=" jhondoe@example.com"
-                v-model="password"
               />
             </b-col>
           </b-row>
@@ -43,9 +41,8 @@
             <b-col>
               <input-component
                 :icon="'unlock'"
-                aria-placeholder="***********"
+                aria-placeholder="***********1"
                 :label="'Senha'"
-                v-model="email"
                 :type="password"
               />
             </b-col>
@@ -54,14 +51,13 @@
                 :icon="'unlock'"
                 aria-placeholder="***********"
                 :label="'Confirme a Senha'"
-                v-model="email"
                 :type="password"
               />
             </b-col>
           </b-row>
         </b-row>
         <b-row class="flex-column">
-          <ButtonComponent :body-text="'Continue'" @click="log()" class="mb-3" />
+          <ButtonComponent :body-text="'Continue'" @click="register" class="mb-3" />
           <ButtonComponent :body-text="'Voltar ao login'" :color="'input-theme'" @click="log()" />
         </b-row>
       </b-form>
@@ -70,6 +66,7 @@
 </template>
 <script>
 import InputComponet from '@/components/InputComponet.vue'
+import { signUp } from '@/services/fireBaseConfig'
 import ButtonComponent from '@/components/ButtonComponent.vue'
 export default {
   name: 'RegisterUser',
@@ -87,10 +84,22 @@ export default {
     log() {
       alert(this.email + ' ' + this.password)
     },
+    async register() {
+      try {
+        await signUp(this.email, this.password)
+        alert('Usuário cadastrado com sucesso!')
+        console.log('Usuário cadastrado com sucesso!')
+      } catch (error) {
+        console.error('Erro ao cadastrar usuário:', error.message)
+      }
+    },
   },
 }
 </script>
 <style>
+.row {
+  justify-content: center;
+}
 .align-self-center {
   align-self: center;
 }
