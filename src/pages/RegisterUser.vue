@@ -13,12 +13,16 @@
                 :icon="'envelope'"
                 :label="'E-mail'"
                 v-model="email"
-                type="text"
+                type="email"
                 placeholder=" jhondoe@example.com"
               />
             </b-col>
             <b-col>
-              <input-component :icon="'circle-user'" :label="'Nome'" v-model="password" />
+              <input-component
+                :icon="'circle-user'"
+                :label="'Nome'"
+                v-model="additionalAttributes.nome"
+              />
             </b-col>
           </b-row>
           <b-row>
@@ -27,6 +31,7 @@
                 :icon="'address-card'"
                 :label="'CPF'"
                 placeholder="  ###.###.###-##"
+                v-model="additionalAttributes.cpf"
               />
             </b-col>
             <b-col>
@@ -34,6 +39,7 @@
                 :icon="'calendar-xmark'"
                 :label="'Data Nascimento'"
                 placeholder=" jhondoe@example.com"
+                v-model="additionalAttributes.dataNascimento"
               />
             </b-col>
           </b-row>
@@ -41,9 +47,10 @@
             <b-col>
               <input-component
                 :icon="'unlock'"
-                aria-placeholder="***********1"
+                :aria-placeholder="'***********'"
                 :label="'Senha'"
-                :type="password"
+                :type="'password'"
+                v-model="password"
               />
             </b-col>
             <b-col>
@@ -55,6 +62,10 @@
               />
             </b-col>
           </b-row>
+          <h1>{{ password }}</h1>
+          <h1>{{ nome }}</h1>
+          <h1>{{ cpf }}</h1>
+          <h1>{{ dataNascimento }}</h1>
         </b-row>
         <b-row class="flex-column">
           <ButtonComponent :body-text="'Continue'" @click="register" class="mb-3" />
@@ -78,6 +89,11 @@ export default {
     return {
       email: '',
       password: '',
+      additionalAttributes: {
+        nome: '',
+        cpf: '',
+        dataNascimento: '',
+      },
     }
   },
   methods: {
@@ -86,7 +102,7 @@ export default {
     },
     async register() {
       try {
-        await signUp(this.email, this.password)
+        await signUp(this.email, this.password, this.additionalAttributes)
         alert('Usuário cadastrado com sucesso!')
         console.log('Usuário cadastrado com sucesso!')
       } catch (error) {

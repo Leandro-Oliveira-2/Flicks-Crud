@@ -66,7 +66,9 @@ export default {
 </script>
 <style>
 .carousel-container {
-  position: relative;
+  overflow: hidden;
+  position: fixed;
+  width: 100%;
   z-index: 1;
   top: -5rem;
 }

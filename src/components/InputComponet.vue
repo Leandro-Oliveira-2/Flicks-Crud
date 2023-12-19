@@ -2,7 +2,13 @@
   <div class="my-1">
     <label class="form-label">{{ label }}</label>
     <div class="input-icon">
-      <b-input class="icon-input" v-bind="$attrs" v-on="$listeners" v-model="value" />
+      <b-input
+        class="icon-input"
+        v-bind="$attrs"
+        v-on="$listeners"
+        v-model="value"
+        :style="{ minWidth: buttonSize + 'px' }"
+      />
       <font-awesome-icon :icon="icon" class="icon" />
     </div>
   </div>
@@ -29,6 +35,10 @@ export default {
     valueData: {
       type: String,
     },
+    buttonSize: {
+      type: Number,
+      default: 250, // Default button size
+    },
   },
   watch: {
     valueData(value) {
@@ -45,11 +55,18 @@ export default {
   },
 }
 </script>
+
 <style>
 .form-label {
   color: #e1e2e6;
 }
-
+.row {
+  display: flex;
+  flex-direction: column;
+  align-content: center;
+  justify-content: center;
+  align-items: center;
+}
 .col {
   flex-basis: 0;
   flex-grow: 3;
@@ -59,7 +76,7 @@ export default {
 .form-control {
   background-color: #202024;
   border: none;
-  width: 342px;
+  width: 400px;
 }
 .input-icon {
   position: relative;
