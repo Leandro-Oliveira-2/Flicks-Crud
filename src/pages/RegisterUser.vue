@@ -27,12 +27,14 @@
           </b-row>
           <b-row>
             <b-col>
-              <input-component
-                :icon="'address-card'"
-                :label="'CPF'"
-                placeholder="  ###.###.###-##"
-                v-model="additionalAttributes.cpf"
-              />
+              <div class="input-container">
+                <label class="input-label">CPF</label>
+                <input-component
+                  :icon="'address-card'"
+                  placeholder=" jhondoe@example.com"
+                  v-model="additionalAttributes.cpf"
+                />
+              </div>
             </b-col>
             <b-col>
               <input-component
@@ -62,14 +64,14 @@
               />
             </b-col>
           </b-row>
-          <h1>{{ password }}</h1>
-          <h1>{{ nome }}</h1>
-          <h1>{{ cpf }}</h1>
-          <h1>{{ dataNascimento }}</h1>
         </b-row>
         <b-row class="flex-column">
           <ButtonComponent :body-text="'Continue'" @click="register" class="mb-3" />
-          <ButtonComponent :body-text="'Voltar ao login'" :color="'input-theme'" @click="log()" />
+          <ButtonComponent
+            :body-text="'Voltar ao login'"
+            :color="'input-theme'"
+            @click="redirect"
+          />
         </b-row>
       </b-form>
     </b-container>
@@ -109,18 +111,17 @@ export default {
         console.error('Erro ao cadastrar usuário:', error.message)
       }
     },
+    redirect() {
+      this.$router.push('/loginPage')
+    },
   },
 }
 </script>
 <style>
 .row {
-  justify-content: center;
-}
-.align-self-center {
-  align-self: center;
-}
-.d-flex {
   display: flex;
+  flex-direction: row;
+  justify-content: center;
   align-items: center;
 }
 .space {
@@ -136,13 +137,6 @@ export default {
   width: 900px;
   height: 70vh;
 }
-.my-1 {
-  color: black;
-  display: flex;
-  flex-direction: column; /* Alinha os elementos em uma coluna */
-  justify-content: center; /* Alinha horizontalmente ao centro */
-  align-items: left; /* Alinha verticalmente ao centro */
-}
 .desktop-image {
   width: 100px;
   height: 87px;
@@ -157,13 +151,8 @@ export default {
 span {
   width: 232px;
   height: 22px;
+  margin-bottom: 3rem;
   color: #7c7c8a;
-}
-input {
-  width: 400px;
-  height: 48px;
-  padding: 12px 16px;
-  border-radius: 4px;
 }
 
 .input-icon {

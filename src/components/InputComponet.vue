@@ -84,7 +84,7 @@ export default {
 }
 
 .icon-input {
-  padding-left: 30px; /* Ajuste isso de acordo com o tamanho do seu ícone */
+  padding-left: 34px; /* Ajuste isso de acordo com o tamanho do seu ícone */
 }
 
 svg:not(:root).svg-inline--fa,
@@ -101,10 +101,12 @@ svg:not(:host).svg-inline--fa {
   transform: translateY(-50%);
   pointer-events: none;
 }
-
+.input-container {
+  display: flex;
+  flex-direction: column;
+}
 .my-1 {
   color: black;
-  display: flex;
   flex-direction: column; /* Alinha os elementos em uma coluna */
   justify-content: center; /* Alinha horizontalmente ao centro */
   align-items: left; /* Alinha verticalmente ao centro */

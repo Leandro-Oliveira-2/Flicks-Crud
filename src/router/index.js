@@ -1,19 +1,20 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import HomeView from '../views/HomeView.vue'
+import Movies from '../pages/MoviesPage.vue'
 
 Vue.use(VueRouter)
 
 const routes = [
   {
-    path: '/',
+    path: '/layout',
     name: 'AppLayout',
     component: () => import(/* webpackChunkName: "appLayout" */ '../components/AppLayout.vue'),
     children: [
       {
-        path: '/',
-        name: 'home',
-        component: HomeView,
+        path: '/movies',
+        name: 'movies',
+        component: Movies,
       },
       {
         path: '/about',
@@ -36,6 +37,11 @@ const routes = [
         component: () => import(/* webpackChunkName: "movies" */ '../pages/MoviesPage.vue'),
       },
     ],
+  },
+  {
+    path: '/',
+    name: 'home',
+    component: HomeView,
   },
   {
     path: '/loginPage',
