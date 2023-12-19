@@ -48,6 +48,23 @@ export default {
   }
 }
 
+@media (max-width: 600px) {
+  @keyframes zoom {
+    0% {
+      transform: scale(1);
+    }
+    50% {
+      transform: scale(2.5);
+    }
+    100% {
+      transform: scale(4);
+    }
+  }
+  .video {
+    animation-timing-function: ease-in-out;
+  }
+}
+
 @keyframes fadeOut {
   0% {
     opacity: 1;
