@@ -13,7 +13,7 @@
                 :icon="'envelope'"
                 :label="'E-mail'"
                 v-model="email"
-                type="email"
+                :type="'email'"
                 placeholder=" jhondoe@example.com"
               />
             </b-col>
@@ -21,6 +21,7 @@
               <input-component
                 :icon="'circle-user'"
                 :label="'Nome'"
+                :type="'name'"
                 v-model="additionalAttributes.nome"
               />
             </b-col>
@@ -33,6 +34,7 @@
                   :icon="'address-card'"
                   placeholder=" jhondoe@example.com"
                   v-model="additionalAttributes.cpf"
+                  :type="'CPF'"
                 />
               </div>
             </b-col>
@@ -40,6 +42,7 @@
               <input-component
                 :icon="'calendar-xmark'"
                 :label="'Data Nascimento'"
+                :type="'date'"
                 placeholder=" jhondoe@example.com"
                 v-model="additionalAttributes.dataNascimento"
               />
@@ -60,7 +63,7 @@
                 :icon="'unlock'"
                 aria-placeholder="***********"
                 :label="'Confirme a Senha'"
-                :type="password"
+                :type="'password'"
               />
             </b-col>
           </b-row>

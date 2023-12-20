@@ -6,6 +6,7 @@
         class="icon-input"
         v-bind="$attrs"
         v-on="$listeners"
+        :type="type"
         v-model="value"
         :style="{ minWidth: buttonSize + 'px' }"
       />
@@ -31,6 +32,7 @@ export default {
     },
     type: {
       type: String,
+      default: 'text',
     },
     valueData: {
       type: String,

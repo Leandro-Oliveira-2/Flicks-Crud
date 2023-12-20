@@ -52,7 +52,7 @@ export default {
   },
   data() {
     return {
-      perPage: 3,
+      perPage: 6,
       currentPage: 0,
       hasScrolled: false,
     }
@@ -78,6 +78,10 @@ export default {
 </script>
 
 <style>
+.movie-container.mt-5 {
+  top: -350px;
+  z-index: 10;
+}
 .movie-container {
   position: relative;
   overflow: hidden; /* Adicionado para evitar que o card ampliado ultrapasse os limites do contêiner */
@@ -88,6 +92,17 @@ export default {
   transform: scale(1.4);
   transition: transform 0.3s ease-in-out;
   z-index: 1;
+  border-radius: 5%;
+}
+
+li#carousel-fade___BV_indicator_1_ {
+  background-color: #ffffff00;
+}
+li#carousel-fade___BV_indicator_2_ {
+  background-color: #ffffff00;
+}
+li#carousel-fade___BV_indicator_3_ {
+  background-color: #ffffff00;
 }
 
 .card-container:hover .card .card-img-top {
@@ -131,7 +146,7 @@ a.btn.btn-primary {
   z-index: 1;
 }
 .mt-5 {
-  top: -240px;
+  top: -340px;
 }
 .carousel-button {
   position: absolute;
@@ -180,6 +195,9 @@ a.btn.btn-primary {
 }
 
 @media (max-width: 600px) {
+  .movie-container.mt-5 {
+    top: -6px;
+  }
   .carousel-button {
     position: absolute;
     top: 12%;
@@ -210,7 +228,7 @@ a.btn.btn-primary {
 
   .mt-5 {
     top: 0px;
-    margin-left: -0.5%;
+    margin-left: 0.5%;
   }
 }
 </style>

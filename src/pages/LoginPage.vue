@@ -50,7 +50,18 @@
           @click="login"
           :icon="'facebook'"
           :dynamicBackground="'#202024'"
+          class="mb-3"
         />
+        <div class="link-container">
+          <div>
+            <b-link class="custom-link" href="#foo">Esqueceu sua senha?</b-link>
+          </div>
+          <div>
+            <b-link class="custom-link" href="registerPage"
+              >Não possui conta? Crie uma agora</b-link
+            >
+          </div>
+        </div>
       </b-container>
     </div>
   </div>
@@ -117,6 +128,15 @@ export default {
 }
 </script>
 <style>
+.link-container {
+  font-size: 14px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.custom-link {
+  color: #7c7c8a !important;
+}
 vector {
   color: #7c7c8a;
   width: 75px;
@@ -151,7 +171,7 @@ vector {
 .login {
   display: flex;
   width: 401px;
-  height: 490px;
+  height: 590px;
   left: 517px;
   border-radius: 4px;
   border: 1px;

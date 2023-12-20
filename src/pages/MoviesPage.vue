@@ -80,7 +80,7 @@ export default {
         {
           caption: 'First Slide',
           imgSrc:
-            'https://s2.glbimg.com/2C0hMRuCY_7NfDPjby4_Bjmq8Nc=/e.glbimg.com/og/ed/f/original/2018/03/22/avengers-infinity-war-official-poster-2018-4o.jpg',
+            'https://occ-0-354-3851.1.nflxso.net/dnm/api/v6/6AYY37jfdO6hpXcMjf9Yu5cnmO0/AAAABbUDUkFrv0uvWy2qDyZhDDdc2vrUzQi6HZtiBap5kZm7-MwRClCMPDar4thi9mFvdy8FW6EDNS5geSJe9NngZbs7-AIKILKnsgCH.webp?r=9b9',
         },
         {
           caption: 'Second Slide',
@@ -89,7 +89,7 @@ export default {
         {
           caption: 'Third Slide',
           imgSrc:
-            'https://4329028l.ha.azioncdn.net/img/2021/01/blog/97961/blog-deus-nao-esta-morto-easy-resize-com.jpg',
+            'https://occ-0-354-3851.1.nflxso.net/dnm/api/v6/6AYY37jfdO6hpXcMjf9Yu5cnmO0/AAAABcjRxFa4RMwiBewWATi4DwRla4regS-pGEzW8CK7VG4gwKg-JtKirFk1EBTW1c9d5mUPEnUq2wIc95MTXu1wiyezfn1dq8Jzp4k5.webp?r=f84',
         },
       ],
     }
@@ -100,9 +100,9 @@ export default {
 img.img-fluid {
   position: relative;
   width: 100%;
-  object-fit: cover;
-  margin: 0; /* Adicione esta linha */
-  padding: 0; /* Adicione esta linha */
+  object-fit: contain; /* Altere 'cover' para 'contain' */
+  margin: 0;
+  padding: 0;
 }
 .carousel-component {
   z-index: 0;

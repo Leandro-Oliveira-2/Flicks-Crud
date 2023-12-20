@@ -15,7 +15,20 @@
         :caption="title"
         :img-src="slide.imgSrc"
         :label-indicator="`Página ${index + 1}`"
-      ></b-carousel-slide>
+      >
+        <!--         <div class="title-fillme container">
+          <b-img
+            src="https://occ-0-354-3851.1.nflxso.net/dnm/api/v6/LmEnxtiAuzezXBjYXPuDgfZ4zZQ/AAAABQ6SZkab5muGE6Oip_LHaL5ISY9bm_7Ig5iIA41aNqKF0dVR_aBgqf8Wg7p0aO8GoOlXJI2uQLieRKafGvSyQDbMeQCx46cAchBDu7qKoVry.webp?r=c4e"
+            fluid
+            alt="Responsive image"
+            class="image-demonSlayer"
+          ></b-img>
+          <div class="ptrack-content">
+            Demônios massacraram sua família e amaldiçoaram sua irmã. Agora Tanjiro inicia sua
+            jornada para encontrar a cura e se vingar.
+          </div>
+        </div> -->
+      </b-carousel-slide>
     </b-carousel>
     <div class="degrade">teste</div>
     <div class="d-flex justify-content-between position-absolute w-100" style="z-index: 1">
@@ -45,6 +58,7 @@
         />
       </svg>
     </div>
+    <div class="lateral-degrade">teste</div>
   </div>
 </template>
 
@@ -66,28 +80,40 @@ export default {
 </script>
 <style>
 .carousel-container {
-  overflow: hidden;
-  position: fixed;
-  width: 100%;
-  z-index: 1;
+  background-position: 50%;
+  background-size: cover;
+  bottom: 0;
+  filter: alpha(opacity=100);
+  left: 0;
+  opacity: 1;
+  position: relative;
+  right: 0;
   top: -5rem;
+  transition: opacity 0.4s cubic-bezier(0.665, 0.235, 0.265, 0.8) 0s;
+  width: 100%;
 }
 .degrade {
   display: block;
   position: absolute;
-  top: 68%;
+  top: 78%;
   left: 0;
   width: 100%;
-  height: 261px;
+  height: 237px;
   background: rgb(20, 20, 20);
   background: linear-gradient(180deg, rgba(20, 20, 20, 0) 0%, rgba(20, 20, 20, 1) 81%);
   z-index: 10;
   color: rgba(240, 248, 255, 0);
 }
-img.img-fluid.w-100.d-block {
-  height: 780px;
-  width: 100%;
-  object-fit: cover;
+.lateral-degrade {
+  display: block;
+  position: absolute;
+  z-index: 1;
+  top: 0%;
+  left: 0;
+  width: 50%;
+  height: 950px;
+  background: linear-gradient(77deg, rgba(0, 0, 0, 0.6), transparent 85%);
+  color: rgba(240, 248, 255, 0);
 }
 .carousel-indicators {
   padding-left: 3%;
@@ -101,8 +127,15 @@ svg.bi.bi-info-circle.ml-auto {
   display: none;
 }
 @media (max-width: 600px) {
+  .lateral-degrade {
+    display: none;
+  }
   .degrade {
     display: none;
+  }
+  .image-demonSlayer {
+    margin-left: -50%; /* ajuste conforme necessário */
+    margin-block-end: 5%; /* ajuste conforme necessário */
   }
   .VueCarousel.carousel {
     margin-block-end: -5px;
