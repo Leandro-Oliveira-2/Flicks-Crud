@@ -13,8 +13,12 @@
       </b-navbar-nav>
       <b-navbar-nav class="ml-auto">
         <div class="icon-container">
-          <font-awesome-icon icon="magnifying-glass" size="lg" style="color: #d5ddec" />
-          <font-awesome-icon icon="bell" size="lg" style="color: #ffffff" />
+          <b-avatar class="avatar1">
+            <font-awesome-icon icon="magnifying-glass" size="lg" style="color: #d5ddec" />
+          </b-avatar>
+          <b-avatar>
+            <font-awesome-icon icon="bell" size="lg" style="color: #ffffff" />
+          </b-avatar>
           <b-avatar
             rounded="sm"
             src="https://i.postimg.cc/FRKMfYYb/AAAABXVGEr6zoc-E82-JPf-Lfx5-LREGANJUg3w-PAAPYc-ROD2m-Qg-LMMgz-ne2j-Sx96e-Xv-FIUn1v-Zl-SMj-Xj0-TWujvls-MCUVc-VKic1-QSvf.png"
@@ -31,33 +35,6 @@
     </b-navbar>
     <b-navbar class="mobile-navbar p-0" transparency>
       <b-navbar-nav class="navbar-content">
-        <!--   <div>
-          <b-button v-b-toggle.sidebar-1>
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="16"
-              height="16"
-              fill="currentColor"
-              class="bi bi-justify transparency"
-              viewBox="0 0 16 16"
-            >
-              <path
-                fill-rule="evenodd"
-                d="M2 12.5a.5.5 0 0 1 .5-.5h11a.5.5 0 0 1 0 1h-11a.5.5 0 0 1-.5-.5m0-3a.5.5 0 0 1 .5-.5h11a.5.5 0 0 1 0 1h-11a.5.5 0 0 1-.5-.5m0-3a.5.5 0 0 1 .5-.5h11a.5.5 0 0 1 0 1h-11a.5.5 0 0 1-.5-.5m0-3a.5.5 0 0 1 .5-.5h11a.5.5 0 0 1 0 1h-11a.5.5 0 0 1-.5-.5"
-              />
-            </svg>
-          </b-button>
-          <b-sidebar id="sidebar-1" title="Sidebar" shadow>
-            <div class="px-3 py-2">
-              <p>
-                Cras mattis consectetur purus sit amet fermentum. Cras justo odio, dapibus ac
-                facilisis in, egestas eget quam. Morbi leo risus, porta ac consectetur ac,
-                vestibulum at eros.
-              </p>
-              <b-img src="https://picsum.photos/500/500/?image=54" fluid thumbnail></b-img>
-            </div>
-          </b-sidebar>
-        </div> -->
         <b-navbar-brand href="#">
           <img src="../../public/Images//Icons//SnetFlix.png" fluid-grow alt="Fluid-grow image" />
         </b-navbar-brand>
@@ -119,6 +96,10 @@ export default {
 img {
   margin-left: 4rem;
 }
+.b-avatar[data-v-40d62f2b] {
+  margin-right: 0.5rem;
+  background-color: #00000000;
+}
 .b-avatar {
   margin-right: -1.7rem;
 }
@@ -135,7 +116,8 @@ img {
   font-size: 1.2rem;
 }
 .font-icon-search {
-  display: block;
+  display: flex;
+  left: 375px;
 }
 .navbar-expand .navbar-nav .dropdown-menu {
   position: relative;
@@ -184,9 +166,8 @@ img {
   align-items: center;
 }
 .icon-container {
-  gap: 1rem;
   display: flex;
-  justify-content: flex-end;
+  justify-content: flex-end; /* Alterado de space-between para flex-end */
   align-items: center;
 }
 /* Quando a largura da tela for 600px ou menos (tipicamente telefones) */

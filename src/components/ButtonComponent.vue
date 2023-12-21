@@ -30,8 +30,20 @@
       v-bind="$attrs"
       :class="color"
       v-on="$listeners"
-      :style="{ minWidth: buttonSize + 'px', background: dynamicBackground }"
+      :style="{
+        minWidth: buttonSize + 'px',
+        height: buttonHeight + 'px',
+        background: dynamicBackground,
+        padding: '12px 20px',
+        color: colorButton ? colorButton : '#fff',
+      }"
     >
+      <font-awesome-icon
+        :icon="icon"
+        class="icon"
+        :size="sizeIcon"
+        :style="{ color: colorIcon, left: leftIcon }"
+      />
       {{ bodyText }}
     </b-button>
   </b-button-group>
@@ -49,13 +61,33 @@ export default {
       type: String,
       default: 'btn-danger',
     },
+    colorButton: {
+      type: String,
+      default: '#fff',
+    },
     buttonSize: {
       type: Number,
       default: 250, // Default button size
     },
+    buttonHeight: {
+      type: Number,
+      default: 50, // Este será o valor padrão da altura
+    },
     icon: {
       type: String,
       default: '',
+    },
+    colorIcon: {
+      type: String,
+      default: '#fff',
+    },
+    leftIcon: {
+      type: String,
+      default: '15%',
+    },
+    sizeIcon: {
+      type: String,
+      default: 'lg',
     },
     dynamicBackground: {
       type: String,
@@ -72,7 +104,7 @@ b-button-group {
 
 svg {
   position: absolute;
-  left: 87px;
+  left: 20%;
   top: 50%;
   z-index: 1;
   transform: translateY(-50%);
@@ -81,8 +113,6 @@ svg {
 button.btn.btn-secondary {
   white-space: nowrap;
   display: flex;
-  width: 0;
-  padding: var(--flix-sys-radius-base, 12px) 161px;
   justify-content: center;
   align-items: center;
   border: none;

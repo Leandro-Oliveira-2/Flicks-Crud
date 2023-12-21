@@ -79,7 +79,7 @@ export default {
 
 <style>
 .movie-container.mt-5 {
-  top: -350px;
+  top: -43vh;
   z-index: 10;
 }
 .movie-container {
@@ -146,7 +146,7 @@ a.btn.btn-primary {
   z-index: 1;
 }
 .mt-5 {
-  top: -340px;
+  top: -440px;
 }
 .carousel-button {
   position: absolute;

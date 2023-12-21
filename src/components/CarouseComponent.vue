@@ -8,6 +8,7 @@
       img-width="800"
       img-height="100px"
       controls="false"
+      @sliding-start="updateActiveSlide"
     >
       <b-carousel-slide
         v-for="(slide, index) in slides"
@@ -16,34 +17,25 @@
         :img-src="slide.imgSrc"
         :label-indicator="`Página ${index + 1}`"
       >
-        <!--         <div class="title-fillme container">
-          <b-img
-            src="https://occ-0-354-3851.1.nflxso.net/dnm/api/v6/LmEnxtiAuzezXBjYXPuDgfZ4zZQ/AAAABQ6SZkab5muGE6Oip_LHaL5ISY9bm_7Ig5iIA41aNqKF0dVR_aBgqf8Wg7p0aO8GoOlXJI2uQLieRKafGvSyQDbMeQCx46cAchBDu7qKoVry.webp?r=c4e"
-            fluid
-            alt="Responsive image"
-            class="image-demonSlayer"
-          ></b-img>
-          <div class="ptrack-content">
-            Demônios massacraram sua família e amaldiçoaram sua irmã. Agora Tanjiro inicia sua
-            jornada para encontrar a cura e se vingar.
-          </div>
-        </div> -->
       </b-carousel-slide>
     </b-carousel>
+    <div class="degrade-top">teste</div>
     <div class="degrade">teste</div>
     <div class="d-flex justify-content-between position-absolute w-100" style="z-index: 1">
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        width="50px"
-        height="50px"
-        fill="currentColor"
-        class="bi bi-heart"
-        viewBox="0 0 32 32"
-      >
-        <path
-          d="m8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143c.06.055.119.112.176.171a3.12 3.12 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15"
-        />
-      </svg>
+      <div class="heart-svg-icon">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="50px"
+          height="50px"
+          fill="currentColor"
+          class="bi bi-heart"
+          viewBox="0 0 32 32"
+        >
+          <path
+            d="m8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143c.06.055.119.112.176.171a3.12 3.12 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15"
+          />
+        </svg>
+      </div>
       <svg
         xmlns="http://www.w3.org/2000/svg"
         width="50px"
@@ -59,12 +51,50 @@
       </svg>
     </div>
     <div class="lateral-degrade">teste</div>
+    <div class="title-container" v-if="activeSlide === 2">
+      <div class="title">
+        <b-img
+          src="https://occ-0-354-3851.1.nflxso.net/dnm/api/v6/LmEnxtiAuzezXBjYXPuDgfZ4zZQ/AAAABU253PSQDGa2j0hWv3QM8bUkbakNhdnSCQKUOp3X9GNbzBIT_6TYeP-o-UetIskBJVXDCqDPGt7zg1l-FMukeqnPcnfN2Nw5bro-LF23UCtHwxWuzJ6UsVQhjCKyOyAa_Nuh3DBNolh3Ewe0kFn-YLdKjUJGtdsZ3L_VwCGLlLlNT6yumGzxPQ.webp?r=580"
+          fluid-grow
+          alt="Fluid-grow image"
+        ></b-img>
+      </div>
+      <div class="title">
+        <p class="text-justify">
+          Nesta série documental, a cantora pop mais polêmica do Brasil fala sobre a vida amorosa,
+          carreira, controvérsias e a criação de um novo álbum.
+        </p>
+      </div>
+      <div class="btn container">
+        <ButtonComponent
+          :body-text="'Assistir'"
+          :color="'btn-light'"
+          :colorButton="'#000000'"
+          :buttonSize="150"
+          :buttonHeight="60"
+          :icon="'play'"
+          :colorIcon="'#000000'"
+        />
+        <ButtonComponent
+          :icon="'circle-info'"
+          :iconColor="'#fffffff'"
+          :body-text="'Mais informações'"
+          :buttonHeight="60"
+          :buttonSize="270"
+          :dynamicBackground="'rgba(128, 128, 128, 0.6)'"
+        />
+      </div>
+    </div>
   </div>
 </template>
 
 <script>
+import ButtonComponent from '@/components/ButtonComponent.vue'
 export default {
   name: 'carouselComponent',
+  components: {
+    ButtonComponent,
+  },
   props: {
     slides: {
       type: Array,
@@ -74,11 +104,50 @@ export default {
   data() {
     return {
       title: '',
+      activeSlide: 0,
     }
+  },
+  methods: {
+    updateActiveSlide(newSlide) {
+      this.activeSlide = newSlide
+    },
   },
 }
 </script>
 <style>
+@import url('https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@600&family=Inter:wght@300;400&display=swap');
+
+img.img-fluid {
+  min-width: 600px;
+}
+.text-justify {
+  font-size: 1.2rem;
+  font-family: 'Be Vietnam Pro', 'Inter', sans-serif;
+  color: #fff;
+  font-weight: 300;
+  line-height: 1.5;
+}
+.title {
+  margin-left: 2rem;
+}
+.title-container {
+  position: absolute;
+  width: 500px;
+  display: flex;
+  text-align: justify;
+  top: 40%;
+  left: 16rem;
+  transform: translate(-50%, -50%);
+  z-index: 10;
+  flex-direction: column;
+  align-items: flex-start;
+}
+.btn.container > * {
+  margin-right: 5px; /* Ajuste este valor conforme necessário */
+}
+.button {
+  z-index: 20; /* Ajuste este valor conforme necessário */
+}
 .carousel-container {
   background-position: 50%;
   background-size: cover;
@@ -95,12 +164,24 @@ export default {
 .degrade {
   display: block;
   position: absolute;
-  top: 78%;
+  top: 80%;
   left: 0;
   width: 100%;
   height: 237px;
-  background: rgb(20, 20, 20);
+  background: rgb(136, 28, 28);
   background: linear-gradient(180deg, rgba(20, 20, 20, 0) 0%, rgba(20, 20, 20, 1) 81%);
+  z-index: 10;
+  color: rgba(240, 248, 255, 0);
+}
+.degrade-top {
+  display: block;
+  position: absolute;
+  top: 0%;
+  left: 0;
+  width: 100%;
+  height: 136px;
+  background: rgb(20, 20, 20);
+  background: linear-gradient(0deg, rgba(20, 20, 20, 0) 0%, rgba(20, 20, 20, 1) 99%);
   z-index: 10;
   color: rgba(240, 248, 255, 0);
 }
@@ -111,7 +192,7 @@ export default {
   top: 0%;
   left: 0;
   width: 50%;
-  height: 950px;
+  height: 1100px;
   background: linear-gradient(77deg, rgba(0, 0, 0, 0.6), transparent 85%);
   color: rgba(240, 248, 255, 0);
 }
@@ -120,13 +201,19 @@ export default {
   margin-left: 10%;
   list-style: none;
 }
-svg.bi.bi-heart {
-  display: none;
+.d-flex.justify-content-between.position-absolute.w-100 {
+  margin-left: 3%; /* Adicione essa regra para alinhar os ícones corretamente */
+}
+.heart-svg-icon {
+  left: -50px;
 }
 svg.bi.bi-info-circle.ml-auto {
-  display: none;
+  margin-left: auto; /* Substitua ml-auto por margin-left: auto para alinhar o ícone à direita */
 }
 @media (max-width: 600px) {
+  .title-container {
+    display: none;
+  }
   .lateral-degrade {
     display: none;
   }
@@ -146,10 +233,12 @@ svg.bi.bi-info-circle.ml-auto {
     object-fit: cover;
   }
   svg.bi.bi-heart {
-    display: block;
+    display: flex;
+    left: 10px;
   }
   svg.bi.bi-info-circle {
-    display: block;
+    display: flex;
+    left: 362px;
   }
   svg.bi.bi-info-circle.ml-auto {
     display: block;

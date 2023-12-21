@@ -21,6 +21,7 @@ export default {
   },
   data() {
     return {
+      reload: window.localStorage.getItem('reload'),
       featuredMovies: [
         // Add your featured movies here
       ],
@@ -77,6 +78,11 @@ export default {
         },
       ],
       slides: [
+        /*      {
+          caption: 'First Slide',
+          imgSrc:
+            'https://occ-0-354-3851.1.nflxso.net/dnm/api/v6/6AYY37jfdO6hpXcMjf9Yu5cnmO0/AAAABbUDUkFrv0uvWy2qDyZhDDdc2vrUzQi6HZtiBap5kZm7-MwRClCMPDar4thi9mFvdy8FW6EDNS5geSJe9NngZbs7-AIKILKnsgCH.webp?r=9b9',
+        }, */
         {
           caption: 'First Slide',
           imgSrc:
@@ -93,6 +99,21 @@ export default {
         },
       ],
     }
+  },
+  methods: {
+    teste() {
+      console.log('teste')
+    },
+    reloadStorage() {
+      if (this.reload == 'true') {
+        window.localStorage.setItem('reload', 'false')
+        window.location.reload()
+      }
+    },
+  },
+  mounted() {
+    this.reloadStorage()
+    this.teste()
   },
 }
 </script>

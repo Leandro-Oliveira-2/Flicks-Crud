@@ -3,7 +3,7 @@
     <div class="container">
       <b-navbar-brand href="#" class="img-logo">
         <img center class="desktop-image" src="../../public/Images/Frame.png" alt="Kitten" />
-        <span>Faça login e comece a usar</span>
+        <span>Crie sua conta e comece a usar</span>
       </b-navbar-brand>
       <b-container fluid class="login">
         <b-row class="form">
@@ -15,35 +15,20 @@
               v-model="email"
               :InputSize="400"
               :type="email"
+              class="mb-3"
             />
-          </b-col>
-          <b-col>
-            <input-component
-              class="mb-2"
-              :icon="'unlock'"
-              placeholder="***********"
-              :label="'Sua senha'"
-              v-model="password"
-              :InputSize="400"
-              :type="'password'"
-            />
-          </b-col>
-          <b-col>
-            <b-form-checkbox v-model="checked" class="custom-checkbox mb-4">
-              {{ checked ? 'Confirmado' : 'Continuar logado?' }}
-            </b-form-checkbox>
           </b-col>
           <ButtonComponent
             :body-text="'Faça login'"
             :buttonSize="400"
             @click="login"
-            class="mb-3"
+            class="mb-4"
           />
         </b-row>
         <!-- prettier-ignore -->
         <vector>___ OU ___</vector>
         <!-- prettier-ignore -->
-        <ButtonComponent :body-text="' Login Com Google'" :buttonSize="400" @click="signInWithGoogle" :icon="'google'" class="mb-3" :dynamicBackground="'#202024'" />
+        <ButtonComponent :body-text="'Cadastre-se Com Google'" :buttonSize="400" @click="signInWithGoogle" :icon="'google'" class="mb-3" :dynamicBackground="'#202024'" />
         <ButtonComponent
           :body-text="'Login Com Facebook'"
           :buttonSize="400"
@@ -76,7 +61,7 @@ import InputComponet from '@/components/InputComponet.vue'
 import { signInWithGoogle } from '@/services/fireBaseConfig'
 
 export default {
-  name: 'LoginPage',
+  name: 'account-screen',
   components: {
     ButtonComponent,
     'input-component': InputComponet,

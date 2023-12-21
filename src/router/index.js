@@ -53,6 +53,11 @@ const routes = [
     name: 'RegisterUser',
     component: () => import(/* webpackChunkName: "registerPage" */ '../pages/RegisterUser.vue'),
   },
+  {
+    path: '/account-screen',
+    name: 'account-screen',
+    component: () => import(/* webpackChunkName: "accountScreen" */ '../pages/AccountScreen.vue'),
+  },
 ]
 
 const router = new VueRouter({

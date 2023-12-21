@@ -86,18 +86,18 @@ export default {
       ],
       slides: [
         {
-          caption: 'First Slide',
-          imgSrc:
-            'https://s2.glbimg.com/2C0hMRuCY_7NfDPjby4_Bjmq8Nc=/e.glbimg.com/og/ed/f/original/2018/03/22/avengers-infinity-war-official-poster-2018-4o.jpg',
-        },
-        {
           caption: 'Second Slide',
           imgSrc: 'https://i.postimg.cc/FHfw4rSw/round-6-jpg.webp',
         },
         {
           caption: 'Third Slide',
           imgSrc:
-            'https://4329028l.ha.azioncdn.net/img/2021/01/blog/97961/blog-deus-nao-esta-morto-easy-resize-com.jpg',
+            'https://occ-0-354-3851.1.nflxso.net/dnm/api/v6/6AYY37jfdO6hpXcMjf9Yu5cnmO0/AAAABW93ISQjYU-22HN6z20IbLqvrEW66EOeeIOTtihaGUG_BCtJSu5_zGZWMlxfjVogcWwOXANj232qXlbfRfgXWLRClpFJrwSAxOTM.webp?r=d4f',
+        },
+        {
+          caption: 'First Slide',
+          imgSrc:
+            'https://occ-0-354-3851.1.nflxso.net/dnm/api/v6/6AYY37jfdO6hpXcMjf9Yu5cnmO0/AAAABUmwiDmbFXV1OoNorKsBGIboikSCCFEe10JWzy3ueANf4028_0Rrz-xr-aMjFYkiH44YZL7aN0SLhjDg2AsjUiug1L19hHKjj8M-.webp?r=be5',
         },
       ],
     }
