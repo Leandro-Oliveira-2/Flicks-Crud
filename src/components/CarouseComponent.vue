@@ -220,16 +220,14 @@ svg.bi.bi-info-circle.ml-auto {
   .degrade {
     display: none;
   }
-  .image-demonSlayer {
-    margin-left: -50%; /* ajuste conforme necessário */
-    margin-block-end: 5%; /* ajuste conforme necessário */
-  }
   .VueCarousel.carousel {
     margin-block-end: -5px;
   }
   img.img-fluid.w-100.d-block {
-    height: 350px;
+    object-position: left;
     width: 100%;
+    margin: 41px -172px 0px;
+    height: 311px;
     object-fit: cover;
   }
   svg.bi.bi-heart {
