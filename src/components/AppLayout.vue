@@ -94,7 +94,7 @@ export default {
 </script>
 <style scoped>
 img {
-  margin-left: 4rem;
+  margin-left: 2rem;
 }
 .b-avatar[data-v-40d62f2b] {
   margin-right: 0.5rem;
@@ -135,7 +135,7 @@ img {
 
 .desktop-image {
   display: relative; /* Exibido em telas grandes */
-  height: 20px; /* Add this line */
+  height: 25px; /* Add this line */
   top: 2%;
 }
 .mobile-image {

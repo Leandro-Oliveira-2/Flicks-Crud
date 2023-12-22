@@ -13,11 +13,6 @@
           <div class="card" style="border: none">
             <img :src="movie.banner" class="card-img-top mobile" alt="..." />
             <div class="card-body">
-              <h5 class="card-title">Card title</h5>
-              <p class="card-text">
-                Some quick example text to build on the card title and make up the bulk of the
-                card's content.
-              </p>
               <a href="#" class="btn btn-primary">Go somewhere</a>
             </div>
           </div>
@@ -105,14 +100,15 @@ li#carousel-fade___BV_indicator_3_ {
   background-color: #ffffff00;
 }
 
-.card-container:hover .card .card-img-top {
+/* .card-container:hover .card .card-img-top {
   transition: transform 0.3s ease-in-out;
+  margin: 90px 0 70px;
 }
 
 .card-container:hover .card .card-body {
   position: relative;
   display: block;
-}
+} */
 
 a.btn.btn-primary {
   background-color: #0c0000; /* Adicionado para mudar a cor de fundo do botão */
@@ -123,11 +119,11 @@ a.btn.btn-primary {
   object-fit: cover; /* Adicionado para evitar que a imagem suba */
 }
 
-.card:hover .card-body {
+/* .card:hover .card-body {
   width: 350px;
-  position: relative;
-  transform: none !important; /* Adicionado para evitar o redimensionamento dos itens internos */
-}
+  height: 300px;
+  transform: none !important; /* Adicionado para evitar o redimensionamento dos itens internos 
+} */
 
 .card-img-top.mobile {
   /* Adapte o tamanho da imagem conforme necessário para dispositivos móveis */
@@ -191,7 +187,7 @@ a.btn.btn-primary {
 }
 .mt-5 {
   top: 0px;
-  margin-left: 2%;
+  margin-left: 2rem;
 }
 
 @media (max-width: 600px) {

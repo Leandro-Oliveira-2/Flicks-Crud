@@ -51,7 +51,7 @@
       </svg>
     </div>
     <div class="lateral-degrade">teste</div>
-    <div class="title-container" v-if="activeSlide === 2">
+    <div class="title-container" v-if="activeSlide === 2 && window.location.pathname === '/series'">
       <div class="title">
         <b-img
           src="https://occ-0-354-3851.1.nflxso.net/dnm/api/v6/LmEnxtiAuzezXBjYXPuDgfZ4zZQ/AAAABU253PSQDGa2j0hWv3QM8bUkbakNhdnSCQKUOp3X9GNbzBIT_6TYeP-o-UetIskBJVXDCqDPGt7zg1l-FMukeqnPcnfN2Nw5bro-LF23UCtHwxWuzJ6UsVQhjCKyOyAa_Nuh3DBNolh3Ewe0kFn-YLdKjUJGtdsZ3L_VwCGLlLlNT6yumGzxPQ.webp?r=580"
@@ -70,6 +70,29 @@
           :body-text="'Assistir'"
           :color="'btn-light'"
           :colorButton="'#000000'"
+          @click="redirect(slide.url)"
+          :buttonSize="150"
+          :buttonHeight="60"
+          :icon="'play'"
+          :colorIcon="'#000000'"
+        />
+        <ButtonComponent
+          :icon="'circle-info'"
+          :iconColor="'#fffffff'"
+          :body-text="'Mais informações'"
+          :buttonHeight="60"
+          :buttonSize="270"
+          :dynamicBackground="'rgba(128, 128, 128, 0.6)'"
+        />
+      </div>
+    </div>
+    <div class="title-container-2">
+      <div class="btn container">
+        <ButtonComponent
+          :body-text="'Assistir'"
+          :color="'btn-light'"
+          :colorButton="'#000000'"
+          @click="redirect(slides[activeSlide].url)"
           :buttonSize="150"
           :buttonHeight="60"
           :icon="'play'"
@@ -105,11 +128,19 @@ export default {
     return {
       title: '',
       activeSlide: 0,
+      urlVideo: '',
     }
   },
   methods: {
     updateActiveSlide(newSlide) {
       this.activeSlide = newSlide
+    },
+    redirect(url) {
+      if (url) {
+        window.location.href = url
+      } else {
+        console.log('URL não fornecida para este slide.')
+      }
     },
   },
 }
@@ -136,6 +167,18 @@ img.img-fluid {
   display: flex;
   text-align: justify;
   top: 40%;
+  left: 16rem;
+  transform: translate(-50%, -50%);
+  z-index: 10;
+  flex-direction: column;
+  align-items: flex-start;
+}
+.title-container-2 {
+  position: absolute;
+  width: 500px;
+  display: flex;
+  text-align: justify;
+  top: 65%;
   left: 16rem;
   transform: translate(-50%, -50%);
   z-index: 10;
@@ -189,7 +232,7 @@ img.img-fluid {
   display: block;
   position: absolute;
   z-index: 1;
-  top: 0%;
+  top: -200px;
   left: 0;
   width: 50%;
   height: 1100px;
@@ -212,6 +255,9 @@ svg.bi.bi-info-circle.ml-auto {
 }
 @media (max-width: 600px) {
   .title-container {
+    display: none;
+  }
+  .title-container-2 {
     display: none;
   }
   .lateral-degrade {

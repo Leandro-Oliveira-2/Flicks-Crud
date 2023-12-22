@@ -13,6 +13,7 @@
 <script>
 import MoviesSection from '@/components/MoviesSection.vue'
 import CarouseComponent from '@/components/CarouseComponent.vue'
+import request from '../utils/request'
 export default {
   name: 'HomeView',
   components: {
@@ -78,31 +79,74 @@ export default {
         },
       ],
       slides: [
-        /*      {
-          caption: 'First Slide',
-          imgSrc:
-            'https://occ-0-354-3851.1.nflxso.net/dnm/api/v6/6AYY37jfdO6hpXcMjf9Yu5cnmO0/AAAABbUDUkFrv0uvWy2qDyZhDDdc2vrUzQi6HZtiBap5kZm7-MwRClCMPDar4thi9mFvdy8FW6EDNS5geSJe9NngZbs7-AIKILKnsgCH.webp?r=9b9',
-        }, */
         {
           caption: 'First Slide',
           imgSrc:
-            'https://occ-0-354-3851.1.nflxso.net/dnm/api/v6/6AYY37jfdO6hpXcMjf9Yu5cnmO0/AAAABbUDUkFrv0uvWy2qDyZhDDdc2vrUzQi6HZtiBap5kZm7-MwRClCMPDar4thi9mFvdy8FW6EDNS5geSJe9NngZbs7-AIKILKnsgCH.webp?r=9b9',
+            'https://lh3.googleusercontent.com/-aGmK5ReqUnw/Ybt9mUR0NcI/AAAAAAAAN4k/eMCuN6c81pgC63uQOWe31woGFb7jmxA0ACNcBGAsYHQ/s16000/homem-aranha%2Bsem%2Bvolta%2Bpra%2Bcasa.png',
+          url: 'https://embedder.net/e/634649',
         },
         {
           caption: 'Second Slide',
-          imgSrc: 'https://i.postimg.cc/FHfw4rSw/round-6-jpg.webp',
+          imgSrc:
+            'https://assetsio.reedpopcdn.com/2000x1125.webp?width=1200&height=1200&fit=bounds&quality=70&format=jpg&auto=webp',
+          url: 'https://embedder.net/e/502356',
         },
         {
           caption: 'Third Slide',
           imgSrc:
-            'https://occ-0-354-3851.1.nflxso.net/dnm/api/v6/6AYY37jfdO6hpXcMjf9Yu5cnmO0/AAAABcjRxFa4RMwiBewWATi4DwRla4regS-pGEzW8CK7VG4gwKg-JtKirFk1EBTW1c9d5mUPEnUq2wIc95MTXu1wiyezfn1dq8Jzp4k5.webp?r=f84',
+            'https://ifilosofandohome.files.wordpress.com/2020/11/batman-cavaleiro-das-trevas.jpg',
+          url: 'https://embedder.net/e/155',
         },
       ],
     }
   },
   methods: {
-    teste() {
-      console.log('teste')
+    async fetchData() {
+      console.log('----------------entrei------------------')
+      try {
+        // Primeira requisição para obter os gêneros
+        const genresResponse = await request.get('https://api.themoviedb.org/3/genre/movie/list', {
+          params: {
+            language: 'en',
+          },
+          headers: {
+            Authorization:
+              'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI2MzMwM2VkNzZjNzE4NGVhNDI0NGFjMjI2MTgzMWMzZSIsInN1YiI6IjY1ODRjMWUzNzVmMWFkMTY4OTZkYzk1MyIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.ioUiTj6EKTNpxrF-AqhWAuNzoQaqg5yPjgjJrtIZ1to',
+          },
+        })
+
+        const genresData = genresResponse.data.genres
+        console.log('Genres Data:', genresData)
+
+        // Segunda requisição para obter a lista de filmes com base nos gêneros
+        const moviesResponse = await request.get('https://api.themoviedb.org/3/discover/movie', {
+          params: {
+            language: 'en',
+            sort_by: 'popularity.desc',
+            with_genres: genresData.map((genre) => genre.id).join(','), // Concatena os IDs dos gêneros
+          },
+          headers: {
+            Authorization:
+              'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI2MzMwM2VkNzZjNzE4NGVhNDI0NGFjMjI2MTgzMWMzZSIsInN1YiI6IjY1ODRjMWUzNzVmMWFkMTY4OTZkYzk1MyIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.ioUiTj6EKTNpxrF-AqhWAuNzoQaqg5yPjgjJrtIZ1to',
+          },
+        })
+
+        const moviesData = moviesResponse.data.results
+        console.log('Movies Data:', moviesData)
+
+        // Mapeie os resultados para o formato desejado
+        const movies = moviesData.map((movie) => ({
+          id: movie.id,
+          banner: `https://caminho-para-as-posters/${movie.poster_path}`,
+          // Adicione outros campos conforme necessário
+        }))
+
+        // Atribua a lista de filmes à propriedade do componente
+        this.movies = movies
+      } catch (error) {
+        console.error('Erro ao obter dados:', error)
+      }
+      console.log('----------------sai------------------')
     },
     reloadStorage() {
       if (this.reload == 'true') {
@@ -112,6 +156,7 @@ export default {
     },
   },
   mounted() {
+    this.fetchData()
     this.reloadStorage()
     this.teste()
   },

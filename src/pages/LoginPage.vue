@@ -44,14 +44,14 @@
         <vector>___ OU ___</vector>
         <!-- prettier-ignore -->
         <ButtonComponent :body-text="' Login Com Google'" :buttonSize="400" @click="signInWithGoogle" :icon="'google'" class="mb-3" :dynamicBackground="'#202024'" />
-        <ButtonComponent
+        <!--    <ButtonComponent
           :body-text="'Login Com Facebook'"
           :buttonSize="400"
-          @click="login"
+          @click="signInWithFacebook"
           :icon="'facebook'"
           :dynamicBackground="'#202024'"
           class="mb-3"
-        />
+        /> -->
         <div class="link-container">
           <div>
             <b-link class="custom-link" href="#foo">Esqueceu sua senha?</b-link>
@@ -74,6 +74,7 @@ import { doc, getDoc } from 'firebase/firestore'
 import ButtonComponent from '@/components/ButtonComponent.vue'
 import InputComponet from '@/components/InputComponet.vue'
 import { signInWithGoogle } from '@/services/fireBaseConfig'
+import { signInWithFacebook } from '@/services/fireBaseConfig'
 
 export default {
   name: 'LoginPage',
@@ -112,6 +113,9 @@ export default {
     },
     async signInWithGoogle() {
       await signInWithGoogle(this.$router) // Passe this.$router como um argumento
+    },
+    async signInWithFacebook() {
+      await signInWithFacebook(this.$router) // Passe this.$router como um argumento
     },
     async fetchAdditionalUserInfo(userId) {
       // Função para buscar informações adicionais do usuário no Firestore

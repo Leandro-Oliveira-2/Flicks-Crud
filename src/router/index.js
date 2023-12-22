@@ -22,11 +22,6 @@ const routes = [
         component: () => import(/* webpackChunkName: "about" */ '../views/AboutView.vue'),
       },
       {
-        path: '/training',
-        name: 'training',
-        component: () => import(/* webpackChunkName: "training" */ '../pages/TrainingView.vue'),
-      },
-      {
         path: '/series',
         name: 'SeriesPage',
         component: () => import(/* webpackChunkName: "series" */ '../pages/SeriesPage.vue'),
@@ -42,6 +37,11 @@ const routes = [
     path: '/',
     name: 'home',
     component: HomeView,
+  },
+  {
+    path: '/training',
+    name: 'training',
+    component: () => import(/* webpackChunkName: "training" */ '../pages/TrainingView.vue'),
   },
   {
     path: '/loginPage',

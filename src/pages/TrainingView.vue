@@ -1,116 +1,31 @@
 <template>
-  <div>
-    <h1>Exemple text</h1>
-    <!--   <div>
-      <b-img src="https://i.postimg.cc/FHfw4rSw/round-6-jpg.webp" fluid-grow alt="Fluid-grow image"></b-img>
-    </div> -->
-    <movies-section :movies="movies" />
-    <div>
-  <b-embed
-    type="iframe"
-    aspect="16by9"
-    src="https://www.youtube.com/embed/zpOULjyy-n8?rel=0"
-    allowfullscreen
-  ></b-embed>
-</div>
+  <div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
+    <iframe style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;" src="https://www.youtube.com/embed/SBoODpO-DT0?autoplay=1" title="YouTube video player" frameborder="0" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
   </div>
 </template>
 
-
 <script>
-import MoviesSection from '@/components/MoviesSection.vue'
 export default {
   name: 'TrainingView',
-  components: {
-    'movies-section': MoviesSection,
+  methods: {
+    async fullScreen() {
+      console.log('teste')
+      window.addEventListener('load', function() {
+        var event = new KeyboardEvent('keydown', {
+          key: 'f',
+          code: 'KeyF',
+          charCode: 'f'.charCodeAt(0),
+          keyCode: 'f'.charCodeAt(0),
+          view: window,
+          bubbles: true
+        });
+
+        document.body.dispatchEvent(event);
+      });
+    },
   },
-  data() {
-    return {
-      featuredMovies: [
-        // Add your featured movies here
-      ],
-      movies: [
-        { id: 1, banner: 'https://i.postimg.cc/FHfw4rSw/round-6-jpg.webp' },
-        {
-          id: 2,
-          banner: 'https://t.ctcdn.com.br/tVW4FExOvyqJxDqrLxPKJAbAwVc=/640x360/smart/i348994.jpeg',
-        },
-        {
-          id: 3,
-          banner:
-            'https://4329028l.ha.azioncdn.net/img/2021/01/blog/97961/blog-deus-nao-esta-morto-easy-resize-com.jpg',
-        },
-        {
-          id: 4,
-          banner:
-            'https://4329028l.ha.azioncdn.net/img/2021/01/blog/97960/blog-deus-nao-esta-morto-1-easy-resize-com.jpg',
-        },
-        {
-          id: 5,
-          banner:
-            'https://bibliotecadopregador.com.br/wp-content/uploads/2022/04/filme-evangelico-Eu-so-posso-imaginar.jpg',
-        },
-        {
-          id: 6,
-          banner:
-            'https://4329028l.ha.azioncdn.net/img/2021/01/blog/97960/blog-deus-nao-esta-morto-1-easy-resize-com.jpg',
-        },
-        { id: 1, banner: 'https://i.postimg.cc/FHfw4rSw/round-6-jpg.webp' },
-        {
-          id: 2,
-          banner: 'https://t.ctcdn.com.br/tVW4FExOvyqJxDqrLxPKJAbAwVc=/640x360/smart/i348994.jpeg',
-        },
-        {
-          id: 3,
-          banner:
-            'https://4329028l.ha.azioncdn.net/img/2021/01/blog/97961/blog-deus-nao-esta-morto-easy-resize-com.jpg',
-        },
-        {
-          id: 4,
-          banner:
-            'https://4329028l.ha.azioncdn.net/img/2021/01/blog/97960/blog-deus-nao-esta-morto-1-easy-resize-com.jpg',
-        },
-        {
-          id: 5,
-          banner:
-            'https://bibliotecadopregador.com.br/wp-content/uploads/2022/04/filme-evangelico-Eu-so-posso-imaginar.jpg',
-        },
-        {
-          id: 6,
-          banner:
-            'https://4329028l.ha.azioncdn.net/img/2021/01/blog/97960/blog-deus-nao-esta-morto-1-easy-resize-com.jpg',
-        },
-      ],
-      slides: [
-        {
-          caption: 'First Slide',
-          imgSrc:
-            'https://s2.glbimg.com/2C0hMRuCY_7NfDPjby4_Bjmq8Nc=/e.glbimg.com/og/ed/f/original/2018/03/22/avengers-infinity-war-official-poster-2018-4o.jpg',
-        },
-        {
-          caption: 'Second Slide',
-          imgSrc: 'https://i.postimg.cc/FHfw4rSw/round-6-jpg.webp',
-        },
-        {
-          caption: 'Third Slide',
-          imgSrc:
-            'https://4329028l.ha.azioncdn.net/img/2021/01/blog/97961/blog-deus-nao-esta-morto-easy-resize-com.jpg',
-        },
-      ],
-    }
+  mounted() {
+    this.fullScreen();
   },
 }
 </script>
-
-
-<style scoped>
-.img-fluid {
-  position: static;
-  margin-top: -5%;
-}
-
-.bg-transparent {
-  position: static;
-  top: 0;
-}
-</style>

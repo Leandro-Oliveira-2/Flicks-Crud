@@ -2,7 +2,7 @@
 // eslint-disable-next-line no-useless-catch
 // Import the functions you need from the SDKs you need
 import { initializeApp } from 'firebase/app'
-import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword, GoogleAuthProvider, signInWithPopup } from 'firebase/auth'
+import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword, GoogleAuthProvider, signInWithPopup, FacebookAuthProvider } from 'firebase/auth'
 import { getFirestore, setDoc, doc } from 'firebase/firestore'
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
@@ -25,7 +25,7 @@ const app = initializeApp(firebaseConfig)
 const appAuth = getAuth(app)
 const db = getFirestore(app)
 const googleProvider = new GoogleAuthProvider();
-
+const Facebookprovider = new FacebookAuthProvider();
 const login = (email, password) => {
   return signInWithEmailAndPassword(appAuth, email, password)
 }
@@ -59,4 +59,17 @@ const signInWithGoogle = async (router) => {
   }
 };
 
-export { login, signUp, db, signInWithGoogle }
+const signInWithFacebook = async (router) => {
+  try {
+    const resultado = await signInWithPopup(getAuth(), Facebookprovider);
+    // Manipule o usuário que fez login aqui, se necessário
+    const user = resultado.user;
+    console.log('Login com Facebook bem-sucedido:', user);
+    router.push('/movies')
+  } catch (erro) {
+    console.error('Erro no login com Facebook:', erro);
+  }
+}
+
+
+export { login, signUp, db, signInWithGoogle, signInWithFacebook }
