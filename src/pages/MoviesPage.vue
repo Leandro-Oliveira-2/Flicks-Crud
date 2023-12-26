@@ -62,8 +62,12 @@ export default {
     }
   },
   methods: {
+    async verifyUser() {
+      if (window.localStorage.getItem('user') == null) {
+        this.$router.push('/loginPage')
+      }
+    },
     async topPlay() {
-      console.log('----------------entrei------------------')
       try {
         await request('GET', 'upcoming', (response) => {
           console.log(response.data.results)
@@ -139,6 +143,7 @@ export default {
     },
   },
   mounted() {
+    this.verifyUser()
     this.getPopular()
     this.getNowPlaying()
     this.topPlay()
