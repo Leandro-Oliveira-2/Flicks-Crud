@@ -13,7 +13,20 @@
           <div class="card" style="border: none">
             <img :src="movie.banner" class="card-img-top mobile" alt="..." />
             <div class="card-body">
-              <a href="#" class="btn btn-primary">Go somewhere</a>
+              <b-button
+                class="link-light"
+                @click="redirect(movie.movieId)"
+                style="background-color: transparent !important; border: none"
+              >
+                <font-awesome-icon class="icon-play" icon="circle-play" size="2xl" />
+              </b-button>
+              <b-card-text class="card-description-text">
+                {{
+                  movie.description.length > 280
+                    ? movie.description.substring(0, 280) + '...'
+                    : movie.description
+                }}
+              </b-card-text>
             </div>
           </div>
         </div>
@@ -31,7 +44,6 @@
 <script>
 import { Carousel, Slide } from 'vue-carousel'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
-
 export default {
   name: 'movies-section',
   components: {
@@ -68,11 +80,63 @@ export default {
         this.currentPage = Math.ceil(this.movies.length / this.perPage) - 1 // Volta para o final quando chega ao início
       }
     },
+    redirect(url) {
+      if (url) {
+        window.open(`https://embedder.net/e/${url}`)
+      } else {
+        console.log('URL não fornecida para este slide.')
+      }
+    },
   },
 }
 </script>
 
 <style>
+.card-description-text {
+  text-align: justify;
+  font-size: 0.62vw;
+}
+.icon-button {
+  background-color: transparent;
+}
+.icon-button.custom-link:active {
+  width: 500px;
+  border: none;
+}
+.btn-secondary:not(:disabled):not(.disabled):active {
+  border: none;
+}
+.custom-link {
+  color: #ffffff; /* Define a cor do texto para branco */
+  background-color: white;
+  text-decoration: none; /* Remove sublinhado padrão */
+}
+button.btn.btn-secondary {
+  white-space: nowrap;
+  display: flex;
+  width: 0;
+  padding: var(--flix-sys-radius-base, 0px) 0px !important;
+  justify-content: center;
+  align-items: center;
+  border: none;
+}
+
+.icon-play {
+  height: 35px;
+  width: 35px;
+  top: -20px;
+  margin-left: -33px;
+}
+
+.button-container {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  margin-top: 10px;
+}
+.card {
+  background-color: #f3141400;
+}
 .movie-container.mt-5 {
   top: -43vh;
   z-index: 10;
@@ -82,10 +146,11 @@ export default {
   overflow: hidden; /* Adicionado para evitar que o card ampliado ultrapasse os limites do contêiner */
 }
 .card-container:hover .card {
+  background-color: #202024;
   position: relative;
   top: 20%;
   transform: scale(1.4);
-  transition: transform 0.3s ease-in-out;
+  transition: transform 0.2s ease-in-out;
   z-index: 1;
   border-radius: 5%;
 }
@@ -100,33 +165,32 @@ li#carousel-fade___BV_indicator_3_ {
   background-color: #ffffff00;
 }
 
-/* .card-container:hover .card .card-img-top {
+.card-container:hover .card .card-img-top {
   transition: transform 0.3s ease-in-out;
-  margin: 90px 0 70px;
+  margin: 75px 0 70px;
 }
 
 .card-container:hover .card .card-body {
   position: relative;
   display: block;
-} */
-
-a.btn.btn-primary {
-  background-color: #0c0000; /* Adicionado para mudar a cor de fundo do botão */
-  margin: -60% 25% 0;
 }
+
+/* a.btn.btn-primary {
+  background-color: #0c0000; 
+  margin: -60% 25% 0;
+} */
 
 .card-img-top {
   object-fit: cover; /* Adicionado para evitar que a imagem suba */
 }
 
-/* .card:hover .card-body {
-  width: 350px;
-  height: 300px;
-  transform: none !important; /* Adicionado para evitar o redimensionamento dos itens internos 
-} */
+.card:hover .card-body {
+  width: 300px;
+  height: 200px;
+  transform: none !important;
+}
 
 .card-img-top.mobile {
-  /* Adapte o tamanho da imagem conforme necessário para dispositivos móveis */
   width: 100%;
   height: 200px; /* Ajuste conforme necessário */
 }

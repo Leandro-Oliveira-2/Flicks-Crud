@@ -55,7 +55,7 @@ export default {
   props: {
     bodyText: {
       type: String,
-      default: 'Button',
+      default: '',
     },
     color: {
       type: String,

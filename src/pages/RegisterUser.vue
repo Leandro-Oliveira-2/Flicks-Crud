@@ -69,9 +69,15 @@
           </b-row>
         </b-row>
         <b-row class="flex-column">
-          <ButtonComponent :body-text="'Continue'" @click="register" class="mb-3" />
+          <ButtonComponent
+            :body-text="'Continue'"
+            :buttonSize="250"
+            @click="register"
+            class="mb-3"
+          />
           <ButtonComponent
             :body-text="'Voltar ao login'"
+            :buttonSize="250"
             :color="'input-theme'"
             @click="redirect"
           />

@@ -5,7 +5,7 @@
         <b-navbar-brand href="#">
           <img center class="desktop-image" src="../assets/logo.png" alt="Kitten" />
         </b-navbar-brand>
-        <b-nav-item href="/">Início</b-nav-item>
+        <b-nav-item href="/movies">Início</b-nav-item>
         <b-nav-item href="/series">Seríes</b-nav-item>
         <b-nav-item href="/movies">Filmes</b-nav-item>
         <b-nav-item href="#">Bombando</b-nav-item>

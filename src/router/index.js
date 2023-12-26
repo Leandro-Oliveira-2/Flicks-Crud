@@ -58,6 +58,12 @@ const routes = [
     name: 'account-screen',
     component: () => import(/* webpackChunkName: "accountScreen" */ '../pages/AccountScreen.vue'),
   },
+  {
+    path: '/cineScreen',
+    name: 'cineScreen',
+    component: () => import(/* webpackChunkName: "cineScreen" */ '../pages/CineScreen.vue'),
+    props: true,
+  },
 ]
 
 const router = new VueRouter({
