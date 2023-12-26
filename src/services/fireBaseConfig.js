@@ -2,7 +2,7 @@
 // eslint-disable-next-line no-useless-catch
 // Import the functions you need from the SDKs you need
 import { initializeApp } from 'firebase/app'
-import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword, GoogleAuthProvider, signInWithPopup, FacebookAuthProvider } from 'firebase/auth'
+import { getAuth, onAuthStateChanged, signInWithEmailAndPassword, createUserWithEmailAndPassword, GoogleAuthProvider, signInWithPopup, FacebookAuthProvider } from 'firebase/auth'
 import { getFirestore, setDoc, doc } from 'firebase/firestore'
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
@@ -59,6 +59,27 @@ const signInWithGoogle = async (router) => {
   }
 };
 
+const checkAuth = (router) => {
+  return new Promise((resolve, reject) => {
+    const unsubscribe = onAuthStateChanged(appAuth, (user) => {
+      // unsubscribe para de ouvir as mudanças no estado de autenticação
+      unsubscribe();
+
+      if (user) {
+        // O usuário está autenticado
+        console.log('Usuário autenticado:', user);
+        resolve(user);
+      } else {
+        // O usuário não está autenticado
+        console.log('Usuário não autenticado');
+        reject(new Error('Usuário não autenticado'));
+        // Redirecionar para a página de login ou realizar alguma outra ação, se necessário
+        router.push('/login');
+      }
+    });
+  });
+};
+
 const signInWithFacebook = async (router) => {
   try {
     const resultado = await signInWithPopup(getAuth(), Facebookprovider);
@@ -72,4 +93,4 @@ const signInWithFacebook = async (router) => {
 }
 
 
-export { login, signUp, db, signInWithGoogle, signInWithFacebook }
+export { login, signUp, db, signInWithGoogle, signInWithFacebook, checkAuth }

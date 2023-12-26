@@ -1,12 +1,14 @@
 <template>
   <div class="home">
-    <carousel-component :slides="slides" />
+    <carousel-component :slides="slides" @slide-clicked="redirectToCineScreen" />
     <!--     <b-card-text>Titulo</b-card-text> -->
-    <movies-section :movies="movies" class="mt-5" />
+    <categories-component :movies="movies" />
+
+    <movies-section :movies="movies" :sectionTitle="dynamicTitle" class="mt-5" />
     <!--     <b-card-text>Titulo</b-card-text> -->
-    <movies-section :movies="nowPlaying" class="mt-5" />
+    <movies-section :movies="nowPlaying" :sectionTitle="dynamicTitle2" class="mt-5" />
     <!--     <b-card-text>Titulo</b-card-text> -->
-    <movies-section :movies="topPopular" class="mt-5" />
+    <movies-section :movies="topPopular" :sectionTitle="dynamicTitle3" class="mt-5" />
     <FooterComponent />
   </div>
 </template>
@@ -16,12 +18,14 @@ import MoviesSection from '@/components/MoviesSection.vue'
 import CarouseComponent from '@/components/CarouseComponent.vue'
 import FooterComponent from '@/components/FooterComponent.vue'
 import request from '../utils/request'
+import CategoriasComponentVue from '@/components/CategoriasComponent.vue'
 export default {
   name: 'HomeView',
   components: {
     'movies-section': MoviesSection,
     'carousel-component': CarouseComponent,
     FooterComponent: FooterComponent,
+    'categories-component': CategoriasComponentVue,
   },
   data() {
     return {
@@ -30,6 +34,9 @@ export default {
         // Add your featured movies here
       ],
       movies: [],
+      dynamicTitle: 'Top Filmes',
+      dynamicTitle2: 'Populares',
+      dynamicTitle3: 'Lançados Recentemente',
       topPopular: [],
       nowPlaying: [],
       slides: [
@@ -37,7 +44,7 @@ export default {
           caption: 'First Slide',
           imgSrc:
             'https://i0.wp.com/viciados.net/wp-content/uploads/2021/11/Spider-Man_No_Way_Home_Sem_Volta_Para_Casa_Homem_Aranha_3.webp',
-          url: 'https://embedder.net/e/634649',
+          movieId: '634649',
         },
         {
           caption: 'Second Slide',
@@ -55,48 +62,6 @@ export default {
     }
   },
   methods: {
-    async fetchData() {
-      console.log('----------------entrei------------------')
-      try {
-        const tmdbApiOptions = {
-          method: 'GET',
-          url: 'https://api.themoviedb.org/3/movie/now_playing',
-          params: {
-            language: 'en-US',
-            page: 1,
-          },
-          headers: {
-            Authorization:
-              'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI2MzMwM2VkNzZjNzE4NGVhNDI0NGFjMjI2MTgzMWMzZSIsInN1YiI6IjY1ODRjMWUzNzVmMWFkMTY4OTZkYzk1MyIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.ioUiTj6EKTNpxrF-AqhWAuNzoQaqg5yPjgjJrtIZ1to',
-            accept: 'application/json',
-          },
-        }
-
-        await request(
-          tmdbApiOptions.method,
-          tmdbApiOptions.url,
-          tmdbApiOptions.params,
-          tmdbApiOptions.headers,
-          (response) => {
-            console.log('entrei')
-            let i = 0
-            response.data.data.list.map((item) => {
-              i++
-              this.movies.push({
-                id: i,
-                banner: item.primaryImage.imageUrl,
-                movieId: item.id,
-                description: item.overview,
-              })
-            })
-            console.log(response.data.data.list.id)
-          },
-        )
-      } catch (error) {
-        console.log(error)
-      }
-      console.log('----------------sai------------------')
-    },
     async topPlay() {
       console.log('----------------entrei------------------')
       try {
@@ -110,6 +75,7 @@ export default {
               banner: `https://image.tmdb.org/t/p/w1280${item.backdrop_path}`,
               movieId: item.id,
               description: item.overview,
+              title: item.original_title,
             })
           })
           console.log(response.data.data.list.id)
@@ -132,6 +98,7 @@ export default {
               banner: `https://image.tmdb.org/t/p/w1280${item.backdrop_path}`,
               movieId: item.id,
               description: item.overview,
+              title: item.original_title,
             })
           })
           console.log(response.data.data.list.id)
@@ -154,6 +121,7 @@ export default {
               banner: `https://image.tmdb.org/t/p/w1280${item.backdrop_path}`,
               movieId: item.id,
               description: item.overview,
+              title: item.original_title,
             })
           })
           console.log(response.data.data.list.id)

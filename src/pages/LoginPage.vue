@@ -98,12 +98,10 @@ export default {
 
         // Após o login, busca informações adicionais do usuário no Firestore
         const additionalInfo = await this.fetchAdditionalUserInfo(user.uid)
-        console.log('additionalInfo', additionalInfo)
-        console.log('Usuário logado com sucesso:', user)
         // Combina as informações do usuário e as informações adicionais
         this.userData = { ...user, ...additionalInfo }
         this.$router.push('/movies')
-        console.log('Usuário logado com sucesso:', this.userData)
+        localStorage.setItem('user', JSON.stringify(this.userData))
       } catch (error) {
         console.log(error.code)
         if (error.code === 'auth/invalid-credential') {
@@ -140,9 +138,11 @@ export default {
   display: flex;
   flex-direction: column;
   align-items: center;
+  margin-block-end: -150px;
 }
 .custom-link {
   color: #7c7c8a !important;
+  background-color: transparent !important;
 }
 vector {
   color: #7c7c8a;
@@ -178,7 +178,7 @@ vector {
 .login {
   display: flex;
   width: 401px;
-  height: 590px;
+  height: 650px;
   left: 517px;
   border-radius: 4px;
   border: 1px;

@@ -1,6 +1,6 @@
 <template>
   <div class="container-fluid">
-    <footer class="bg-dark text-center text-lg-start text-white">
+    <footer class="custom-footer">
       <!-- Grid container -->
       <div class="container p-4">
         <!--Grid row-->
@@ -110,7 +110,7 @@
       <!-- Grid container -->
 
       <!-- Copyright -->
-      <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2)">
+      <div class="text-center p-3" style="background-color: #141414">
         © 2023 Copyright:
         <a class="text-white" href="https://mdbootstrap.com/">MDBootstrap.com</a>
       </div>
@@ -126,6 +126,7 @@ export default {
 </script>
 <style>
 .container-fluid {
+  background-color: #141414;
   margin-top: -150px;
   width: 100%;
   padding-right: 0 !important;

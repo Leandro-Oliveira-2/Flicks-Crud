@@ -70,7 +70,7 @@
           :body-text="'Assistir'"
           :color="'btn-light'"
           :colorButton="'#000000'"
-          @click="redirect(slide.url)"
+          @click="redirect(slide)"
           :buttonSize="150"
           :buttonHeight="60"
           :icon="'play'"
@@ -92,7 +92,7 @@
           :body-text="'Assistir'"
           :color="'btn-light'"
           :colorButton="'#000000'"
-          @click="redirect(slides[activeSlide].url)"
+          @click="redirect(slides.movieId)"
           :buttonSize="150"
           :buttonHeight="60"
           :icon="'play'"
@@ -113,6 +113,7 @@
 
 <script>
 import ButtonComponent from '@/components/ButtonComponent.vue'
+import store from '@/utils/store'
 export default {
   name: 'carouselComponent',
   components: {
@@ -137,7 +138,13 @@ export default {
     },
     redirect(url) {
       if (url) {
-        window.location.href = url
+        // Use a mutation para armazenar a URL na store
+        store.commit('setSelectedMovieUrl', url)
+
+        // Navegue para a rota 'cineScreen'
+        this.$router.push({
+          name: 'cineScreen',
+        })
       } else {
         console.log('URL não fornecida para este slide.')
       }

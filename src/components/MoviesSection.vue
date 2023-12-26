@@ -1,6 +1,6 @@
 <template>
   <div class="movie-container">
-    <b-card-title>Séries</b-card-title>
+    <b-card-title>{{ sectionTitle }}</b-card-title>
     <Carousel
       :per-page="perPage"
       :paginationEnabled="false"
@@ -20,6 +20,7 @@
               >
                 <font-awesome-icon class="icon-play" icon="circle-play" size="2xl" />
               </b-button>
+              <b-card-title class="card-title">{{ movie.title }}</b-card-title>
               <b-card-text class="card-description-text">
                 {{
                   movie.description.length > 280
@@ -44,6 +45,8 @@
 <script>
 import { Carousel, Slide } from 'vue-carousel'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
+import store from '@/utils/store'
+
 export default {
   name: 'movies-section',
   components: {
@@ -54,6 +57,10 @@ export default {
   props: {
     movies: {
       type: Array,
+      required: true,
+    },
+    sectionTitle: {
+      type: String,
       required: true,
     },
   },
@@ -82,7 +89,13 @@ export default {
     },
     redirect(url) {
       if (url) {
-        window.open(`https://embedder.net/e/${url}`)
+        // Use a mutation para armazenar a URL na store
+        store.commit('setSelectedMovieUrl', url)
+
+        // Navegue para a rota 'cineScreen'
+        this.$router.push({
+          name: 'cineScreen',
+        })
       } else {
         console.log('URL não fornecida para este slide.')
       }
@@ -92,9 +105,12 @@ export default {
 </script>
 
 <style>
+.card-title {
+  font-size: 0.7vw;
+}
 .card-description-text {
   text-align: justify;
-  font-size: 0.62vw;
+  font-size: 0.52vw;
 }
 .icon-button {
   background-color: transparent;
@@ -272,12 +288,37 @@ li#carousel-fade___BV_indicator_3_ {
     width: 50px;
     margin: 0 -10px 0;
   }
-  .card-container:hover .card .card-body {
-    position: relative;
-    display: none;
-  }
   .card-container:hover .card {
     transform: none; /* Desativa o efeito de zoom */
+    width: 200px;
+    height: 400px;
+  }
+
+  .card:hover .card-body {
+    width: 197px;
+    font-size: 0.5vw;
+    /* height: 211px; */
+    transform: none !important;
+  }
+  p.card-text.card-description-text {
+    font-size: 1.5vw;
+  }
+
+  .card-container:hover .card .card-img-top {
+    transition: transform 0.3s ease-in-out;
+    margin: 2px 0 70px;
+    width: 100%;
+  }
+
+  .icon-play {
+    height: 35px;
+    width: 35px;
+    top: -20px;
+    margin-left: -22px;
+  }
+  .movie-container:hover .carousel-button {
+    opacity: 1;
+    display: none;
   }
 
   /* Aplicar estilos específicos para a classe 'mobile' em dispositivos móveis */
