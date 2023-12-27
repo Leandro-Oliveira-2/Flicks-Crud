@@ -10,6 +10,7 @@
           <b-row>
             <b-col>
               <input-component
+                :buttonSize="'400'"
                 :icon="'envelope'"
                 :label="'E-mail'"
                 v-model="email"
@@ -19,6 +20,7 @@
             </b-col>
             <b-col>
               <input-component
+                :buttonSize="'400'"
                 :icon="'circle-user'"
                 :label="'Nome'"
                 :type="'name'"
@@ -31,6 +33,7 @@
               <div class="input-container">
                 <label class="input-label">CPF</label>
                 <input-component
+                  :buttonSize="'400'"
                   :icon="'address-card'"
                   placeholder=" jhondoe@example.com"
                   v-model="additionalAttributes.cpf"
@@ -40,6 +43,7 @@
             </b-col>
             <b-col>
               <input-component
+                :buttonSize="'400'"
                 :icon="'calendar-xmark'"
                 :label="'Data Nascimento'"
                 :type="'date'"
@@ -51,6 +55,7 @@
           <b-row>
             <b-col>
               <input-component
+                :buttonSize="'400'"
                 :icon="'unlock'"
                 :aria-placeholder="'***********'"
                 :label="'Senha'"
@@ -60,6 +65,7 @@
             </b-col>
             <b-col>
               <input-component
+                :buttonSize="'400'"
                 :icon="'unlock'"
                 aria-placeholder="***********"
                 :label="'Confirme a Senha'"
@@ -123,12 +129,19 @@ export default {
     redirect() {
       this.$router.push('/loginPage')
     },
+    inserStorage() {
+      localStorage.setItem('reload', 1)
+    },
+  },
+  mounted() {
+    this.inserStorage()
   },
 }
 </script>
 <style>
 .row {
   display: flex;
+  width: 902px;
   flex-direction: row;
   justify-content: center;
   align-items: center;
@@ -138,8 +151,8 @@ export default {
   width: 100vw;
   height: 100vh;
   display: flex;
-  justify-content: center; /* Alinha horizontalmente ao centro */
-  align-items: center; /* Alinha verticalmente ao centro */
+  justify-content: center;
+  align-items: center;
 }
 .login {
   background-color: #ffffff00;
@@ -153,9 +166,9 @@ export default {
 }
 .img-logo {
   display: flex;
-  justify-content: center; /* Alinha horizontalmente ao centro */
-  align-items: center; /* Alinha verticalmente ao centro */
-  flex-direction: column; /* Alinha os elementos em uma coluna */
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
 }
 span {
   width: 232px;
@@ -170,12 +183,12 @@ span {
 }
 
 .icon-input {
-  padding-left: 30px; /* Ajuste isso de acordo com o tamanho do seu ícone */
+  padding-left: 30px;
 }
 
 .icon {
   position: absolute;
-  left: 10px; /* Ajuste isso de acordo com o tamanho do seu ícone */
+  left: 10px;
   top: 50%;
   transform: translateY(-50%);
   pointer-events: none;

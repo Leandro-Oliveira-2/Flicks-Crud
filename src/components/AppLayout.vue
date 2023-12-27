@@ -173,7 +173,7 @@ img {
 /* Quando a largura da tela for 600px ou menos (tipicamente telefones) */
 @media screen and (min-width: 841px) and (max-width: 1280px) and (orientation: landscape) {
   .desktop-navbar {
-    font-size: 0.85vw;
+    font-size: 1rem;
   }
 }
 

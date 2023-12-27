@@ -92,7 +92,7 @@
           :body-text="'Assistir'"
           :color="'btn-light'"
           :colorButton="'#000000'"
-          @click="redirect(slides.movieId)"
+          @click="redirect()"
           :buttonSize="150"
           :buttonHeight="60"
           :icon="'play'"
@@ -136,18 +136,18 @@ export default {
     updateActiveSlide(newSlide) {
       this.activeSlide = newSlide
     },
-    redirect(url) {
-      if (url) {
-        // Use a mutation para armazenar a URL na store
-        store.commit('setSelectedMovieUrl', url)
-
-        // Navegue para a rota 'cineScreen'
-        this.$router.push({
-          name: 'cineScreen',
-        })
-      } else {
-        console.log('URL não fornecida para este slide.')
+    redirect() {
+      if (this.activeSlide === 0) {
+        store.commit('setSelectedMovieUrl', 634649)
+      } else if (this.activeSlide === 1) {
+        store.commit('setSelectedMovieUrl', 502356)
+      } else if (this.activeSlide === 2) {
+        store.commit('setSelectedMovieUrl', 872585)
       }
+      // Navegue para a rota 'cineScreen'
+      this.$router.push({
+        name: 'cineScreen',
+      })
     },
   },
 }

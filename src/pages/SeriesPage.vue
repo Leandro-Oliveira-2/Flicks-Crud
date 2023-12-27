@@ -33,9 +33,7 @@ export default {
   data() {
     return {
       reload: window.localStorage.getItem('reload'),
-      featuredMovies: [
-        // Add your featured movies here
-      ],
+      featuredMovies: [],
       movies: [],
       dynamicTitle: 'Top Filmes',
       dynamicTitle2: 'Populares',
@@ -65,13 +63,7 @@ export default {
     }
   },
   methods: {
-    async verifyUser() {
-      if (window.localStorage.getItem('user') == null) {
-        this.$router.push('/loginPage')
-      }
-    },
     async topPlay() {
-      console.log('----------------entrei------------------')
       try {
         await request('GET', 'upcoming', (response) => {
           console.log(response.data.results)
@@ -91,10 +83,8 @@ export default {
       } catch (error) {
         console.log(error)
       }
-      console.log('----------------sai------------------')
     },
     async getPopular() {
-      console.log('----------------entrei------------------')
       try {
         await request('GET', 'top_rated?language=pt-BR&page=1', (response) => {
           console.log(response.data.results)
@@ -114,10 +104,8 @@ export default {
       } catch (error) {
         console.log(error)
       }
-      console.log('----------------sai------------------')
     },
     async getNowPlaying() {
-      console.log('----------------entrei 2222------------------')
       try {
         await request('GET', 'now_playing', (response) => {
           console.log(response.data.results)
@@ -137,7 +125,6 @@ export default {
       } catch (error) {
         console.log(error)
       }
-      console.log('----------------sai------------------')
     },
     reloadStorage() {
       if (this.reload == 'true') {
@@ -147,7 +134,6 @@ export default {
     },
   },
   mounted() {
-    this.verifyUser()
     this.getPopular()
     this.getNowPlaying()
     this.topPlay()

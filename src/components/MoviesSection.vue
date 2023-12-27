@@ -23,8 +23,8 @@
               <b-card-title class="card-title">{{ movie.title }}</b-card-title>
               <b-card-text class="card-description-text">
                 {{
-                  movie.description.length > 280
-                    ? movie.description.substring(0, 280) + '...'
+                  movie.description.length > 210
+                    ? movie.description.substring(0, 210) + '...'
                     : movie.description
                 }}
               </b-card-text>
@@ -106,11 +106,11 @@ export default {
 
 <style>
 .card-title {
-  font-size: 0.7vw;
+  font-size: 1rem;
 }
 .card-description-text {
   text-align: justify;
-  font-size: 0.52vw;
+  font-size: 0.6rem;
 }
 .icon-button {
   background-color: transparent;
@@ -140,7 +140,7 @@ button.btn.btn-secondary {
 .icon-play {
   height: 35px;
   width: 35px;
-  top: -20px;
+  top: -30px;
   margin-left: -33px;
 }
 
@@ -164,7 +164,7 @@ button.btn.btn-secondary {
 .card-container:hover .card {
   background-color: #202024;
   position: relative;
-  top: 20%;
+  top: 10%;
   transform: scale(1.4);
   transition: transform 0.2s ease-in-out;
   z-index: 1;
@@ -187,6 +187,12 @@ li#carousel-fade___BV_indicator_3_ {
 }
 
 .card-container:hover .card .card-body {
+  position: relative;
+  display: block;
+}
+
+.card-container:hover .card > div:nth-child(1) {
+  padding: 80px !important;
   position: relative;
   display: block;
 }
@@ -264,6 +270,11 @@ li#carousel-fade___BV_indicator_3_ {
   position: relative;
   vertical-align: top;
   padding: 0 0 0.2;
+}
+.card-body {
+  flex: 1 1 auto;
+  min-height: 1px;
+  padding: 0.75rem;
 }
 .mt-5 {
   top: 0px;

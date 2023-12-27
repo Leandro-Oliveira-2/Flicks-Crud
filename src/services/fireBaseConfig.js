@@ -1,14 +1,12 @@
 // prettier-ignore
 // eslint-disable-next-line no-useless-catch
-// Import the functions you need from the SDKs you need
 import { initializeApp } from 'firebase/app'
-import { getAuth, onAuthStateChanged, signInWithEmailAndPassword, createUserWithEmailAndPassword, GoogleAuthProvider, signInWithPopup, FacebookAuthProvider } from 'firebase/auth'
+import { getAuth, signOut, onAuthStateChanged, signInWithEmailAndPassword, createUserWithEmailAndPassword, GoogleAuthProvider, signInWithPopup, FacebookAuthProvider } from 'firebase/auth'
 import { getFirestore, setDoc, doc } from 'firebase/firestore'
+import router from '@/router'
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
-// Your web app's Firebase configuration
-// For Firebase JS SDK v7.20.0 and later, measurementId is optional
 const firebaseConfig = {
   apiKey: 'AIzaSyDiD9azitPPfnTYGiuynjMxnWmXXXWizSc',
   authDomain: 'snetflix-e23f0.firebaseapp.com',
@@ -20,7 +18,6 @@ const firebaseConfig = {
 }
 
 
-// Initialize Firebase
 const app = initializeApp(firebaseConfig)
 const appAuth = getAuth(app)
 const db = getFirestore(app)
@@ -36,8 +33,6 @@ const signUp = async (email, password, additionalAttributes) => {
     // Cria o usuário no Firebase Authentication
     const userCredential = await createUserWithEmailAndPassword(appAuth, email, password)
     const user = userCredential.user
-
-    // Adiciona atributos adicionais ao usuário no Firestore
     const userDocRef = doc(db, 'users', user.uid)
     await setDoc(userDocRef, additionalAttributes)
 
@@ -50,7 +45,6 @@ const signUp = async (email, password, additionalAttributes) => {
 const signInWithGoogle = async (router) => {
   try {
     const resultado = await signInWithPopup(getAuth(), googleProvider);
-    // Manipule o usuário que fez login aqui, se necessário
     const user = resultado.user;
     console.log('Login com Google bem-sucedido:', user);
     router.push('/movies')
@@ -59,31 +53,46 @@ const signInWithGoogle = async (router) => {
   }
 };
 
-const checkAuth = (router) => {
-  return new Promise((resolve, reject) => {
-    const unsubscribe = onAuthStateChanged(appAuth, (user) => {
-      // unsubscribe para de ouvir as mudanças no estado de autenticação
-      unsubscribe();
+const logout = async () => {
+  const auth = getAuth();
 
-      if (user) {
-        // O usuário está autenticado
-        console.log('Usuário autenticado:', user);
-        resolve(user);
-      } else {
-        // O usuário não está autenticado
-        console.log('Usuário não autenticado');
-        reject(new Error('Usuário não autenticado'));
-        // Redirecionar para a página de login ou realizar alguma outra ação, se necessário
-        router.push('/login');
-      }
+  try {
+    await signOut(auth);
+    console.log('Usuário deslogado com sucesso.');
+  } catch (error) {
+    console.error('Erro ao fazer logout:', error);
+  }
+};
+
+const checkAuth = async () => {
+  try {
+    return await new Promise((resolve, reject) => {
+      const unsubscribe = onAuthStateChanged(appAuth, (user) => {
+        unsubscribe();
+
+        if (user) {
+          console.log('Usuário autenticado:', user);
+          resolve(user);
+        } else {
+          console.log('Usuário não autenticado');
+          const currentRoute = router.currentRoute;
+
+          if (currentRoute.path !== '/loginPage') {
+            router.push('/loginPage');
+          }
+          reject(new Error('Usuário não autenticado'));
+        }
+      });
     });
-  });
+  } catch (error) {
+    console.error('Erro ao verificar autenticação:', error);
+    throw error;
+  }
 };
 
 const signInWithFacebook = async (router) => {
   try {
     const resultado = await signInWithPopup(getAuth(), Facebookprovider);
-    // Manipule o usuário que fez login aqui, se necessário
     const user = resultado.user;
     console.log('Login com Facebook bem-sucedido:', user);
     router.push('/movies')
@@ -93,4 +102,4 @@ const signInWithFacebook = async (router) => {
 }
 
 
-export { login, signUp, db, signInWithGoogle, signInWithFacebook, checkAuth }
+export { login, signUp, db, signInWithGoogle, signInWithFacebook, checkAuth, logout }

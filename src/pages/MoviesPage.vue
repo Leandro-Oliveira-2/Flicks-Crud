@@ -30,9 +30,7 @@ export default {
   data() {
     return {
       reload: window.localStorage.getItem('reload'),
-      featuredMovies: [
-        // Add your featured movies here
-      ],
+      featuredMovies: [],
       movies: [],
       dynamicTitle: 'Top Filmes',
       dynamicTitle2: 'Populares',
@@ -55,7 +53,7 @@ export default {
         {
           caption: 'Third Slide',
           imgSrc:
-            'https://occ-0-5514-3851.1.nflxso.net/dnm/api/v6/6AYY37jfdO6hpXcMjf9Yu5cnmO0/AAAABQnffHFDiWLP1apeR8hWLXZvEiZaA86y6aMOE_Zsp-pWkeyiqB1Ad-hR-N9XAwgJuOO0B4rn3G5L2LBGA-S4ejYjvUQwf6Y0TOuq.webp?r=005',
+            'https://img.olhardigital.com.br/wp-content/uploads/2023/07/Destaque-Poster-de-Oppenheimer.jpg',
           url: 'https://embedder.net/e/155',
         },
       ],
@@ -87,10 +85,8 @@ export default {
       } catch (error) {
         console.log(error)
       }
-      console.log('----------------sai------------------')
     },
     async getPopular() {
-      console.log('----------------entrei------------------')
       try {
         await request('GET', 'top_rated?language=pt-BR&page=1', (response) => {
           console.log(response.data.results)
@@ -110,30 +106,29 @@ export default {
       } catch (error) {
         console.log(error)
       }
-      console.log('----------------sai------------------')
     },
     async getNowPlaying() {
-      console.log('----------------entrei 2222------------------')
       try {
         await request('GET', 'now_playing', (response) => {
           console.log(response.data.results)
-          let i = 0
-          response.data.results.map((item) => {
-            i++
+
+          this.nowPlaying = []
+
+          response.data.results.forEach((item, index) => {
             this.nowPlaying.push({
-              id: i,
-              banner: `https://image.tmdb.org/t/p/w1280${item.backdrop_path}`,
+              id: index + 1,
+              banner: `https://image.tmdb.org/t/p/w1280${item.backdrop_path || ''}`,
               movieId: item.id,
               description: item.overview,
               title: item.original_title,
             })
           })
-          console.log(response.data.data.list.id)
+        }).catch((error) => {
+          console.error('Erro na solicitação now_playing:', error)
         })
       } catch (error) {
         console.log(error)
       }
-      console.log('----------------sai------------------')
     },
     reloadStorage() {
       if (this.reload == 'true') {
@@ -143,7 +138,6 @@ export default {
     },
   },
   mounted() {
-    this.verifyUser()
     this.getPopular()
     this.getNowPlaying()
     this.topPlay()

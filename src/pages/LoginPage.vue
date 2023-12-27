@@ -75,6 +75,7 @@ import ButtonComponent from '@/components/ButtonComponent.vue'
 import InputComponet from '@/components/InputComponet.vue'
 import { signInWithGoogle } from '@/services/fireBaseConfig'
 import { signInWithFacebook } from '@/services/fireBaseConfig'
+import { logout } from '../services/fireBaseConfig'
 
 export default {
   name: 'LoginPage',
@@ -91,15 +92,25 @@ export default {
     }
   },
   methods: {
+    async clearLocalStorage() {
+      if (localStorage.getItem('reload') == 1) {
+        logout()
+        localStorage.clear()
+        window.location.reload()
+      }
+      logout()
+      localStorage.clear()
+    },
     async login() {
       try {
         const userCredential = await login(this.email, this.password)
         const user = userCredential.user
 
-        // Após o login, busca informações adicionais do usuário no Firestore
+        const idToken = await user.getIdToken()
+
         const additionalInfo = await this.fetchAdditionalUserInfo(user.uid)
-        // Combina as informações do usuário e as informações adicionais
-        this.userData = { ...user, ...additionalInfo }
+
+        this.userData = { ...user, ...additionalInfo, idToken }
         this.$router.push('/movies')
         localStorage.setItem('user', JSON.stringify(this.userData))
       } catch (error) {
@@ -110,25 +121,24 @@ export default {
       }
     },
     async signInWithGoogle() {
-      await signInWithGoogle(this.$router) // Passe this.$router como um argumento
+      await signInWithGoogle(this.$router)
     },
     async signInWithFacebook() {
-      await signInWithFacebook(this.$router) // Passe this.$router como um argumento
+      await signInWithFacebook(this.$router)
     },
     async fetchAdditionalUserInfo(userId) {
-      // Função para buscar informações adicionais do usuário no Firestore
-      // Você precisa implementar esta função de acordo com a estrutura do seu Firestore
-      // Aqui está um exemplo básico
       const userDocRef = doc(db, 'users', userId)
       const userDoc = await getDoc(userDocRef)
 
       if (userDoc.exists()) {
         return userDoc.data()
       } else {
-        // Se o documento não existir, você pode retornar um objeto vazio ou lidar de outra forma
         return {}
       }
     },
+  },
+  mounted() {
+    this.clearLocalStorage()
   },
 }
 </script>
@@ -191,6 +201,10 @@ vector {
   height: 87px;
   top: 159px;
   left: 667px;
+}
+
+.container-fluid {
+  background-color: #14141400;
 }
 
 .img-logo {
