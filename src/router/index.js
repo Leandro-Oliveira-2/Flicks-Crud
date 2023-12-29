@@ -31,6 +31,21 @@ const routes = [
         name: 'MoviesPage',
         component: () => import(/* webpackChunkName: "movies" */ '../pages/MoviesPage.vue'),
       },
+      {
+        path: '/myList',
+        name: 'MyListPage',
+        component: () => import(/* webpackChunkName: "myList" */ '../pages/MyListPage.vue'),
+      },
+      {
+        path: '/pumpingPage',
+        name: 'PumpingPage',
+        component: () => import(/* webpackChunkName: "pumpingPage" */ '../pages/PumpingPage.vue'),
+      },
+      {
+        path: '/userProfile',
+        name: 'UserProfile',
+        component: () => import(/* webpackChunkName: "pumpingPage" */ '../pages/UserInfoPage.vue'),
+      },
     ],
   },
   {

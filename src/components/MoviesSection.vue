@@ -1,5 +1,5 @@
 <template>
-  <div class="movie-container">
+  <div class="movie-container" :class="{ hovered: isHovered }">
     <b-card-title>{{ sectionTitle }}</b-card-title>
     <Carousel
       :per-page="perPage"
@@ -11,7 +11,12 @@
       <Slide v-for="movie in movies" :key="movie.id">
         <div class="card-container">
           <div class="card" style="border: none">
-            <img :src="movie.banner" class="card-img-top mobile" alt="..." />
+            <img
+              class="card-img-top mobile"
+              @mouseover="isHovered = true"
+              @mouseleave="isHovered = false"
+              :src="movie.banner"
+            />
             <div class="card-body">
               <b-button
                 class="link-light"
@@ -19,6 +24,19 @@
                 style="background-color: transparent !important; border: none"
               >
                 <font-awesome-icon class="icon-play" icon="circle-play" size="2xl" />
+              </b-button>
+              <b-button @click="addFavorite(movie.movieId, movie.title)">
+                <font-awesome-icon icon="heart" class="heart-icon" style="color: #141414" />
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="36"
+                  height="36"
+                  fill="currentColor"
+                  class="bi bi-circle-fill"
+                  viewBox="0 0 16 16"
+                >
+                  <circle cx="8" cy="8" r="8" />
+                </svg>
               </b-button>
               <b-card-title class="card-title">{{ movie.title }}</b-card-title>
               <b-card-text class="card-description-text">
@@ -46,6 +64,7 @@
 import { Carousel, Slide } from 'vue-carousel'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 import store from '@/utils/store'
+import { addMovieToFavorites } from '@/services/fireBaseConfig'
 
 export default {
   name: 'movies-section',
@@ -69,6 +88,7 @@ export default {
       perPage: 6,
       currentPage: 0,
       hasScrolled: false,
+      isHovered: false,
     }
   },
   methods: {
@@ -100,13 +120,40 @@ export default {
         console.log('URL não fornecida para este slide.')
       }
     },
+    async addFavorite(moveId, title) {
+      try {
+        const user = localStorage.getItem('user') // Substitua pelo seu userId
+        const userId = JSON.parse(user).uid
+        console.log(userId)
+        await addMovieToFavorites(userId, moveId, title)
+      } catch (error) {
+        console.error('Erro ao adicionar filme aos favoritos:', error)
+      }
+    },
   },
 }
 </script>
 
 <style>
+.heart-icon {
+  top: -30px;
+  z-index: 10;
+  left: 70px;
+}
+.bi.bi-circle-fill {
+  top: -30px;
+  left: 61px;
+}
+
+.movie-container.hovered {
+  z-index: 100;
+  margin-block-end: -100px;
+  position: relative; /* Adicione esta linha */
+}
 .card-title {
-  font-size: 1rem;
+  font-size: 1.2rem;
+  white-space: break-spaces;
+  color: #ffffff;
 }
 .card-description-text {
   text-align: justify;
@@ -141,7 +188,7 @@ button.btn.btn-secondary {
   height: 35px;
   width: 35px;
   top: -30px;
-  margin-left: -33px;
+  margin-left: -40px;
 }
 
 .button-container {
@@ -154,21 +201,35 @@ button.btn.btn-secondary {
   background-color: #f3141400;
 }
 .movie-container.mt-5 {
-  top: -43vh;
+  top: -45vh;
   z-index: 10;
 }
+
 .movie-container {
   position: relative;
   overflow: hidden; /* Adicionado para evitar que o card ampliado ultrapasse os limites do contêiner */
 }
 .card-container:hover .card {
   background-color: #202024;
-  position: relative;
-  top: 10%;
-  transform: scale(1.4);
+  position: absolute;
+  transform: scale(1.3);
   transition: transform 0.2s ease-in-out;
   z-index: 1;
-  border-radius: 5%;
+  width: 100%;
+  height: 100%;
+  border-radius: 2%;
+}
+
+.card-container .card:hover {
+  background-color: #202024;
+  position: relative;
+  top: -150px;
+  transform: scale(1.3);
+  transition: transform 0.2s ease-in-out;
+  z-index: 1;
+  width: 100%;
+  height: 100%;
+  border-radius: 2%;
 }
 
 li#carousel-fade___BV_indicator_1_ {
@@ -183,7 +244,7 @@ li#carousel-fade___BV_indicator_3_ {
 
 .card-container:hover .card .card-img-top {
   transition: transform 0.3s ease-in-out;
-  margin: 75px 0 70px;
+  margin: 180px 0 70px;
 }
 
 .card-container:hover .card .card-body {
@@ -197,18 +258,13 @@ li#carousel-fade___BV_indicator_3_ {
   display: block;
 }
 
-/* a.btn.btn-primary {
-  background-color: #0c0000; 
-  margin: -60% 25% 0;
-} */
-
 .card-img-top {
   object-fit: cover; /* Adicionado para evitar que a imagem suba */
 }
 
 .card:hover .card-body {
   width: 300px;
-  height: 200px;
+  height: 150px;
   transform: none !important;
 }
 
@@ -227,12 +283,9 @@ li#carousel-fade___BV_indicator_3_ {
 .movie-container {
   z-index: 1;
 }
-.mt-5 {
-  top: -440px;
-}
 .carousel-button {
   position: absolute;
-  top: 30%;
+  top: 15%;
   background: none;
   border: none;
   cursor: pointer;
@@ -240,13 +293,12 @@ li#carousel-fade___BV_indicator_3_ {
   transition: opacity 0.3s;
   backdrop-filter: blur(2px);
   background-color: rgba(0, 0, 0, 0.368);
-  height: 82%;
+  height: 85%;
   width: 50px;
   margin: 0 -10px 0;
-}
-
-.movie-container:hover .carousel-button {
   opacity: 1;
+  top: 5vh;
+  height: 85%;
 }
 
 .prev {

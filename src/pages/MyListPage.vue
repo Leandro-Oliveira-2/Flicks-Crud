@@ -20,7 +20,7 @@ import FooterComponent from '@/components/FooterComponent.vue'
 import request from '../utils/request'
 import CategoriasComponentVue from '@/components/CategoriasComponent.vue'
 export default {
-  name: 'HomeView',
+  name: 'MyListPage',
   components: {
     'movies-section': MoviesSection,
     'carousel-component': CarouseComponent,
@@ -60,9 +60,14 @@ export default {
     }
   },
   methods: {
+    async verifyUser() {
+      if (window.localStorage.getItem('user') == null) {
+        this.$router.push('/loginPage')
+      }
+    },
     async topPlay() {
       try {
-        await request('GET', 'upcoming', (response) => {
+        await request('GET', '634649/recommendations', (response) => {
           console.log(response.data.results)
           let i = 0
           response.data.results.map((item) => {

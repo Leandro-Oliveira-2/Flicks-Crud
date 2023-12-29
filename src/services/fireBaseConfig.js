@@ -1,9 +1,10 @@
 // prettier-ignore
 // eslint-disable-next-line no-useless-catch
 import { initializeApp } from 'firebase/app'
-import { getAuth, signOut, onAuthStateChanged, signInWithEmailAndPassword, createUserWithEmailAndPassword, GoogleAuthProvider, signInWithPopup, FacebookAuthProvider } from 'firebase/auth'
-import { getFirestore, setDoc, doc } from 'firebase/firestore'
+import { getAuth, signOut, collection, getDocs, onAuthStateChanged, signInWithEmailAndPassword, createUserWithEmailAndPassword, GoogleAuthProvider, signInWithPopup, FacebookAuthProvider } from 'firebase/auth'
+import { getFirestore, setDoc, doc, getDoc } from 'firebase/firestore'
 import router from '@/router'
+import Alert from '@/utils/Alert'
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
@@ -26,7 +27,12 @@ const Facebookprovider = new FacebookAuthProvider();
 const login = (email, password) => {
   return signInWithEmailAndPassword(appAuth, email, password)
 }
-
+const getUser = () => {
+  console.log("OI")
+  const usersCollection = collection(db, 'users');
+  const querySnapshot = getDocs(usersCollection);
+  return console.log(querySnapshot)
+}
 const signUp = async (email, password, additionalAttributes) => {
   // eslint-disable-next-line no-useless-catch
   try {
@@ -41,6 +47,37 @@ const signUp = async (email, password, additionalAttributes) => {
     throw error
   }
 }
+
+const addMovieToFavorites = async (userId, movieId, movieName) => {
+  const userDocRef = doc(db, 'users', userId);
+
+  try {
+    // Obtenha os dados atuais do usuário
+    const userDocSnapshot = await getDoc(userDocRef);
+    const userData = userDocSnapshot.data();
+
+    // Verifique se o array favoriteMovies já existe, se não, crie-o
+    const favoriteMovies = userData.favoriteMovies || [];
+
+    // Verifique se o filme já está na lista de favoritos
+    const isMovieAlreadyAdded = favoriteMovies.some(movie => movie.id === movieId);
+
+    if (!isMovieAlreadyAdded) {
+      // Adicione o novo objeto à lista de favoritos
+      favoriteMovies.push({ id: movieId, name: movieName });
+
+      // Atualize o documento do usuário no Firestore
+      await setDoc(userDocRef, { favoriteMovies }, { merge: true });
+
+      Alert('Filme adicionado aos favoritos com sucesso.');
+    } else {
+      Alert('Filme já está na lista de favoritos.');
+    }
+  } catch (error) {
+    console.error('Erro ao adicionar filme aos favoritos:', error);
+  }
+};
+
 
 const signInWithGoogle = async (router) => {
   try {
@@ -78,7 +115,7 @@ const checkAuth = async () => {
           const currentRoute = router.currentRoute;
 
           if (currentRoute.path !== '/loginPage') {
-            router.push('/loginPage');
+            window.location.href = '/loginPage';
           }
           reject(new Error('Usuário não autenticado'));
         }
@@ -102,4 +139,4 @@ const signInWithFacebook = async (router) => {
 }
 
 
-export { login, signUp, db, signInWithGoogle, signInWithFacebook, checkAuth, logout }
+export { login, signUp, db, signInWithGoogle, signInWithFacebook, checkAuth, logout, getUser, addMovieToFavorites }

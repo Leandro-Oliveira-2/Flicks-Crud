@@ -214,7 +214,7 @@ img.img-fluid {
 .degrade {
   display: block;
   position: absolute;
-  top: 80%;
+  top: 75%;
   left: 0;
   width: 100%;
   height: 237px;
@@ -239,10 +239,10 @@ img.img-fluid {
   display: block;
   position: absolute;
   z-index: 1;
-  top: -200px;
+  margin-top: -62rem;
   left: 0;
-  width: 50%;
-  height: 1100px;
+  width: 622px;
+  height: 995px;
   background: linear-gradient(77deg, rgba(0, 0, 0, 0.6), transparent 85%);
   color: rgba(240, 248, 255, 0);
 }

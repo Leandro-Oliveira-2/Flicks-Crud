@@ -8,14 +8,16 @@
         <b-nav-item href="/movies">Início</b-nav-item>
         <b-nav-item href="/series">Seríes</b-nav-item>
         <b-nav-item href="/movies">Filmes</b-nav-item>
-        <b-nav-item href="#">Bombando</b-nav-item>
-        <b-nav-item href="#">Minha lista</b-nav-item>
+        <b-nav-item href="/pumpingPage">Bombando</b-nav-item>
+        <b-nav-item href="/myList">Minha lista</b-nav-item>
       </b-navbar-nav>
       <b-navbar-nav class="ml-auto">
         <div class="icon-container">
-          <b-avatar class="avatar1">
-            <font-awesome-icon icon="magnifying-glass" size="lg" style="color: #d5ddec" />
-          </b-avatar>
+          <b-button>
+            <b-avatar class="avatar1">
+              <font-awesome-icon icon="magnifying-glass" size="lg" style="color: #d5ddec" />
+            </b-avatar>
+          </b-button>
           <b-avatar>
             <font-awesome-icon icon="bell" size="lg" style="color: #ffffff" />
           </b-avatar>
@@ -24,10 +26,10 @@
             src="https://i.postimg.cc/FRKMfYYb/AAAABXVGEr6zoc-E82-JPf-Lfx5-LREGANJUg3w-PAAPYc-ROD2m-Qg-LMMgz-ne2j-Sx96e-Xv-FIUn1v-Zl-SMj-Xj0-TWujvls-MCUVc-VKic1-QSvf.png"
           ></b-avatar>
           <div class="drop">
-            <b-dropdown id="dropdown-right" variant="transparent" class="m-2">
-              <b-dropdown-item href="#">Action</b-dropdown-item>
-              <b-dropdown-item href="#">Another action</b-dropdown-item>
-              <b-dropdown-item href="#">Something else here</b-dropdown-item>
+            <b-dropdown id="dropdown-left" variant="transparent" class="m-2 dropdown" right="false">
+              <b-dropdown-item href="userProfile">Lista de Favoritos</b-dropdown-item>
+              <b-dropdown-item href="userProfile">Tela de Usuário</b-dropdown-item>
+              <b-dropdown-item href="loginPage">Sair</b-dropdown-item>
             </b-dropdown>
           </div>
         </div>
@@ -93,6 +95,19 @@ export default {
 }
 </script>
 <style scoped>
+.dropdown-menu {
+  left: -217px !important;
+}
+h4.card-title {
+  font-size: 1.5rem;
+}
+.navbar-expand .navbar-nav .dropdown-menu {
+  position: absolute;
+  left: -217px;
+}
+.btn-secondary[data-v-40d62f2b][data-v-40d62f2b] {
+  width: 36px;
+}
 img {
   margin-left: 2rem;
 }

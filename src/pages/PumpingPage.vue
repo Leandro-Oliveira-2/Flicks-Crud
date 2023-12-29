@@ -20,7 +20,7 @@ import FooterComponent from '@/components/FooterComponent.vue'
 import request from '../utils/request'
 import CategoriasComponentVue from '@/components/CategoriasComponent.vue'
 export default {
-  name: 'HomeView',
+  name: 'PumpingPage',
   components: {
     'movies-section': MoviesSection,
     'carousel-component': CarouseComponent,
@@ -60,6 +60,11 @@ export default {
     }
   },
   methods: {
+    async verifyUser() {
+      if (window.localStorage.getItem('user') == null) {
+        this.$router.push('/loginPage')
+      }
+    },
     async topPlay() {
       try {
         await request('GET', 'upcoming', (response) => {
@@ -83,19 +88,23 @@ export default {
     },
     async getPopular() {
       try {
-        await request('GET', 'top_rated?language=pt-BR&page=1', (response) => {
+        await request('GET', '634649/recommendations', (response) => {
           console.log(response.data.results)
           let i = 0
-          response.data.results.map((item) => {
-            i++
-            this.movies.push({
-              id: i,
-              banner: `https://image.tmdb.org/t/p/w1280${item.backdrop_path}`,
-              movieId: item.id,
-              description: item.overview,
-              title: item.original_title,
-            })
+          response.data.results.map((item, index) => {
+            if ((index !== 5) & (index !== 6)) {
+              i++
+
+              this.movies.push({
+                id: i,
+                banner: `https://image.tmdb.org/t/p/w1280${item.backdrop_path}`,
+                movieId: item.id,
+                description: item.overview,
+                title: item.original_title,
+              })
+            }
           })
+          console.log('Lista a ser alterada!')
           console.log(response.data.data.list.id)
         })
       } catch (error) {

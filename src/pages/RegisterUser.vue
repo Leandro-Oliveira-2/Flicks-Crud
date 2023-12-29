@@ -110,6 +110,7 @@ export default {
         nome: '',
         cpf: '',
         dataNascimento: '',
+        favoriteMovies: [],
       },
     }
   },
