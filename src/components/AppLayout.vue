@@ -13,12 +13,12 @@
       </b-navbar-nav>
       <b-navbar-nav class="ml-auto">
         <div class="icon-container d-flex align-items-center">
-          <b-button>
-            <b-avatar class="avatar1">
+          <b-button class="icon-lupa-button">
+            <b-avatar class="avatar-icon">
               <font-awesome-icon icon="magnifying-glass" size="lg" style="color: #d5ddec" />
             </b-avatar>
           </b-button>
-          <b-avatar>
+          <b-avatar class="avatar-icon">
             <font-awesome-icon icon="bell" size="lg" style="color: #ffffff" />
           </b-avatar>
           <b-avatar
@@ -125,24 +125,20 @@ export default {
 h4.card-title {
   font-size: 1.5rem;
 }
-.navbar-expand .navbar-nav .dropdown-menu {
-  position: absolute;
-  left: -217px;
-}
 .btn-secondary[data-v-40d62f2b][data-v-40d62f2b] {
   width: 36px;
 }
 img {
   margin-left: 2rem;
 }
-.b-avatar[data-v-40d62f2b] {
+.avatar-icon {
   margin-right: 0.5rem;
-  background-color: #00000000;
+  background-color: #41e14900;
 }
-.b-avatar {
+.avatar1 {
   margin-right: -1.7rem;
 }
-.btn-secondary[data-v-40d62f2b] {
+.icon-lupa-button {
   color: #fff;
   background-color: #1175cc00;
   border-color: #6c757d00;
@@ -202,11 +198,6 @@ img {
 .navbar-content {
   display: flex;
   justify-content: space-between;
-  align-items: center;
-}
-.icon-container {
-  display: flex;
-  justify-content: flex-end; /* Alterado de space-between para flex-end */
   align-items: center;
 }
 /* Quando a largura da tela for 600px ou menos (tipicamente telefones) */
