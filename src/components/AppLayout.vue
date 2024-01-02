@@ -12,7 +12,7 @@
         <b-nav-item href="/myList">Minha lista</b-nav-item>
       </b-navbar-nav>
       <b-navbar-nav class="ml-auto">
-        <div class="icon-container">
+        <div class="icon-container d-flex align-items-center">
           <b-button>
             <b-avatar class="avatar1">
               <font-awesome-icon icon="magnifying-glass" size="lg" style="color: #d5ddec" />
@@ -34,6 +34,30 @@
           </div>
         </div>
       </b-navbar-nav>
+
+      <!-- <b-navbar-nav class="ml-auto">
+        <div class="icon-container">
+          <b-button>
+            <b-avatar class="avatar1">
+              <font-awesome-icon icon="magnifying-glass" size="lg" style="color: #d5ddec" />
+            </b-avatar>
+          </b-button>
+          <b-avatar>
+            <font-awesome-icon icon="bell" size="lg" style="color: #ffffff" />
+          </b-avatar>
+          <b-avatar
+            rounded="sm"
+            src="https://i.postimg.cc/FRKMfYYb/AAAABXVGEr6zoc-E82-JPf-Lfx5-LREGANJUg3w-PAAPYc-ROD2m-Qg-LMMgz-ne2j-Sx96e-Xv-FIUn1v-Zl-SMj-Xj0-TWujvls-MCUVc-VKic1-QSvf.png"
+          ></b-avatar>
+          <div class="drop">
+            <b-dropdown id="dropdown-left" variant="transparent" class="m-2 dropdown" right="false">
+              <b-dropdown-item href="userProfile">Lista de Favoritos</b-dropdown-item>
+              <b-dropdown-item href="userProfile">Tela de Usuário</b-dropdown-item>
+              <b-dropdown-item href="loginPage">Sair</b-dropdown-item>
+            </b-dropdown>
+          </div>
+        </div>
+      </b-navbar-nav> -->
     </b-navbar>
     <b-navbar class="mobile-navbar p-0" transparency>
       <b-navbar-nav class="navbar-content">

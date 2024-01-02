@@ -17,6 +17,11 @@ module.exports = {
   },
   plugins: ['prettier'], // Adiciona o plugin do Prettier
   rules: {
-    'prettier/prettier': 'error', // Adiciona a regra do Prettier
+    "prettier/prettier": [
+      "error",
+      {
+        "endOfLine": "auto"
+      },
+    ],// Adiciona a regra do Prettier
   },
 };
