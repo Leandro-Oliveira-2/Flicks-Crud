@@ -122,10 +122,16 @@ export default {
     },
     async addFavorite(moveId, title) {
       try {
-        const user = localStorage.getItem('user') // Substitua pelo seu userId
-        const userId = JSON.parse(user).uid
-        console.log(userId)
+        const user = JSON.parse(localStorage.getItem('user')) // Substitua pelo seu userId
+        const userId = user.uid
+        const moviesFavorites = user.favoriteMovies
         await addMovieToFavorites(userId, moveId, title)
+        if (moviesFavorites.id === moveId) {
+          console.log('Filme já adicionado aos favoritos')
+        } else {
+          user.favoriteMovies.push({ id: moveId, title })
+          localStorage.setItem('user', JSON.stringify(user))
+        }
       } catch (error) {
         console.error('Erro ao adicionar filme aos favoritos:', error)
       }

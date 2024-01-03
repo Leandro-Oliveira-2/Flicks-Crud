@@ -4,7 +4,7 @@
     <!--     <b-card-text>Titulo</b-card-text> -->
     <categories-component :movies="movies" />
 
-    <movies-section :movies="movies" :sectionTitle="dynamicTitle" class="mt-5" />
+    <movies-section :movies="favoritMovie" :sectionTitle="dynamicTitle" class="mt-5" />
     <!--     <b-card-text>Titulo</b-card-text> -->
     <movies-section :movies="nowPlaying" :sectionTitle="dynamicTitle2" class="mt-5" />
     <!--     <b-card-text>Titulo</b-card-text> -->
@@ -37,6 +37,7 @@ export default {
       dynamicTitle3: 'Lançados Recentemente',
       topPopular: [],
       nowPlaying: [],
+      favoritMovie: [],
       slides: [
         {
           caption: 'First Slide',
@@ -65,9 +66,37 @@ export default {
         this.$router.push('/loginPage')
       }
     },
+    async getFavoritMovie() {
+      const getFavoritMovie = JSON.parse(window.localStorage.getItem('user'))
+      console.log(getFavoritMovie.favoriteMovies)
+
+      try {
+        if (Array.isArray(getFavoritMovie.favoriteMovies)) {
+          let i = 0
+          getFavoritMovie.favoriteMovies.map((item) => {
+            i++
+            request('GET', `${item.id}`, (response) => {
+              this.favoritMovie.push({
+                id: i,
+                banner: `https://image.tmdb.org/t/p/w1280${response.data.backdrop_path}`,
+                movieId: response.data.id,
+                description: response.data.overview,
+                title: response.data.original_title,
+              })
+              console.log('Resultado da busca por filme favorito')
+              console.log(response.data)
+            })
+          })
+        } else {
+          console.log('favoriteMovies não é um array')
+        }
+      } catch (error) {
+        console.log(error)
+      }
+    },
     async topPlay() {
       try {
-        await request('GET', 'movie/634649/similar?language=en-US&page=1', (response) => {
+        await request('GET', 'upcoming', (response) => {
           console.log(response.data.results)
           let i = 0
           response.data.results.map((item) => {
@@ -139,6 +168,7 @@ export default {
   },
   mounted() {
     this.getPopular()
+    this.getFavoritMovie()
     this.getNowPlaying()
     this.topPlay()
   },

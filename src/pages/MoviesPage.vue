@@ -37,6 +37,7 @@ export default {
       dynamicTitle3: 'Lançados Recentemente',
       topPopular: [],
       nowPlaying: [],
+      favoritMovie: [],
       slides: [
         {
           caption: 'First Slide',
@@ -77,6 +78,34 @@ export default {
           })
           console.log(response.data.data.list.id)
         })
+      } catch (error) {
+        console.log(error)
+      }
+    },
+    async getFavoritMovie() {
+      const getFavoritMovie = JSON.parse(window.localStorage.getItem('user'))
+      console.log(getFavoritMovie.favoriteMovies)
+
+      try {
+        if (Array.isArray(getFavoritMovie.favoriteMovies)) {
+          let i = 0
+          getFavoritMovie.favoriteMovies.map((item) => {
+            i++
+            request('GET', `${item.id}`, (response) => {
+              this.favoritMovie.push({
+                id: i,
+                banner: `https://image.tmdb.org/t/p/w1280${response.data.backdrop_path}`,
+                movieId: response.data.id,
+                description: response.data.overview,
+                title: response.data.original_title,
+              })
+              console.log('Resultado da busca por filme favorito')
+              console.log(response.data)
+            })
+          })
+        } else {
+          console.log('favoriteMovies não é um array')
+        }
       } catch (error) {
         console.log(error)
       }
@@ -136,6 +165,7 @@ export default {
     this.getPopular()
     this.getNowPlaying()
     this.topPlay()
+    this.getFavoritMovie()
   },
 }
 </script>
