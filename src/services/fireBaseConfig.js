@@ -28,7 +28,6 @@ const login = (email, password) => {
   return signInWithEmailAndPassword(appAuth, email, password)
 }
 const getUser = () => {
-  console.log("OI")
   const usersCollection = collection(db, 'users');
   const querySnapshot = getDocs(usersCollection);
   return console.log(querySnapshot)

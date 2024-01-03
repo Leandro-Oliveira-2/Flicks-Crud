@@ -67,7 +67,7 @@ export default {
     },
     async topPlay() {
       try {
-        await request('GET', '634649/recommendations', (response) => {
+        await request('GET', 'movie/634649/similar?language=en-US&page=1', (response) => {
           console.log(response.data.results)
           let i = 0
           response.data.results.map((item) => {
