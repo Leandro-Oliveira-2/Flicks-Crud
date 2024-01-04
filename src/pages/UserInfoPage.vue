@@ -29,6 +29,36 @@ export default {
       user: JSON.parse(localStorage.getItem('user')),
     }
   },
+  methods: {
+    async verifyFavoriteList() {
+      console.log('oi')
+      const user = JSON.parse(localStorage.getItem('user'))
+
+      if (user && Array.isArray(user.favoriteMovies)) {
+        let uniqueTitles = new Set()
+
+        user.favoriteMovies.forEach((item) => {
+          // Converta o ID para string antes de adicionar ao Set
+          const idString = String(item.id)
+
+          if (uniqueTitles.has(idString)) {
+            console.log(`Duplicated Title: ${item.id}`)
+            uniqueTitles.delete(idString)
+          } else {
+            uniqueTitles.add(idString)
+          }
+        })
+
+        this.favoriteMovies = Array.from(uniqueTitles)
+      } else {
+        console.log('User or favoriteMovies is not defined or not an array.')
+      }
+    },
+  },
+  mounted() {
+    console.log('User data from localStorage:', localStorage.getItem('user'))
+    this.verifyFavoriteList()
+  },
 }
 </script>
 

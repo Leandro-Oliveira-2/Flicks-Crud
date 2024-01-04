@@ -10,9 +10,14 @@
     >
       <Slide v-for="movie in movies" :key="movie.id">
         <div>
-          <b-avatar rounded="sm" :src="movie.banner"></b-avatar>
+          <b-avatar
+            class="genero"
+            rounded="sm"
+            :src="movie.banner"
+            style="width: 80px; height: 80px"
+          ></b-avatar>
         </div>
-        <b-card-title class="text-label-categorie">Label</b-card-title>
+        <b-card-title class="text-label-categorie" style="margin-left: 25%">Label</b-card-title>
       </Slide>
     </Carousel>
   </div>
@@ -67,11 +72,8 @@ export default {
     margin-bottom: -1rem;
     margin-left: -0.5%;
   }
-  .b-avatar {
-    height: 4.4rem;
-    width: 4.4rem;
-    object-fit: cover;
-    border-radius: 5rem;
+  span.b-avatar.genero.badge-secondary.rounded-sm {
+    width: 60px;
   }
   span.b-avatar-img {
     border-radius: 5rem;
@@ -87,9 +89,8 @@ export default {
     font-size: 1rem;
   }
   .text-label-categorie {
-    text-align: center;
     font-size: 0.5rem;
-    margin: 5px 0 0;
+    margin: 7px 0 15px;
   }
 }
 </style>

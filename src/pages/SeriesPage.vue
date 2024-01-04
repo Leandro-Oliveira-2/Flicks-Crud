@@ -86,7 +86,7 @@ export default {
     },
     async getPopular() {
       try {
-        await request('GET', 'top_rated?language=pt-BR&page=1', (response) => {
+        await request('GET', 'discover/movie', { params: { with_genres: '27' } }, (response) => {
           console.log(response.data.results)
           let i = 0
           response.data.results.map((item) => {

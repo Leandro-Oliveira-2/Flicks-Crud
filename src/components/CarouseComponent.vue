@@ -136,13 +136,23 @@ export default {
     updateActiveSlide(newSlide) {
       this.activeSlide = newSlide
     },
-    redirect() {
+    redirect(id) {
+      store.commit('setSelectedMovieUrl', id)
       if (this.activeSlide === 0) {
         store.commit('setSelectedMovieUrl', 634649)
       } else if (this.activeSlide === 1) {
         store.commit('setSelectedMovieUrl', 502356)
       } else if (this.activeSlide === 2) {
         store.commit('setSelectedMovieUrl', 872585)
+      }
+      if (location.href === 'http://localhost:8080/pumpingPage') {
+        if (this.activeSlide === 0) {
+          store.commit('setSelectedMovieUrl', 'https://superflixapi.top/filme/tt6495056')
+        } else if (this.activeSlide === 1) {
+          store.commit('setSelectedMovieUrl', 502356)
+        } else if (this.activeSlide === 2) {
+          store.commit('setSelectedMovieUrl', 872585)
+        }
       }
       // Navegue para a rota 'cineScreen'
       this.$router.push({
@@ -277,11 +287,13 @@ svg.bi.bi-info-circle.ml-auto {
     margin-block-end: -5px;
   }
   img.img-fluid.w-100.d-block {
+    -o-object-position: left;
     object-position: left;
     width: 100%;
-    margin: 41px -172px 0px;
+    margin: 40px -36px 18px;
     height: 311px;
-    object-fit: cover;
+    -o-object-fit: cover;
+    object-fit: scale-down;
   }
   svg.bi.bi-heart {
     display: flex;

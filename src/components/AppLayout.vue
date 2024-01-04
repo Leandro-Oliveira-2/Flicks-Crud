@@ -75,6 +75,7 @@
         <transition name="slide-fade">
           <div v-if="showSearch" class="search-container">
             <font-awesome-icon
+              class="lupa"
               icon="magnifying-glass"
               size="xl"
               style="color: #d5ddec"
@@ -119,6 +120,12 @@ export default {
 }
 </script>
 <style scoped>
+.lupa {
+  margin-left: 47px;
+}
+button.btn.icon-lupa-button.btn-secondary {
+  background-color: transparent;
+}
 .dropdown-menu {
   left: -217px !important;
 }

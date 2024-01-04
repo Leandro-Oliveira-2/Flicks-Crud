@@ -43,11 +43,11 @@
                   <circle cx="8" cy="8" r="8" />
                 </svg>
               </b-button>
-              <b-card-title class="card-title-movie">{{ movie.title }}</b-card-title>
+              <b-card-title class="card-title">{{ movie.title }}</b-card-title>
               <b-card-text class="card-description-text">
                 {{
                   movie.description.length > 210
-                    ? movie.description.substring(0, 160) + '...'
+                    ? movie.description.substring(0, 210) + '...'
                     : movie.description
                 }}
               </b-card-text>
@@ -72,7 +72,7 @@ import store from '@/utils/store'
 import { addMovieToFavorites } from '@/services/fireBaseConfig'
 
 export default {
-  name: 'movies-section',
+  name: 'series-section',
   components: {
     Carousel,
     Slide,
@@ -115,9 +115,6 @@ export default {
     redirect(url) {
       if (url) {
         // Use a mutation para armazenar a URL na store
-        if (url.length > 30) {
-          alert('URl diferente')
-        }
         store.commit('setSelectedMovieUrl', url)
 
         // Navegue para a rota 'cineScreen'
@@ -164,11 +161,10 @@ export default {
   margin-block-end: -100px;
   position: relative; /* Adicione esta linha */
 }
-.card-title-movie {
+.card-title {
   font-size: 1.2rem;
   white-space: break-spaces;
   color: #ffffff;
-  margin-top: -15px;
 }
 .card-description-text {
   text-align: justify;
@@ -333,10 +329,6 @@ li#carousel-fade___BV_indicator_3_ {
   white-space: normal;
 }
 
-.VueCarousel-slide:first-child:hover {
-  padding-left: 3rem;
-}
-
 .card-img-top {
   position: relative;
   vertical-align: top;
@@ -356,32 +348,6 @@ li#carousel-fade___BV_indicator_3_ {
   .movie-container.mt-5 {
     top: -6px;
   }
-  .heart-icon {
-    top: -19px;
-    z-index: 10;
-    left: 58px;
-    width: 15px;
-    height: 15px;
-  }
-  svg.heart-icon.svg-inline--fa.fa-heart {
-    margin: -1px -8px 0;
-  }
-  .bi.bi-circle-fill {
-    top: -21px;
-    left: 50px;
-    width: 25px;
-    height: 25px;
-  }
-  svg:not(:root).svg-inline--fa,
-  svg:not(:host).svg-inline--fa {
-    overflow: visible;
-    box-sizing: content-box;
-    width: 25px;
-  }
-  .VueCarousel-slide:first-child:hover {
-    padding-left: 0;
-  }
-
   .carousel-button {
     position: absolute;
     top: 12%;
@@ -399,33 +365,28 @@ li#carousel-fade___BV_indicator_3_ {
   .card-container:hover .card {
     transform: none; /* Desativa o efeito de zoom */
     width: 200px;
-    height: 480px;
-    top: -102px;
+    height: 400px;
   }
 
   .card:hover .card-body {
     width: 197px;
-    font-size: 1rem;
-    left: -10px;
+    font-size: 0.5vw;
     /* height: 211px; */
     transform: none !important;
   }
   p.card-text.card-description-text {
-    font-size: 0.5rem;
-  }
-  h4.card-title {
-    margin-left: 2%;
-    font-size: 0.9rem;
+    font-size: 1.5vw;
   }
 
   .card-container:hover .card .card-img-top {
     transition: transform 0.3s ease-in-out;
-    margin: 97px 0 45px;
+    margin: 2px 0 70px;
     width: 100%;
   }
+
   .icon-play {
-    height: 25px;
-    width: 25px;
+    height: 35px;
+    width: 35px;
     top: -20px;
     margin-left: -22px;
   }

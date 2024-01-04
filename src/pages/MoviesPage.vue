@@ -9,6 +9,11 @@
     <movies-section :movies="nowPlaying" :sectionTitle="dynamicTitle2" class="mt-5" />
     <!--     <b-card-text>Titulo</b-card-text> -->
     <movies-section :movies="topPopular" :sectionTitle="dynamicTitle3" class="mt-5" />
+    <movies-section :movies="movies" :sectionTitle="dynamicTitle" class="mt-5" />
+    <!--     <b-card-text>Titulo</b-card-text> -->
+    <movies-section :movies="nowPlaying" :sectionTitle="dynamicTitle2" class="mt-5" />
+    <!--     <b-card-text>Titulo</b-card-text> -->
+    <movies-section :movies="topPopular" :sectionTitle="dynamicTitle3" class="mt-5" />
     <FooterComponent />
   </div>
 </template>
@@ -74,6 +79,7 @@ export default {
               movieId: item.id,
               description: item.overview,
               title: item.original_title,
+              isLoading: false,
             })
           })
           console.log(response.data.data.list.id)
@@ -112,6 +118,7 @@ export default {
     },
     async getPopular() {
       try {
+        this.isLoading = true
         await request('GET', 'top_rated?language=pt-BR&page=1', (response) => {
           console.log(response.data.results)
           let i = 0
@@ -123,12 +130,14 @@ export default {
               movieId: item.id,
               description: item.overview,
               title: item.original_title,
+              isFavorit: false,
             })
           })
-          console.log(response.data.data.list.id)
+          this.isLoading = false
         })
       } catch (error) {
         console.log(error)
+        this.isLoading = false
       }
     },
     async getNowPlaying() {
@@ -161,15 +170,26 @@ export default {
       }
     },
   },
-  mounted() {
-    this.getPopular()
-    this.getNowPlaying()
-    this.topPlay()
-    this.getFavoritMovie()
+  async mounted() {
+    try {
+      await Promise.all([
+        this.getPopular(),
+        this.getNowPlaying(),
+        this.topPlay(),
+        this.getFavoritMovie(),
+      ])
+    } catch (error) {
+      console.error('Erro ao carregar dados:', error)
+    } finally {
+      this.isLoading = false // Indica que todas as chamadas foram concluídas
+    }
   },
 }
 </script>
 <style>
+.home {
+  position: static;
+}
 img.img-fluid {
   position: relative;
   width: 100%;

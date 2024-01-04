@@ -27,12 +27,16 @@ export default {
       this.$router.push('/movies')
     },
     handleSlideClick(index) {
+      console.log('handleSlideClick', index)
       const movieId = this.slides[index].movieId
       this.$emit('slide-clicked', movieId)
     },
   },
   computed: {
     url() {
+      if (store.state.selectedMovieUrl.length > 15) {
+        return `${store.state.selectedMovieUrl}`
+      }
       // Obtenha a URL do filme da store
       return `https://embedder.net/e/${store.state.selectedMovieUrl}`
     },

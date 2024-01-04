@@ -40,9 +40,8 @@ export default {
       slides: [
         {
           caption: 'First Slide',
-          imgSrc:
-            'https://i0.wp.com/viciados.net/wp-content/uploads/2021/11/Spider-Man_No_Way_Home_Sem_Volta_Para_Casa_Homem_Aranha_3.webp',
-          movieId: '634649',
+          imgSrc: 'https://iili.io/J5e0OuV.jpg',
+          movieId: 'https://superflixapi.top/filme/tt6495056',
         },
         {
           caption: 'Second Slide',

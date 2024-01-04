@@ -32,8 +32,8 @@ export default {
       reload: window.localStorage.getItem('reload'),
       featuredMovies: [],
       movies: [],
-      dynamicTitle: 'Top Filmes',
-      dynamicTitle2: 'Populares',
+      dynamicTitle: 'Lista de Favoritos',
+      dynamicTitle2: 'Sugestões',
       dynamicTitle3: 'Lançados Recentemente',
       topPopular: [],
       nowPlaying: [],
@@ -69,24 +69,23 @@ export default {
     async getFavoritMovie() {
       const getFavoritMovie = JSON.parse(window.localStorage.getItem('user'))
       console.log(getFavoritMovie.favoriteMovies)
-
       try {
         if (Array.isArray(getFavoritMovie.favoriteMovies)) {
-          let i = 0
-          getFavoritMovie.favoriteMovies.map((item) => {
-            i++
-            request('GET', `${item.id}`, (response) => {
-              this.favoritMovie.push({
-                id: i,
-                banner: `https://image.tmdb.org/t/p/w1280${response.data.backdrop_path}`,
-                movieId: response.data.id,
-                description: response.data.overview,
-                title: response.data.original_title,
+          for (let i = 0; i < getFavoritMovie.favoriteMovies.length; i++) {
+            const item = getFavoritMovie.favoriteMovies[i]
+            await new Promise((resolve) => {
+              request('GET', `${item.id}`, (response) => {
+                this.favoritMovie.push({
+                  id: i + 1,
+                  banner: `https://image.tmdb.org/t/p/w1280${response.data.backdrop_path}`,
+                  movieId: response.data.id,
+                  description: response.data.overview,
+                  title: response.data.original_title,
+                })
+                resolve()
               })
-              console.log('Resultado da busca por filme favorito')
-              console.log(response.data)
             })
-          })
+          }
         } else {
           console.log('favoriteMovies não é um array')
         }
