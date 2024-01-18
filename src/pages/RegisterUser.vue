@@ -1,5 +1,5 @@
 <template>
-  <div class="space">
+  <div class="register-user">
     <b-container fluid class="login">
       <b-navbar-brand href="#" class="img-logo">
         <img center class="desktop-image" src="../../public/Images/Frame.png" alt="Kitten" />
@@ -183,7 +183,7 @@ export default {
   },
 }
 </script>
-<style>
+<style scoped>
 .row {
   display: flex;
   width: 902px;
@@ -191,7 +191,7 @@ export default {
   justify-content: center;
   align-items: center;
 }
-.space {
+.register-user {
   background-color: #141414;
   width: 100vw;
   height: 100vh;

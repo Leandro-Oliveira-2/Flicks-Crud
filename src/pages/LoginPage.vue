@@ -89,6 +89,7 @@ export default {
       checked: false,
       password: '',
       userData: null,
+      showAdditionalInfoModal: false,
     }
   },
   methods: {
@@ -96,7 +97,6 @@ export default {
       if (localStorage.getItem('reload') == 1) {
         logout()
         localStorage.clear()
-        window.location.reload()
       }
       logout()
       localStorage.clear()
