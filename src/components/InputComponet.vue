@@ -113,4 +113,15 @@ svg:not(:host).svg-inline--fa {
   justify-content: center; /* Alinha horizontalmente ao centro */
   align-items: left; /* Alinha verticalmente ao centro */
 }
+
+@media screen and (max-width: 600px) {
+  .form-control {
+    background-color: #202024;
+    border: none;
+    width: 200px;
+  }
+  .input#__BVID__13 {
+    max-width: 300px !important;
+  }
+}
 </style>

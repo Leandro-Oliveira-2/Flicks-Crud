@@ -66,9 +66,27 @@ export default {
         this.$router.push('/loginPage')
       }
     },
+    moviesEquals(list1, list2) {
+      console.log(list1.length)
+      console.log(list2.length)
+      const equalMovies = list1.filter((item1) =>
+        list2.map((item2) => item2.movieId).includes(item1.id),
+      )
+
+      const modifiedList = list1
+        .filter((item1) => !equalMovies.map((item2) => item2.id).includes(item1.id))
+        .concat(equalMovies.map((movie) => ({ ...movie, favorit: true })))
+
+      return modifiedList
+    },
+    filterForEquals(favoritMovies, moviesForVerification) {
+      console.log(favoritMovies)
+      console.log('^^^^^^')
+      console.log(moviesForVerification)
+      return favoritMovies.filter((movie) => movie.id === moviesForVerification.movieId)
+    },
     async getFavoritMovie() {
       const getFavoritMovie = JSON.parse(window.localStorage.getItem('user'))
-      console.log(getFavoritMovie.favoriteMovies)
       try {
         if (Array.isArray(getFavoritMovie.favoriteMovies)) {
           for (let i = 0; i < getFavoritMovie.favoriteMovies.length; i++) {
@@ -81,7 +99,10 @@ export default {
                   movieId: response.data.id,
                   description: response.data.overview,
                   title: response.data.original_title,
+                  favorit: true,
                 })
+                console.log('^^^^^^Filmes Favotiros')
+                console.log(this.moviesEquals(getFavoritMovie.favoriteMovies, this.favoritMovie))
                 resolve()
               })
             })
@@ -95,8 +116,9 @@ export default {
     },
     async topPlay() {
       try {
+        const getFavoritMovie = JSON.parse(window.localStorage.getItem('user'))
+        getFavoritMovie.favoriteMovies
         await request('GET', 'upcoming', (response) => {
-          console.log(response.data.results)
           let i = 0
           response.data.results.map((item) => {
             i++
@@ -108,7 +130,9 @@ export default {
               title: item.original_title,
             })
           })
-          console.log(response.data.data.list.id)
+          console.log(this.moviesEquals(getFavoritMovie.favoriteMovies, this.topPopular))
+
+          console.log('Pós filtro')
         })
       } catch (error) {
         console.log(error)

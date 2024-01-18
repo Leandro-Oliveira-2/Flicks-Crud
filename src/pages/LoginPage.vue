@@ -14,7 +14,7 @@
               placeholder="jhondoe@example.com"
               v-model="email"
               :InputSize="400"
-              :type="email"
+              :type="'email'"
             />
           </b-col>
           <b-col>
@@ -111,6 +111,7 @@ export default {
         const additionalInfo = await this.fetchAdditionalUserInfo(user.uid)
 
         this.userData = { ...user, ...additionalInfo, idToken }
+        console.log('entrei')
         this.$router.push('/movies')
         localStorage.setItem('user', JSON.stringify(this.userData))
       } catch (error) {

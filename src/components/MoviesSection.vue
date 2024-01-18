@@ -32,6 +32,11 @@
               </b-button>
               <b-button @click="addFavorite(movie.movieId, movie.title)">
                 <font-awesome-icon icon="heart" class="heart-icon" style="color: #141414" />
+                <i
+                  v-if="movie.favorit == true"
+                  class="fa-solid fa-heart fa-lg"
+                  style="color: #b20710"
+                ></i>
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   width="36"
@@ -149,6 +154,18 @@ export default {
 </script>
 
 <style>
+.card-container,
+.card {
+  cursor: pointer;
+}
+
+i.fa-solid.fa-heart {
+  margin: -98px -117px 0px 0px;
+  z-index: 10;
+  width: 83px !important;
+  height: 0px;
+}
+
 .heart-icon {
   top: -30px;
   z-index: 10;
@@ -245,6 +262,11 @@ button.btn.btn-secondary {
   width: 100%;
   height: 100%;
   border-radius: 2%;
+  box-shadow: rgba(0, 0, 0, 0.17) 0px -23px 25px 0px inset,
+    rgba(0, 0, 0, 0.15) 0px -36px 30px 0px inset, rgba(0, 0, 0, 0.1) 0px -79px 40px 0px inset,
+    rgba(0, 0, 0, 0.06) 0px 2px 1px, rgba(0, 0, 0, 0.09) 0px 4px 2px,
+    rgba(0, 0, 0, 0.09) 0px 8px 4px, rgba(0, 0, 0, 0.09) 0px 16px 8px,
+    rgba(0, 0, 0, 0.09) 0px 32px 16px;
 }
 
 li#carousel-fade___BV_indicator_1_ {
@@ -395,12 +417,6 @@ li#carousel-fade___BV_indicator_3_ {
     height: 90%;
     width: 50px;
     margin: 0 -10px 0;
-  }
-  .card-container:hover .card {
-    transform: none; /* Desativa o efeito de zoom */
-    width: 200px;
-    height: 480px;
-    top: -102px;
   }
 
   .card:hover .card-body {

@@ -26,11 +26,6 @@ export default {
     redirect() {
       this.$router.push('/movies')
     },
-    handleSlideClick(index) {
-      console.log('handleSlideClick', index)
-      const movieId = this.slides[index].movieId
-      this.$emit('slide-clicked', movieId)
-    },
   },
   computed: {
     url() {

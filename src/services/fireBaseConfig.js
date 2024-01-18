@@ -82,7 +82,7 @@ const signInWithGoogle = async (router) => {
   try {
     const resultado = await signInWithPopup(getAuth(), googleProvider);
     const user = resultado.user;
-    console.log('Login com Google bem-sucedido:', user);
+    Alert('Login com Google bem-sucedido:', user);
     router.push('/movies')
   } catch (erro) {
     console.error('Erro no login com Google:', erro);
@@ -94,7 +94,7 @@ const logout = async () => {
 
   try {
     await signOut(auth);
-    console.log('Usuário deslogado com sucesso.');
+    Alert('Usuário deslogado com sucesso.');
   } catch (error) {
     console.error('Erro ao fazer logout:', error);
   }
@@ -107,14 +107,13 @@ const checkAuth = async () => {
         unsubscribe();
 
         if (user) {
-          console.log('Usuário autenticado:', user);
           resolve(user);
         } else {
           console.log('Usuário não autenticado');
           const currentRoute = router.currentRoute;
 
           if (currentRoute.path !== '/loginPage') {
-            window.location.href = '/loginPage';
+            router.replace('/loginPage');
           }
           reject(new Error('Usuário não autenticado'));
         }
@@ -125,6 +124,7 @@ const checkAuth = async () => {
     throw error;
   }
 };
+
 
 const signInWithFacebook = async (router) => {
   try {

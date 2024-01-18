@@ -79,6 +79,11 @@ const routes = [
     component: () => import(/* webpackChunkName: "cineScreen" */ '../pages/CineScreen.vue'),
     props: true,
   },
+  {
+    path: '*',
+    name: 'not-found',
+    component: () => import('../pages/NotFoundPage.vue'),
+  },
 ]
 
 const router = new VueRouter({
