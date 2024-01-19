@@ -76,6 +76,7 @@ import InputComponet from '@/components/InputComponet.vue'
 import { signInWithGoogle } from '@/services/fireBaseConfig'
 import { signInWithFacebook } from '@/services/fireBaseConfig'
 import { logout } from '../services/fireBaseConfig'
+import Alert from '../utils/Alert'
 
 export default {
   name: 'LoginPage',
@@ -109,11 +110,9 @@ export default {
         const idToken = await user.getIdToken()
 
         const additionalInfo = await this.fetchAdditionalUserInfo(user.uid)
-
         this.userData = { ...user, ...additionalInfo, idToken }
-        console.log('entrei')
-        this.$router.push('/movies')
         localStorage.setItem('user', JSON.stringify(this.userData))
+        this.$router.push('/movies')
       } catch (error) {
         console.log(error.code)
         if (error.code === 'auth/invalid-credential') {
@@ -122,7 +121,13 @@ export default {
       }
     },
     async signInWithGoogle() {
-      await signInWithGoogle(this.$router)
+      Alert('AQUI NO lOGIN')
+      try {
+        const res = await signInWithGoogle(this.$router)
+        console.log(res)
+      } catch (error) {
+        console.error(error)
+      }
     },
     async signInWithFacebook() {
       await signInWithFacebook(this.$router)
@@ -143,7 +148,7 @@ export default {
   },
 }
 </script>
-<style>
+<style scoped>
 .link-container {
   font-size: 14px;
   display: flex;

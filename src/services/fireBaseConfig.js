@@ -77,15 +77,73 @@ const addMovieToFavorites = async (userId, movieId, movieName) => {
   }
 };
 
-
 const signInWithGoogle = async (router) => {
   try {
     const resultado = await signInWithPopup(getAuth(), googleProvider);
+    console.log('entrei no resultado')
+    console.log(resultado.user)
     const user = resultado.user;
-    Alert('Login com Google bem-sucedido:', user);
-    router.push('/movies')
-  } catch (erro) {
-    console.error('Erro no login com Google:', erro);
+    const userDocRef = doc(db, 'users', user.uid);
+
+    // Verificar se o usuário já está cadastrado
+    const userDocSnapshot = await getDoc(userDocRef);
+    console.log(userDocRef)
+    if (!userDocSnapshot.exists()) {
+      // Se o usuário não estiver cadastrado, adicionar informações ao Firestore
+      await setDoc(userDocRef, {
+        nome: user.displayName,
+        cpf: '',
+        dataNascimento: '',
+        favoriteMovies: [],
+      });
+      console.log('entreei no if')
+      Alert(`Cadastro com Google bem-sucedido: ${user.displayName}`);
+      const userData = {
+        ...user, ...{
+          nome: user.displayName,
+          cpf: '',
+          dataNascimento: '',
+          favoriteMovies: [],
+        }
+      };
+      localStorage.setItem('user', JSON.stringify(userData));
+    } else {
+      const userDocRef = doc(db, 'users', resultado.user.uid)
+      const userDoc = await getDoc(userDocRef)
+      const list = []
+      if (userDoc.exists()) {
+        const { favoriteMovies } = userDoc.data();
+        console.log('favoriteMovies', favoriteMovies)
+        if (favoriteMovies) {
+          favoriteMovies.map((movie) => {
+            list.push(movie);
+          });
+        }
+      }
+      console.log('Favoritos ^^')
+      console.log(user)
+      console.log('prints a cima')
+      const userData = {
+        ...user, ...{
+          cpf: userDoc._document.data.value.mapValue.fields.cpf,
+          dataNascimento: userDoc._document.data.value.mapValue.fields.dataNascimento,
+          nome: userDoc._document.data.value.mapValue.fields.favoriteMovies.arrayValue,
+          favoriteMovies: list,
+        }
+      };
+      localStorage.setItem('user', JSON.stringify(userData));
+      Alert(`Login com Google bem-sucedido: ${user.displayName}`);
+
+    }
+
+    // Obter informações adicionais após login (pode ser necessário, dependendo da lógica do seu aplicativo
+
+    // Definir as informações do usuário no localStorage
+    // Redirecione para a página desejada
+    return { success: true, message: `Login com Google bem-sucedido: ${user.displayName}` }, router.push('/movies');
+  } catch (error) {
+    console.error('Erro no login com Google:', error);
+    return { success: false, message: 'Erro no login com Google' };
   }
 };
 

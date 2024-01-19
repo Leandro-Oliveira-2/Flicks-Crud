@@ -87,6 +87,8 @@ export default {
     },
     async getFavoritMovie() {
       const getFavoritMovie = JSON.parse(window.localStorage.getItem('user'))
+      console.log(getFavoritMovie)
+      console.log('^^^^^^Filmes Favotiros')
       try {
         if (Array.isArray(getFavoritMovie.favoriteMovies)) {
           for (let i = 0; i < getFavoritMovie.favoriteMovies.length; i++) {

@@ -140,7 +140,7 @@ export default {
   },
 }
 </script>
-<style>
+<style scoped>
 .carousel-component {
   z-index: 0;
 }

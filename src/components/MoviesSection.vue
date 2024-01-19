@@ -233,7 +233,7 @@ button.btn.btn-secondary {
   background-color: #f3141400;
 }
 .movie-container.mt-5 {
-  top: -45vh;
+  top: -55vh;
   z-index: 10;
 }
 
@@ -281,7 +281,7 @@ li#carousel-fade___BV_indicator_3_ {
 
 .card-container:hover .card .card-img-top {
   transition: transform 0.3s ease-in-out;
-  margin: 180px 0 70px;
+  margin: 176px 0 70px 0px;
 }
 
 .card-container:hover .card .card-body {
@@ -307,7 +307,7 @@ li#carousel-fade___BV_indicator_3_ {
 
 .card-img-top.mobile {
   width: 100%;
-  height: 200px; /* Ajuste conforme necessário */
+  height: 120px; /* Ajuste conforme necessário */
 }
 
 .card-body {
