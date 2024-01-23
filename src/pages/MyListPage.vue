@@ -19,6 +19,7 @@ import CarouseComponent from '@/components/CarouseComponent.vue'
 import FooterComponent from '@/components/FooterComponent.vue'
 import request from '../utils/request'
 import CategoriasComponentVue from '@/components/CategoriasComponent.vue'
+import { getFavoriteMovies } from '@/services/fireBaseConfig'
 export default {
   name: 'MyListPage',
   components: {
@@ -86,13 +87,13 @@ export default {
       return favoritMovies.filter((movie) => movie.id === moviesForVerification.movieId)
     },
     async getFavoritMovie() {
-      const getFavoritMovie = JSON.parse(window.localStorage.getItem('user'))
-      console.log(getFavoritMovie)
-      console.log('^^^^^^Filmes Favotiros')
+      const userUid = JSON.parse(window.localStorage.getItem('user'))
+      const getFavoritMovie = await getFavoriteMovies(userUid.uid)
+      console.log('^^^^^^Filmes Favotiros', getFavoritMovie)
       try {
-        if (Array.isArray(getFavoritMovie.favoriteMovies)) {
-          for (let i = 0; i < getFavoritMovie.favoriteMovies.length; i++) {
-            const item = getFavoritMovie.favoriteMovies[i]
+        if (Array.isArray(getFavoritMovie)) {
+          for (let i = 0; i < getFavoritMovie.length; i++) {
+            const item = getFavoritMovie[i]
             await new Promise((resolve) => {
               request('GET', `${item.id}`, (response) => {
                 this.favoritMovie.push({
@@ -103,8 +104,7 @@ export default {
                   title: response.data.original_title,
                   favorit: true,
                 })
-                console.log('^^^^^^Filmes Favotiros')
-                console.log(this.moviesEquals(getFavoritMovie.favoriteMovies, this.favoritMovie))
+                console.log('Favoritos', this.favoritMovie)
                 resolve()
               })
             })

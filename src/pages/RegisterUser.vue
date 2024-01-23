@@ -110,6 +110,7 @@ export default {
       email: '',
       password: '',
       confirPassword: '',
+      uid: '',
       additionalAttributes: {
         nome: '',
         cpf: '',
@@ -127,8 +128,21 @@ export default {
         return Alert('Preencha todos os campos', 'd')
       }
       try {
-        await signUp(this.email, this.password, this.additionalAttributes)
+        await signUp(this.email, this.password, this.additionalAttributes).then((res) => {
+          this.uid = res.uid
+        })
+
+        this.userData = {
+          email: this.email,
+          ...this.additionalAttributes,
+          ...{ uid: this.uid },
+        }
+
+        localStorage.setItem('user', JSON.stringify(this.userData))
         Alert('Usuário cadastrado com sucesso!')
+        this.$router.push({
+          name: 'movies',
+        })
         console.log('Usuário cadastrado com sucesso!')
       } catch (error) {
         console.log(error.code)

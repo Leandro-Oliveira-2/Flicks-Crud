@@ -11,8 +11,8 @@
       <div>
         <strong>Filmes Favoritos:</strong>
         <ul v-if="user.favoriteMovies.length">
-          <li v-for="movie in user.favoriteMovies" :key="movie.id">
-            {{ movie.name }}
+          <li v-for="movie in this.favoritos" :key="movie.id">
+            {{ movie.name ? movie.name : movie.title }}
           </li>
         </ul>
         <p v-else>Nenhum filme favorito adicionado.</p>
@@ -22,46 +22,36 @@
 </template>
 
 <script>
+import { getFavoriteMovies } from '@/services/fireBaseConfig'
 export default {
   name: 'UserProfile',
   data() {
     return {
       user: JSON.parse(localStorage.getItem('user')),
+      uid: localStorage.getItem('user').id,
+      favoritos: [],
     }
   },
   methods: {
+    console() {
+      console.log('Aquiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii -----------------------------')
+    },
+    getUserFavoritList() {
+      console.log('negocio chato daaaaaaaaa', this.user.uid)
+    },
     async verifyFavoriteList() {
-      console.log('oi')
-      const user = JSON.parse(localStorage.getItem('user'))
-
-      if (user && Array.isArray(user.favoriteMovies)) {
-        let uniqueTitles = new Set()
-
-        user.favoriteMovies.forEach((item) => {
-          // Converta o ID para string antes de adicionar ao Set
-          const idString = String(item.id)
-
-          if (uniqueTitles.has(idString)) {
-            console.log(`Duplicated Title: ${item.id}`)
-            uniqueTitles.delete(idString)
-          } else {
-            uniqueTitles.add(idString)
-          }
-        })
-
-        this.favoriteMovies = Array.from(uniqueTitles)
-      } else {
-        console.log('User or favoriteMovies is not defined or not an array.')
-      }
+      console.log('User data from localStorage ------------------:', this.user)
+      this.favoritos = await getFavoriteMovies(this.user.uid)
+      console.log('Favoritos do user ------------------:', this.favoritos)
     },
   },
   mounted() {
-    console.log('User data from localStorage:', localStorage.getItem('user'))
+    this.getUserFavoritList()
+    this.console()
     this.verifyFavoriteList()
   },
 }
 </script>
-
 <style scoped>
 .title {
   padding-left: 2rem !important;

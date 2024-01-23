@@ -159,6 +159,23 @@ export default {
   cursor: pointer;
 }
 
+.card {
+  background-color: #f3141400;
+  position: relative;
+  border-radius: 2%;
+}
+
+.card-container:hover .card {
+  background-color: #202024;
+  position: absolute;
+  top: -120px;
+  transition: background-color 0.2s ease-in-out; /* Adicione esta linha para a transição de cor de fundo */
+  z-index: 1;
+  width: 100%;
+  height: 100%;
+  border-radius: 2%;
+}
+
 i.fa-solid.fa-heart {
   margin: -98px -117px 0px 0px;
   z-index: 10;
@@ -229,8 +246,20 @@ button.btn.btn-secondary {
   align-items: center;
   margin-top: 10px;
 }
-.card {
-  background-color: #f3141400;
+.card:hover {
+  position: relative;
+  top: -150px;
+  transform: scale(1.3);
+  transition: transform 0.2s ease-in-out;
+  z-index: 1;
+  width: 100%;
+  height: 100%;
+  border-radius: 2%;
+  box-shadow: rgba(0, 0, 0, 0.17) 0px -23px 25px 0px inset,
+    rgba(0, 0, 0, 0.15) 0px -36px 30px 0px inset, rgba(0, 0, 0, 0.1) 0px -79px 40px 0px inset,
+    rgba(0, 0, 0, 0.06) 0px 2px 1px, rgba(0, 0, 0, 0.09) 0px 4px 2px,
+    rgba(0, 0, 0, 0.09) 0px 8px 4px, rgba(0, 0, 0, 0.09) 0px 16px 8px,
+    rgba(0, 0, 0, 0.09) 0px 32px 16px;
 }
 .movie-container.mt-5 {
   top: -55vh;
@@ -244,8 +273,8 @@ button.btn.btn-secondary {
 .card-container:hover .card {
   background-color: #202024;
   position: absolute;
-  transform: scale(1.3);
-  transition: transform 0.2s ease-in-out;
+  top: -120px;
+  transition: background-color 0.2s ease-in-out; /* Adicione esta linha para a transição de cor de fundo */
   z-index: 1;
   width: 100%;
   height: 100%;

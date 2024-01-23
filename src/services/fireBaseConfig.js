@@ -46,7 +46,23 @@ const signUp = async (email, password, additionalAttributes) => {
     throw error
   }
 }
+const getFavoriteMovies = async (userId) => {
+  const userDocRef = doc(db, 'users', userId);
 
+  try {
+    // Obtenha os dados atuais do usuário
+    const userDocSnapshot = await getDoc(userDocRef);
+    const userData = userDocSnapshot.data();
+
+    // Verifique se o array favoriteMovies já existe, se não, retorne uma array vazia
+    const favoriteMovies = userData.favoriteMovies || [];
+    return favoriteMovies;
+  } catch (error) {
+    console.error('Erro ao obter lista de filmes favoritos:', error);
+    // Em vez de retornar null, você pode lançar um erro ou tomar outra ação apropriada conforme necessário.
+    return null;
+  }
+};
 const addMovieToFavorites = async (userId, movieId, movieName) => {
   const userDocRef = doc(db, 'users', userId);
 
@@ -59,21 +75,24 @@ const addMovieToFavorites = async (userId, movieId, movieName) => {
     const favoriteMovies = userData.favoriteMovies || [];
 
     // Verifique se o filme já está na lista de favoritos
-    const isMovieAlreadyAdded = favoriteMovies.some(movie => movie.id === movieId);
+    const existingMovieIndex = favoriteMovies.findIndex(movie => movie.id === movieId);
 
-    if (!isMovieAlreadyAdded) {
+    if (existingMovieIndex === -1) {
       // Adicione o novo objeto à lista de favoritos
       favoriteMovies.push({ id: movieId, name: movieName });
-
-      // Atualize o documento do usuário no Firestore
-      await setDoc(userDocRef, { favoriteMovies }, { merge: true });
-
       Alert('Filme adicionado aos favoritos com sucesso.');
     } else {
-      Alert('Filme já está na lista de favoritos.');
+      // Remova o filme da lista de favoritos
+      favoriteMovies.splice(existingMovieIndex, 1);
+      Alert('Filme removido da lista de favoritos.');
     }
+
+    // Atualize o documento do usuário no Firestore
+    await setDoc(userDocRef, { favoriteMovies }, { merge: true });
+
   } catch (error) {
-    console.error('Erro ao adicionar filme aos favoritos:', error);
+    console.error('Erro ao adicionar/remover filme dos favoritos:', error);
+    Alert('Erro ao processar a operação.');
   }
 };
 
@@ -123,12 +142,15 @@ const signInWithGoogle = async (router) => {
       console.log('Favoritos ^^')
       console.log(user)
       console.log('prints a cima')
+      console.log('user', user.email)
       const userData = {
-        ...user, ...{
-          cpf: userDoc._document.data.value.mapValue.fields.cpf,
-          dataNascimento: userDoc._document.data.value.mapValue.fields.dataNascimento,
-          nome: userDoc._document.data.value.mapValue.fields.favoriteMovies.arrayValue,
+        ...{
+          cpf: userDoc._document.data.value.mapValue.fields.cpf.stringValue,
+          email: user.email,
+          dataNascimento: userDoc._document.data.value.mapValue.fields.dataNascimento.stringValue,
+          nome: user.displayName,
           favoriteMovies: list,
+          uid: user.uid,
         }
       };
       localStorage.setItem('user', JSON.stringify(userData));
@@ -196,4 +218,4 @@ const signInWithFacebook = async (router) => {
 }
 
 
-export { login, signUp, db, signInWithGoogle, signInWithFacebook, checkAuth, logout, getUser, addMovieToFavorites }
+export { login, signUp, db, signInWithGoogle, signInWithFacebook, checkAuth, logout, getUser, addMovieToFavorites,getFavoriteMovies}

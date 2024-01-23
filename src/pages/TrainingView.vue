@@ -1,12 +1,18 @@
 <template>
-  <div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
-    <iframe style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;" src="https://www.youtube.com/embed/SBoODpO-DT0?autoplay=1" title="YouTube video player" frameborder="0" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+  <div class="body">
+    <div class="teste">
+      <modal-component />
+    </div>
   </div>
 </template>
 
 <script>
+import modalComponent from '@/components/modalComponent.vue';
 export default {
   name: 'TrainingView',
+  components: {
+    'modal-component':modalComponent,
+  },
   methods: {
     async fullScreen() {
       console.log('teste')
@@ -29,3 +35,21 @@ export default {
   },
 }
 </script>
+
+<style>
+ .body {
+    width: 100%;
+    height: 1000px;
+    background-color: #f5dfdf;
+ }
+ .teste {
+    width: 100%;
+    display: flex;
+    height: 10%;
+    justify-content: space-around;
+    background-color: red;
+    align-content: space-between;
+    flex-direction: row;
+    align-items: center;
+}
+</style>
