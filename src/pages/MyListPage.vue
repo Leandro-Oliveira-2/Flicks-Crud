@@ -9,6 +9,8 @@
     <movies-section :movies="nowPlaying" :sectionTitle="dynamicTitle2" class="mt-5" />
     <!--     <b-card-text>Titulo</b-card-text> -->
     <movies-section :movies="topPopular" :sectionTitle="dynamicTitle3" class="mt-5" />
+
+    <movies-section :movies="movies" :sectionTitle="dynamicTitle" class="mt-5" />
     <FooterComponent />
   </div>
 </template>
@@ -67,25 +69,6 @@ export default {
         this.$router.push('/loginPage')
       }
     },
-    moviesEquals(list1, list2) {
-      console.log(list1.length)
-      console.log(list2.length)
-      const equalMovies = list1.filter((item1) =>
-        list2.map((item2) => item2.movieId).includes(item1.id),
-      )
-
-      const modifiedList = list1
-        .filter((item1) => !equalMovies.map((item2) => item2.id).includes(item1.id))
-        .concat(equalMovies.map((movie) => ({ ...movie, favorit: true })))
-
-      return modifiedList
-    },
-    filterForEquals(favoritMovies, moviesForVerification) {
-      console.log(favoritMovies)
-      console.log('^^^^^^')
-      console.log(moviesForVerification)
-      return favoritMovies.filter((movie) => movie.id === moviesForVerification.movieId)
-    },
     async getFavoritMovie() {
       const userUid = JSON.parse(window.localStorage.getItem('user'))
       const getFavoritMovie = await getFavoriteMovies(userUid.uid)
@@ -116,10 +99,13 @@ export default {
         console.log(error)
       }
     },
+    compararPorId(objetoA, objetoB) {
+      return objetoA.id === objetoB.id
+    },
     async topPlay() {
       try {
         const getFavoritMovie = JSON.parse(window.localStorage.getItem('user'))
-        getFavoritMovie.favoriteMovies
+
         await request('GET', 'upcoming', (response) => {
           let i = 0
           response.data.results.map((item) => {
@@ -146,7 +132,7 @@ export default {
           console.log(response.data.results)
           let i = 0
           response.data.results.map((item) => {
-            i++
+            item.i++
             this.movies.push({
               id: i,
               banner: `https://image.tmdb.org/t/p/w1280${item.backdrop_path}`,

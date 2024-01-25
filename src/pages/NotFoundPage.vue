@@ -17,6 +17,7 @@ export default {
 .not-found {
   text-align: center;
 }
+
 img {
   width: 100%;
   height: 720px;
@@ -30,7 +31,7 @@ img {
   flex-direction: column;
   margin-top: -543px;
   margin-left: 35%;
-  background-color: #141414b8;
+  background-color: #14141400;
   z-index: 1000;
   position: relative;
   justify-content: space-evenly;
@@ -39,5 +40,7 @@ img {
 
 h1 {
   font-size: 8rem;
+  color: #ffffff; /* Cor do texto */
+  text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
 }
 </style>
