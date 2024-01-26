@@ -38,9 +38,9 @@ export default {
       dynamicTitle: 'Lista de Favoritos',
       dynamicTitle2: 'Sugestões',
       dynamicTitle3: 'Lançados Recentemente',
+      favoritMovie: [],
       topPopular: [],
       nowPlaying: [],
-      favoritMovie: [],
       slides: [
         {
           caption: 'First Slide',
@@ -72,7 +72,6 @@ export default {
     async getFavoritMovie() {
       const userUid = JSON.parse(window.localStorage.getItem('user'))
       const getFavoritMovie = await getFavoriteMovies(userUid.uid)
-      console.log('^^^^^^Filmes Favotiros', getFavoritMovie)
       try {
         if (Array.isArray(getFavoritMovie)) {
           for (let i = 0; i < getFavoritMovie.length; i++) {
@@ -87,7 +86,6 @@ export default {
                   title: response.data.original_title,
                   favorit: true,
                 })
-                console.log('Favoritos', this.favoritMovie)
                 resolve()
               })
             })
@@ -104,8 +102,6 @@ export default {
     },
     async topPlay() {
       try {
-        const getFavoritMovie = JSON.parse(window.localStorage.getItem('user'))
-
         await request('GET', 'upcoming', (response) => {
           let i = 0
           response.data.results.map((item) => {
@@ -118,10 +114,21 @@ export default {
               title: item.original_title,
             })
           })
-          console.log(this.moviesEquals(getFavoritMovie.favoriteMovies, this.topPopular))
-
-          console.log('Pós filtro')
         })
+        this.topPopular = this.topPopular.map((item) => {
+          if (this.favoritMovie.find((item2) => item2.movieId === item.movieId)) {
+            return {
+              ...item,
+              favorit: true,
+            }
+          } else {
+            return {
+              ...item,
+              favorit: false,
+            }
+          }
+        })
+        console.log(this.topPopular)
       } catch (error) {
         console.log(error)
       }
@@ -141,7 +148,19 @@ export default {
               title: item.original_title,
             })
           })
-          console.log(response.data.data.list.id)
+        })
+        this.movies = this.movies.map((item) => {
+          if (this.favoritMovie.find((item2) => item2.movieId === item.movieId)) {
+            return {
+              ...item,
+              favorit: true,
+            }
+          } else {
+            return {
+              ...item,
+              favorit: false,
+            }
+          }
         })
       } catch (error) {
         console.log(error)
@@ -166,6 +185,19 @@ export default {
         }).catch((error) => {
           console.error('Erro na solicitação now_playing:', error)
         })
+        this.nowPlaying = this.nowPlaying.map((item) => {
+          if (this.favoritMovie.find((item2) => item2.movieId === item.movieId)) {
+            return {
+              ...item,
+              favorit: true,
+            }
+          } else {
+            return {
+              ...item,
+              favorit: false,
+            }
+          }
+        })
       } catch (error) {
         console.log(error)
       }
@@ -177,11 +209,11 @@ export default {
       }
     },
   },
-  mounted() {
-    this.getPopular()
-    this.getFavoritMovie()
-    this.getNowPlaying()
-    this.topPlay()
+  async mounted() {
+    await this.getFavoritMovie()
+    await this.getPopular()
+    await this.getNowPlaying()
+    await this.topPlay()
   },
 }
 </script>

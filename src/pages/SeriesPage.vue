@@ -21,6 +21,7 @@ import request from '../utils/request'
 import FooterComponent from '@/components/FooterComponent.vue'
 import CategoriasComponentVue from '@/components/CategoriasComponent.vue'
 import NavBar from '@/components/NavBarComponent.vue'
+import { getFavoriteMovies } from '../services/fireBaseConfig'
 export default {
   name: 'SeriesPage',
   components: {
@@ -38,6 +39,7 @@ export default {
       dynamicTitle: 'Top Filmes',
       dynamicTitle2: 'Populares',
       dynamicTitle3: 'Lançados Recentemente',
+      favoritMovie: [],
       topPopular: [],
       nowPlaying: [],
       slides: [
@@ -63,10 +65,40 @@ export default {
     }
   },
   methods: {
+    async getFavoritMovie() {
+      const userUid = JSON.parse(window.localStorage.getItem('user'))
+      const getFavoritMovie = await getFavoriteMovies(userUid.uid)
+      try {
+        if (Array.isArray(getFavoritMovie)) {
+          for (let i = 0; i < getFavoritMovie.length; i++) {
+            const item = getFavoritMovie[i]
+            await new Promise((resolve) => {
+              request('GET', `${item.id}`, (response) => {
+                this.favoritMovie.push({
+                  id: i + 1,
+                  banner: `https://image.tmdb.org/t/p/w1280${response.data.backdrop_path}`,
+                  movieId: response.data.id,
+                  description: response.data.overview,
+                  title: response.data.original_title,
+                  favorit: true,
+                })
+                resolve()
+              })
+            })
+          }
+        } else {
+          console.log('favoriteMovies não é um array')
+        }
+      } catch (error) {
+        console.log(error)
+      }
+    },
+    compararPorId(objetoA, objetoB) {
+      return objetoA.id === objetoB.id
+    },
     async topPlay() {
       try {
         await request('GET', 'upcoming', (response) => {
-          console.log(response.data.results)
           let i = 0
           response.data.results.map((item) => {
             i++
@@ -78,8 +110,21 @@ export default {
               title: item.original_title,
             })
           })
-          console.log(response.data.data.list.id)
         })
+        this.topPopular = this.topPopular.map((item) => {
+          if (this.favoritMovie.find((item2) => item2.movieId === item.movieId)) {
+            return {
+              ...item,
+              favorit: true,
+            }
+          } else {
+            return {
+              ...item,
+              favorit: false,
+            }
+          }
+        })
+        console.log(this.topPopular)
       } catch (error) {
         console.log(error)
       }
@@ -90,7 +135,7 @@ export default {
           console.log(response.data.results)
           let i = 0
           response.data.results.map((item) => {
-            i++
+            item.i++
             this.movies.push({
               id: i,
               banner: `https://image.tmdb.org/t/p/w1280${item.backdrop_path}`,
@@ -99,7 +144,19 @@ export default {
               title: item.original_title,
             })
           })
-          console.log(response.data.data.list.id)
+        })
+        this.movies = this.movies.map((item) => {
+          if (this.favoritMovie.find((item2) => item2.movieId === item.movieId)) {
+            return {
+              ...item,
+              favorit: true,
+            }
+          } else {
+            return {
+              ...item,
+              favorit: false,
+            }
+          }
         })
       } catch (error) {
         console.log(error)
@@ -109,18 +166,33 @@ export default {
       try {
         await request('GET', 'now_playing', (response) => {
           console.log(response.data.results)
-          let i = 0
-          response.data.results.map((item) => {
-            i++
+
+          this.nowPlaying = []
+
+          response.data.results.forEach((item, index) => {
             this.nowPlaying.push({
-              id: i,
-              banner: `https://image.tmdb.org/t/p/w1280${item.backdrop_path}`,
+              id: index + 1,
+              banner: `https://image.tmdb.org/t/p/w1280${item.backdrop_path || ''}`,
               movieId: item.id,
               description: item.overview,
               title: item.original_title,
             })
           })
-          console.log(response.data.data.list.id)
+        }).catch((error) => {
+          console.error('Erro na solicitação now_playing:', error)
+        })
+        this.nowPlaying = this.nowPlaying.map((item) => {
+          if (this.favoritMovie.find((item2) => item2.movieId === item.movieId)) {
+            return {
+              ...item,
+              favorit: true,
+            }
+          } else {
+            return {
+              ...item,
+              favorit: false,
+            }
+          }
         })
       } catch (error) {
         console.log(error)
@@ -133,10 +205,11 @@ export default {
       }
     },
   },
-  mounted() {
-    this.getPopular()
-    this.getNowPlaying()
-    this.topPlay()
+  async mounted() {
+    await this.getFavoritMovie()
+    await this.getPopular()
+    await this.getNowPlaying()
+    await this.topPlay()
   },
 }
 </script>
