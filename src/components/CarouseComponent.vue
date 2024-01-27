@@ -195,7 +195,7 @@ img.img-fluid {
   width: 500px;
   display: flex;
   text-align: justify;
-  top: 65%;
+  top: 58%;
   left: 16rem;
   transform: translate(-50%, -50%);
   z-index: 10;

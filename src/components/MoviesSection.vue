@@ -30,7 +30,7 @@
               >
                 <font-awesome-icon class="icon-play" icon="circle-play" size="2xl" />
               </b-button>
-              <b-button @click="addFavorite(movie.movieId, movie.title)">
+              <b-button @click="addFavorite(movie.movieId, movie.title)" class="favoritButton">
                 <font-awesome-icon icon="heart" class="heart-icon" style="color: #141414" />
                 <i
                   v-if="movie.favorit == true"
@@ -154,227 +154,36 @@ export default {
 </script>
 
 <style>
-.card-container,
-.card {
-  cursor: pointer;
-}
-
-.card {
-  background-color: #f3141400;
-  position: relative;
-  border-radius: 2%;
-}
-
-.card-container:hover .card {
-  background-color: #202024;
-  position: absolute;
-  top: -120px;
-  transition: background-color 0.2s ease-in-out; /* Adicione esta linha para a transição de cor de fundo */
-  z-index: 1;
-  width: 100%;
-  height: 100%;
-  border-radius: 2%;
-}
-
-i.fa-solid.fa-heart {
-  margin: -98px -117px 0px 0px;
-  z-index: 10;
-  width: 83px !important;
-  height: 0px;
-}
-
-.heart-icon {
-  top: -30px;
-  z-index: 10;
-  left: 70px;
-}
-.bi.bi-circle-fill {
-  top: -30px;
-  left: 61px;
-}
-
-.movie-container.hovered {
-  z-index: 100;
-  margin-block-end: -100px;
-  position: relative; /* Adicione esta linha */
-}
-.card-title-movie {
-  font-size: 1.2rem;
-  white-space: break-spaces;
-  color: #ffffff;
-  margin-top: -15px;
-}
-.card-description-text {
-  text-align: justify;
-  font-size: 0.6rem;
-}
-.icon-button {
-  background-color: transparent;
-}
-.icon-button.custom-link:active {
-  width: 500px;
-  border: none;
-}
-.btn-secondary:not(:disabled):not(.disabled):active {
-  border: none;
-}
-.custom-link {
-  color: #ffffff; /* Define a cor do texto para branco */
-  background-color: white;
-  text-decoration: none; /* Remove sublinhado padrão */
-}
-button.btn.btn-secondary {
-  white-space: nowrap;
-  display: flex;
-  width: 0;
-  padding: var(--flix-sys-radius-base, 0px) 0px !important;
-  justify-content: center;
-  align-items: center;
-  border: none;
-}
-
-.icon-play {
-  height: 35px;
-  width: 35px;
-  top: -30px;
-  margin-left: -40px;
-}
-
-.button-container {
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
-  margin-top: 10px;
-}
-.card:hover {
-  position: relative;
-  top: -150px;
-  transform: scale(1.3);
-  transition: transform 0.2s ease-in-out;
-  z-index: 1;
-  width: 100%;
-  height: 100%;
-  border-radius: 2%;
-  box-shadow: rgba(0, 0, 0, 0.17) 0px -23px 25px 0px inset,
-    rgba(0, 0, 0, 0.15) 0px -36px 30px 0px inset, rgba(0, 0, 0, 0.1) 0px -79px 40px 0px inset,
-    rgba(0, 0, 0, 0.06) 0px 2px 1px, rgba(0, 0, 0, 0.09) 0px 4px 2px,
-    rgba(0, 0, 0, 0.09) 0px 8px 4px, rgba(0, 0, 0, 0.09) 0px 16px 8px,
-    rgba(0, 0, 0, 0.09) 0px 32px 16px;
-}
 .movie-container.mt-5 {
-  top: -55vh;
   z-index: 10;
-}
-
-.movie-container {
+  padding-left: 2.5rem;
   position: relative;
-  overflow: hidden; /* Adicionado para evitar que o card ampliado ultrapasse os limites do contêiner */
-}
-.card-container:hover .card {
-  background-color: #202024;
-  position: absolute;
-  top: -120px;
-  transition: background-color 0.2s ease-in-out; /* Adicione esta linha para a transição de cor de fundo */
-  z-index: 1;
-  width: 100%;
-  height: 100%;
-  border-radius: 2%;
+  top: -58vh;
 }
 
-.card-container .card:hover {
-  background-color: #202024;
-  position: relative;
-  top: -150px;
-  transform: scale(1.3);
-  transition: transform 0.2s ease-in-out;
-  z-index: 1;
-  width: 100%;
-  height: 100%;
-  border-radius: 2%;
-  box-shadow: rgba(0, 0, 0, 0.17) 0px -23px 25px 0px inset,
-    rgba(0, 0, 0, 0.15) 0px -36px 30px 0px inset, rgba(0, 0, 0, 0.1) 0px -79px 40px 0px inset,
-    rgba(0, 0, 0, 0.06) 0px 2px 1px, rgba(0, 0, 0, 0.09) 0px 4px 2px,
-    rgba(0, 0, 0, 0.09) 0px 8px 4px, rgba(0, 0, 0, 0.09) 0px 16px 8px,
-    rgba(0, 0, 0, 0.09) 0px 32px 16px;
+.card-body {
+  display: none;
 }
-
-li#carousel-fade___BV_indicator_1_ {
-  background-color: #ffffff00;
-}
-li#carousel-fade___BV_indicator_2_ {
-  background-color: #ffffff00;
-}
-li#carousel-fade___BV_indicator_3_ {
-  background-color: #ffffff00;
-}
-
-.card-container:hover .card .card-img-top {
-  transition: transform 0.3s ease-in-out;
-  margin: 176px 0 70px 0px;
-}
-
-.card-container:hover .card .card-body {
-  position: relative;
-  display: block;
-}
-
 .card-container:hover .card > div:nth-child(1) {
   padding: 80px !important;
   position: relative;
   display: block;
 }
-
-.card-img-top {
-  object-fit: cover; /* Adicionado para evitar que a imagem suba */
-}
-
 .card:hover .card-body {
-  width: 300px;
-  height: 150px;
-  transform: none !important;
-}
-
-.card-img-top.mobile {
-  width: 100%;
-  height: 120px; /* Ajuste conforme necessário */
-}
-
-.card-body {
-  display: none;
-  border: none;
-}
-.movie-container {
-  position: relative;
-}
-.movie-container {
-  z-index: 1;
-}
-.carousel-button {
-  position: absolute;
-  top: 15%;
-  background: none;
-  border: none;
+  display: block;
   cursor: pointer;
-  opacity: 0;
-  transition: opacity 0.3s;
-  backdrop-filter: blur(2px);
-  background-color: rgba(0, 0, 0, 0.368);
-  height: 85%;
-  width: 50px;
-  margin: 0 -10px 0;
-  opacity: 1;
-  top: 5vh;
-  height: 85%;
+  width: 350px;
+  height: 190px;
+  border-radius: 2%;
+  background-color: #202024;
+  box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px,
+    rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px,
+    rgba(0, 0, 0, 0.09) 0px -3px 5px;
 }
 
-.prev {
-  left: 10px;
+.card:hover .card-img-top.mobile {
+  cursor: pointer;
 }
-
-.next {
-  right: 10px;
-}
-
 .VueCarousel-slide {
   box-sizing: border-box;
   display: inline-block;
@@ -384,23 +193,109 @@ li#carousel-fade___BV_indicator_3_ {
   white-space: normal;
 }
 
-.VueCarousel-slide:first-child:hover {
-  padding-left: 3rem;
+.card:hover {
+  z-index: 1;
+  border-radius: 2%;
+  box-shadow: rgba(0, 0, 0, 0.17) 0px -23px 25px 0px inset,
+    rgba(0, 0, 0, 0.15) 0px -36px 30px 0px inset, rgba(0, 0, 0, 0.1) 0px -79px 40px 0px inset,
+    rgba(0, 0, 0, 0.06) 0px 2px 1px, rgba(0, 0, 0, 0.09) 0px 4px 2px,
+    rgba(0, 0, 0, 0.09) 0px 8px 4px, rgba(0, 0, 0, 0.09) 0px 16px 8px,
+    rgba(0, 0, 0, 0.09) 0px 32px 16px;
 }
 
-.card-img-top {
-  position: relative;
-  vertical-align: top;
-  padding: 0 0 0.2;
+.card-title-movie {
+  font-size: 1.2rem;
+  white-space: break-spaces;
+  color: #ffffff;
+  margin-top: -27px;
 }
-.card-body {
-  flex: 1 1 auto;
-  min-height: 1px;
-  padding: 0.75rem;
+.card-description-text {
+  text-align: justify;
+  font-size: 0.7rem;
 }
-.mt-5 {
-  top: 0px;
-  margin-left: 2rem;
+/* Icones  */
+i.fa-solid.fa-heart {
+  margin: -96px 199px 0px 0px;
+  z-index: 10;
+  width: 83px !important;
+  height: 0px;
+}
+
+.icon-play {
+  margin: 45px 0px 0px -50px;
+}
+.heart-icon {
+  top: -30px;
+  z-index: 10;
+  left: 70px;
+}
+.heart-icon {
+  top: 239px;
+  z-index: 10;
+  left: 4.1rem;
+  width: 30px;
+  height: 16px;
+}
+
+.bi.bi-circle-fill {
+  top: 238px;
+  left: 56px;
+  width: 50px;
+  height: 32px;
+}
+/* li */
+li#carousel-fade___BV_indicator_1_ {
+  background-color: #ffffff00;
+  display: none;
+}
+li#carousel-fade___BV_indicator_2_ {
+  background-color: #ffffff00;
+  display: none;
+}
+li#carousel-fade___BV_indicator_3_ {
+  background-color: #c92f2f;
+  display: none;
+}
+/* BOTÕES */
+button.carousel-button.prev {
+  margin-left: 95%;
+}
+button.btn.link-light.btn-secondary {
+  margin-top: 10%;
+}
+.favoritButton:active {
+  border: none;
+}
+.btn-secondary:focus,
+.btn-secondary.focus {
+  color: #fff;
+  border: none;
+  box-shadow: 0 0 0 0.2rem rgb(130 138 145 / 0%) !important;
+}
+.favoritButton {
+  width: 30px; /* ajuste o tamanho conforme necessário */
+  height: 30px; /* ajuste o tamanho conforme necessário */
+  background-color: transparent !important;
+  border: none;
+  padding: 0; /* remova qualquer padding adicional */
+}
+
+.carousel-button {
+  position: absolute;
+  top: 15%;
+  background: none;
+  border: none;
+  cursor: pointer;
+  opacity: 0;
+  transition: opacity 0.3s;
+  backdrop-filter: blur(2px);
+  background-color: rgba(0, 0, 0, 0);
+  height: 85%;
+  width: 50px;
+  margin: 0 -10px 0;
+  opacity: 1;
+  top: 5vh;
+  height: 85%;
 }
 
 @media (max-width: 600px) {
@@ -447,7 +342,6 @@ li#carousel-fade___BV_indicator_3_ {
     width: 50px;
     margin: 0 -10px 0;
   }
-
   .card:hover .card-body {
     width: 197px;
     font-size: 1rem;
