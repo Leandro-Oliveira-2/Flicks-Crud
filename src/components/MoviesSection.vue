@@ -164,6 +164,9 @@ export default {
 .card-body {
   display: none;
 }
+.card-body:hover .carousel-button.prev {
+  visibility: hidden;
+}
 .card-container:hover .card > div:nth-child(1) {
   padding: 80px !important;
   position: relative;

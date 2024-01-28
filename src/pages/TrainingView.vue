@@ -15,7 +15,6 @@ export default {
   },
   methods: {
     async fullScreen() {
-      console.log('teste')
       window.addEventListener('load', function() {
         var event = new KeyboardEvent('keydown', {
           key: 'f',

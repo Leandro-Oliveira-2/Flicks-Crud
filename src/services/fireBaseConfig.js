@@ -99,14 +99,11 @@ const addMovieToFavorites = async (userId, movieId, movieName) => {
 const signInWithGoogle = async (router) => {
   try {
     const resultado = await signInWithPopup(getAuth(), googleProvider);
-    console.log('entrei no resultado')
-    console.log(resultado.user)
     const user = resultado.user;
     const userDocRef = doc(db, 'users', user.uid);
 
     // Verificar se o usuário já está cadastrado
     const userDocSnapshot = await getDoc(userDocRef);
-    console.log(userDocRef)
     if (!userDocSnapshot.exists()) {
       // Se o usuário não estiver cadastrado, adicionar informações ao Firestore
       await setDoc(userDocRef, {
@@ -115,7 +112,6 @@ const signInWithGoogle = async (router) => {
         dataNascimento: '',
         favoriteMovies: [],
       });
-      console.log('entreei no if')
       Alert(`Cadastro com Google bem-sucedido: ${user.displayName}`);
       const userData = {
         ...user, ...{
@@ -132,17 +128,12 @@ const signInWithGoogle = async (router) => {
       const list = []
       if (userDoc.exists()) {
         const { favoriteMovies } = userDoc.data();
-        console.log('favoriteMovies', favoriteMovies)
         if (favoriteMovies) {
           favoriteMovies.map((movie) => {
             list.push(movie);
           });
         }
       }
-      console.log('Favoritos ^^')
-      console.log(user)
-      console.log('prints a cima')
-      console.log('user', user.email)
       const userData = {
         ...{
           cpf: userDoc._document.data.value.mapValue.fields.cpf.stringValue,
@@ -157,11 +148,6 @@ const signInWithGoogle = async (router) => {
       Alert(`Login com Google bem-sucedido: ${user.displayName}`);
 
     }
-
-    // Obter informações adicionais após login (pode ser necessário, dependendo da lógica do seu aplicativo
-
-    // Definir as informações do usuário no localStorage
-    // Redirecione para a página desejada
     return { success: true, message: `Login com Google bem-sucedido: ${user.displayName}` }, router.push('/movies');
   } catch (error) {
     console.error('Erro no login com Google:', error);
@@ -174,7 +160,6 @@ const logout = async () => {
 
   try {
     await signOut(auth);
-    Alert('Usuário deslogado com sucesso.');
   } catch (error) {
     console.error('Erro ao fazer logout:', error);
   }

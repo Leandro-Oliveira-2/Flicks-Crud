@@ -135,4 +135,35 @@ button.btn.btn-secondary {
   align-items: center;
   border: none;
 }
+@media screen and (max-width: 600px) {
+  .btn-secondary.btn-danger {
+    min-width: 284px !important;
+    height: 50px;
+    left: -20px;
+    padding: 12px 20px;
+    color: rgb(255, 255, 255);
+  }
+  svg.bi.bi-google {
+    margin-left: -50px;
+  }
+  vector {
+    margin-left: -53px;
+  }
+  .link-container {
+    margin-left: -57px;
+  }
+  .desktop-image[data-v-16d8eba4] {
+    width: 100px;
+    margin-block-end: 20px;
+    height: 87px;
+    top: 159px;
+    left: 667px;
+  }
+  span[data-v-16d8eba4] {
+    width: 232px;
+    height: 22px;
+    color: #7c7c8a;
+    margin-block-end: 30px;
+  }
+}
 </style>

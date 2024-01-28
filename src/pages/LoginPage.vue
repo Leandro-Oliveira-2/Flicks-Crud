@@ -103,6 +103,10 @@ export default {
       localStorage.clear()
     },
     async login() {
+      if (!this.email || !this.password) {
+        Alert('Preencha todos os campos')
+        return
+      }
       try {
         const userCredential = await login(this.email, this.password)
         const user = userCredential.user
@@ -114,14 +118,12 @@ export default {
         localStorage.setItem('user', JSON.stringify(this.userData))
         this.$router.push('/movies')
       } catch (error) {
-        console.log(error.code)
         if (error.code === 'auth/invalid-credential') {
-          alert('Os dados não conferem')
+          Alert('Os dados não conferem')
         }
       }
     },
     async signInWithGoogle() {
-      Alert('AQUI NO lOGIN')
       try {
         const res = await signInWithGoogle(this.$router)
         console.log(res)
@@ -240,5 +242,13 @@ label.custom-control-label {
   font-size: 1rem;
   white-space: nowrap;
   color: #7c7c8a;
+}
+
+@media screen and (max-width: 600px) {
+  .row {
+    display: flex;
+    width: 351px;
+    flex-direction: column;
+  }
 }
 </style>

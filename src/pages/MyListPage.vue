@@ -128,7 +128,6 @@ export default {
             }
           }
         })
-        console.log(this.topPopular)
       } catch (error) {
         console.log(error)
       }
@@ -136,7 +135,6 @@ export default {
     async getPopular() {
       try {
         await request('GET', 'top_rated?language=pt-BR&page=1', (response) => {
-          console.log(response.data.results)
           let i = 0
           response.data.results.map((item) => {
             item.i++
@@ -169,8 +167,6 @@ export default {
     async getNowPlaying() {
       try {
         await request('GET', 'now_playing', (response) => {
-          console.log(response.data.results)
-
           this.nowPlaying = []
 
           response.data.results.forEach((item, index) => {

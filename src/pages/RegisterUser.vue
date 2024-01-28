@@ -127,6 +127,9 @@ export default {
       if (this.nome == '' || this.cpf == '' || this.dataNascimento == '') {
         return Alert('Preencha todos os campos', 'd')
       }
+      if (this.validateCpf(this.cpf) == false) {
+        return Alert('CPF inválido', 'd')
+      }
       try {
         await signUp(this.email, this.password, this.additionalAttributes).then((res) => {
           this.uid = res.uid
@@ -165,7 +168,9 @@ export default {
         console.error('Erro ao cadastrar usuário:', error.message)
       }
     },
-    validateCpf(strCPF) {
+    async validateCpf(strCPF) {
+      strCPF = strCPF.replace(/[^\d]+/g, '')
+      Number(strCPF)
       var Soma
       var Resto
       Soma = 0

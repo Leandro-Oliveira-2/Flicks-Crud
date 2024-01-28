@@ -118,7 +118,7 @@ svg:not(:host).svg-inline--fa {
   .form-control {
     background-color: #202024;
     border: none;
-    width: 200px;
+    width: 285px;
   }
   .input#__BVID__13 {
     max-width: 300px !important;

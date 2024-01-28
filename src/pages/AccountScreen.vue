@@ -59,6 +59,7 @@ import { doc, getDoc } from 'firebase/firestore'
 import ButtonComponent from '@/components/ButtonComponent.vue'
 import InputComponet from '@/components/InputComponet.vue'
 import { signInWithGoogle } from '@/services/fireBaseConfig'
+import Alert from '../utils/Alert'
 
 export default {
   name: 'account-screen',
@@ -82,16 +83,12 @@ export default {
 
         // Após o login, busca informações adicionais do usuário no Firestore
         const additionalInfo = await this.fetchAdditionalUserInfo(user.uid)
-        console.log('additionalInfo', additionalInfo)
-        console.log('Usuário logado com sucesso:', user)
         // Combina as informações do usuário e as informações adicionais
         this.userData = { ...user, ...additionalInfo }
         this.$router.push('/movies')
-        console.log('Usuário logado com sucesso:', this.userData)
       } catch (error) {
-        console.log(error.code)
         if (error.code === 'auth/invalid-credential') {
-          alert('Os dados não conferem')
+          Alert('Os dados não conferem')
         }
       }
     },

@@ -36,7 +36,7 @@ export default {
 .video {
   width: 100%;
   height: auto;
-  animation: zoom 2s forwards, fadeOut 1s 2.5s forwards;
+  animation: zoom 3s forwards, fadeOut 1s 2.5s forwards;
 }
 
 @keyframes zoom {

@@ -33,16 +33,8 @@ export default {
     }
   },
   methods: {
-    console() {
-      console.log('Aquiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii -----------------------------')
-    },
-    getUserFavoritList() {
-      console.log('negocio chato daaaaaaaaa', this.user.uid)
-    },
     async verifyFavoriteList() {
-      console.log('User data from localStorage ------------------:', this.user)
       this.favoritos = await getFavoriteMovies(this.user.uid)
-      console.log('Favoritos do user ------------------:', this.favoritos)
     },
   },
   mounted() {
