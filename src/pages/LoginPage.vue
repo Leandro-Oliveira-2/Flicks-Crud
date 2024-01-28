@@ -250,5 +250,12 @@ label.custom-control-label {
     width: 351px;
     flex-direction: column;
   }
+  .login[data-v-16d8eba4] {
+    margin-left: 1%;
+    left: 517px;
+  }
+  .navbar-brand.img-logo {
+    margin-left: -2%;
+  }
 }
 </style>

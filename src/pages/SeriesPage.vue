@@ -2,7 +2,7 @@
   <div class="seriesPage">
     <carousel-component :slides="slides" />
     <!--     <b-card-text>Titulo</b-card-text> -->
-    <categories-component :movies="movies" />
+    <categories-component :movies="categoriasMovies" />
     <!-- text -->
     <movies-section :movies="movies" :sectionTitle="dynamicTitle" class="mt-5" />
     <!--     <b-card-text>Titulo</b-card-text> -->
@@ -60,6 +60,40 @@ export default {
           imgSrc:
             'https://occ-0-5514-3851.1.nflxso.net/dnm/api/v6/6AYY37jfdO6hpXcMjf9Yu5cnmO0/AAAABQnffHFDiWLP1apeR8hWLXZvEiZaA86y6aMOE_Zsp-pWkeyiqB1Ad-hR-N9XAwgJuOO0B4rn3G5L2LBGA-S4ejYjvUQwf6Y0TOuq.webp?r=005',
           url: 'https://embedder.net/e/155',
+        },
+      ],
+      categoriasMovies: [
+        {
+          id: 1,
+          title: 'Ação',
+          tela: 'SeriesPage',
+          banner: 'https://tm.ibxk.com.br/2021/12/02/02070127889006.jpg?ims=1200x675',
+        },
+        {
+          id: 2,
+          title: 'Aventura',
+          tela: 'MyListPage',
+          banner: 'https://s.aficionados.com.br/imagens/indiana-jones-0.jpg',
+        },
+        {
+          id: 3,
+          title: 'Comédia',
+          tela: 'PumpingPage',
+          banner:
+            'https://s2-techtudo.glbimg.com/DIt9dHn8OaTksXuZ_P6I3z6cKbA=/0x0:1200x688/984x0/smart/filters:strip_icc()/i.s3.glbimg.com/v1/AUTH_08fbf48bc0524877943fe86e43087e7a/internal_photos/bs/2023/M/t/hUSS1ETauxF4Du1tZYoA/as-branquelas.jpg',
+        },
+        {
+          id: 4,
+          title: 'Drama',
+          tela: 'HomeView',
+          banner: 'https://cdn.folhape.com.br/img/pc/1100/1/dn_arquivo/2022/05/tudobemnao.jpg',
+        },
+        {
+          id: 5,
+          title: 'Ficção Científica',
+          tela: 'SeriesPage',
+          banner:
+            'https://edocbrasil.com.br/wp-content/uploads/2023/04/ficcao-cientifica-e-fantasia-jpg.webp',
         },
       ],
     }

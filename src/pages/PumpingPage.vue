@@ -2,7 +2,7 @@
   <div class="home">
     <carousel-component :slides="slides" @slide-clicked="redirectToCineScreen" />
     <!--     <b-card-text>Titulo</b-card-text> -->
-    <categories-component :movies="movies" />
+    <categories-component :movies="categoriasMovies" />
 
     <movies-section :movies="movies" :sectionTitle="dynamicTitle" class="mt-5" />
     <!--     <b-card-text>Titulo</b-card-text> -->
@@ -56,6 +56,40 @@ export default {
           imgSrc:
             'https://img.olhardigital.com.br/wp-content/uploads/2023/07/Destaque-Poster-de-Oppenheimer.jpg',
           url: 'https://embedder.net/e/155',
+        },
+      ],
+      categoriasMovies: [
+        {
+          id: 1,
+          title: 'Ação',
+          tela: 'SeriesPage',
+          banner: 'https://tm.ibxk.com.br/2021/12/02/02070127889006.jpg?ims=1200x675',
+        },
+        {
+          id: 2,
+          title: 'Aventura',
+          tela: 'MyListPage',
+          banner: 'https://s.aficionados.com.br/imagens/indiana-jones-0.jpg',
+        },
+        {
+          id: 3,
+          title: 'Comédia',
+          tela: 'PumpingPage',
+          banner:
+            'https://s2-techtudo.glbimg.com/DIt9dHn8OaTksXuZ_P6I3z6cKbA=/0x0:1200x688/984x0/smart/filters:strip_icc()/i.s3.glbimg.com/v1/AUTH_08fbf48bc0524877943fe86e43087e7a/internal_photos/bs/2023/M/t/hUSS1ETauxF4Du1tZYoA/as-branquelas.jpg',
+        },
+        {
+          id: 4,
+          title: 'Drama',
+          tela: 'HomeView',
+          banner: 'https://cdn.folhape.com.br/img/pc/1100/1/dn_arquivo/2022/05/tudobemnao.jpg',
+        },
+        {
+          id: 5,
+          title: 'Ficção Científica',
+          tela: 'SeriesPage',
+          banner:
+            'https://edocbrasil.com.br/wp-content/uploads/2023/04/ficcao-cientifica-e-fantasia-jpg.webp',
         },
       ],
     }

@@ -56,7 +56,19 @@ const routes = [
   {
     path: '/training',
     name: 'training',
-    component: () => import(/* webpackChunkName: "training" */ '../pages/TrainingView.vue'),
+    component: () =>
+      import(/* webpackChunkName: "training" */ '../components/CategoriasComponent.vue'),
+  },
+  {
+    path: '/ categories',
+    name: 'CategoriesComponent',
+    component: () =>
+      import(/* webpackChunkName: "training" */ '../components/CategoriasComponent.vue'),
+  },
+  {
+    path: '/movies',
+    name: 'HomeView', // Nome da rota
+    component: () => import(/* webpackChunkName: "training" */ '../pages/MoviesPage.vue'), // Componente associado à rota
   },
   {
     path: '/loginPage',

@@ -11,6 +11,16 @@
 <script>
 export default {
   name: 'NotFoundPage',
+  methods: {
+    redirect() {
+      this.$router.push({ name: 'LoginPage' })
+    },
+  },
+  mounted() {
+    setTimeout(() => {
+      this.redirect()
+    }, 3000)
+  },
 }
 </script>
 <style scoped>
@@ -42,5 +52,16 @@ h1 {
   font-size: 8rem;
   color: #ffffff; /* Cor do texto */
   text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
+}
+
+@media (max-width: 600px) {
+  img {
+    width: 649px;
+    height: 1415px;
+  }
+  .title-mensage[data-v-f378f97c] {
+    margin-top: -889px;
+    margin-left: 15%;
+  }
 }
 </style>

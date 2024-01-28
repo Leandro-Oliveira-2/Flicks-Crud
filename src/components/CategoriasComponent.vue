@@ -9,7 +9,7 @@
       class="carousel"
     >
       <Slide v-for="movie in movies" :key="movie.id">
-        <div>
+        <div @click="redirect(movie.tela)">
           <b-avatar
             class="genero"
             rounded="sm"
@@ -17,13 +17,17 @@
             style="width: 80px; height: 80px"
           ></b-avatar>
         </div>
-        <b-card-title class="text-label-categorie" style="margin-left: 25%">Label</b-card-title>
+        <b-card-title class="text-label-categorie" style="margin-left: 25%">{{
+          movie.title
+        }}</b-card-title>
       </Slide>
     </Carousel>
   </div>
 </template>
+
 <script>
 import { Carousel, Slide } from 'vue-carousel'
+
 export default {
   name: 'CategoriesComponent',
   components: {
@@ -44,16 +48,9 @@ export default {
     }
   },
   methods: {
-    next() {
-      if (this.currentPage < this.categories.length - this.perPage) {
-        this.currentPage++
-        this.hasScrolled = true
-      }
-    },
-    prev() {
-      if (this.currentPage > 0) {
-        this.currentPage--
-      }
+    redirect(categoryName) {
+      // Aqui você redireciona para a rota com o nome da categoria
+      this.$router.push({ name: categoryName })
     },
   },
 }

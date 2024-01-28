@@ -305,8 +305,12 @@ button.btn.link-light.btn-secondary {
 
 @media (max-width: 600px) {
   .movie-container.mt-5 {
-    padding-left: 2%;
+    padding-left: 3%;
     top: auto;
+  }
+  .categoria-conteiner {
+    margin-bottom: -3rem;
+    margin-left: 3.5%;
   }
   button.carousel-button.prev {
     margin-left: 89%;

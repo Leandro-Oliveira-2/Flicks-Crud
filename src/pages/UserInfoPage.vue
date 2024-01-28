@@ -35,11 +35,10 @@ export default {
   methods: {
     async verifyFavoriteList() {
       this.favoritos = await getFavoriteMovies(this.user.uid)
+      console.log(this.favoritos)
     },
   },
   mounted() {
-    this.getUserFavoritList()
-    this.console()
     this.verifyFavoriteList()
   },
 }

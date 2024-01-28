@@ -80,6 +80,7 @@
           :icon="'circle-info'"
           :iconColor="'#fffffff'"
           :body-text="'Mais informações'"
+          @click="abrirSite()"
           :buttonHeight="60"
           :buttonSize="270"
           :dynamicBackground="'rgba(128, 128, 128, 0.6)'"
@@ -102,6 +103,7 @@
           :icon="'circle-info'"
           :iconColor="'#fffffff'"
           :body-text="'Mais informações'"
+          @click="abrirSite()"
           :buttonHeight="60"
           :buttonSize="270"
           :dynamicBackground="'rgba(128, 128, 128, 0.6)'"
@@ -135,6 +137,9 @@ export default {
   methods: {
     updateActiveSlide(newSlide) {
       this.activeSlide = newSlide
+    },
+    abrirSite() {
+      window.open('https://www.adorocinema.com/')
     },
     redirect(id) {
       store.commit('setSelectedMovieUrl', id)

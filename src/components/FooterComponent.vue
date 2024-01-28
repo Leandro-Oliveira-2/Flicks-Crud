@@ -4,7 +4,7 @@
       <div class="container">
         <div class="row">
           <div class="col-md-4">
-            <h5>Contato</h5>
+            <h4>Contato</h4>
             <p>Email: leandropx24@gmail.com</p>
           </div>
           <div class="col-md-4">
@@ -46,6 +46,17 @@ export default {
 }
 </script>
 <style>
+.row {
+  display: flex;
+  flex-direction: row;
+  align-content: center;
+  justify-content: center;
+  align-items: center;
+}
+.footer h5 {
+  color: #fff;
+  margin-left: 26px;
+}
 .container-fluid {
   background-color: #141414;
   margin-top: -150px;
@@ -74,5 +85,31 @@ export default {
 .text-center.p-3 {
   text-align: center;
   width: 100vw;
+}
+
+@media (max-width: 600px) {
+  .footer {
+    text-align: center;
+    margin-top: 10%;
+  }
+
+  .footer h5 {
+    margin-top: 1rem;
+  }
+
+  .col-md-4 {
+    margin-bottom: 2rem;
+  }
+
+  .text-center.p-3 {
+    width: 100%;
+    padding: 10px 0;
+  }
+
+  ul {
+    margin-top: 0;
+    margin-bottom: -25px;
+    margin-block-end: 5%;
+  }
 }
 </style>
