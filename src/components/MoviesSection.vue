@@ -305,88 +305,89 @@ button.btn.link-light.btn-secondary {
 
 @media (max-width: 600px) {
   .movie-container.mt-5 {
-    top: -6px;
+    padding-left: 2%;
+    top: auto;
   }
-  .heart-icon {
-    top: -19px;
-    z-index: 10;
-    left: 58px;
-    width: 15px;
-    height: 15px;
+  button.carousel-button.prev {
+    margin-left: 89%;
   }
-  svg.heart-icon.svg-inline--fa.fa-heart {
-    margin: -1px -8px 0;
+  .card {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    min-width: 128px !important;
+    min-height: 186px;
+    word-wrap: break-word;
+    background-color: #fff;
+    background-clip: border-box;
+    border: 1px solid rgba(0, 0, 0, 0.125);
+    border-radius: 0.25rem;
   }
-  .bi.bi-circle-fill {
-    top: -21px;
-    left: 50px;
-    width: 25px;
-    height: 25px;
-  }
-  svg:not(:root).svg-inline--fa,
-  svg:not(:host).svg-inline--fa {
-    overflow: visible;
-    box-sizing: content-box;
-    width: 25px;
-  }
-  .VueCarousel-slide:first-child:hover {
-    padding-left: 0;
-  }
-
-  .carousel-button {
-    position: absolute;
-    top: 12%;
-    border: none;
-    cursor: pointer;
-    opacity: 0;
-    transition: opacity 0.3s;
-    -webkit-backdrop-filter: blur(2px);
-    backdrop-filter: blur(2px);
-    background-color: rgba(0, 0, 0, 0.368);
-    height: 90%;
-    width: 50px;
-    margin: 0 -10px 0;
-  }
-  .card:hover .card-body {
-    width: 197px;
-    font-size: 1rem;
-    left: -10px;
-    /* height: 211px; */
-    transform: none !important;
-  }
-  p.card-text.card-description-text {
-    font-size: 0.5rem;
-  }
-  h4.card-title {
-    margin-left: 2%;
-    font-size: 0.9rem;
-  }
-
-  .card-container:hover .card .card-img-top {
-    transition: transform 0.3s ease-in-out;
-    margin: 97px 0 45px;
-    width: 100%;
-  }
-  .icon-play {
-    height: 25px;
-    width: 25px;
-    top: -20px;
-    margin-left: -22px;
-  }
-  .movie-container:hover .carousel-button {
-    opacity: 1;
+  .card:hover button.carousel-button.next {
     display: none;
   }
 
-  /* Aplicar estilos específicos para a classe 'mobile' em dispositivos móveis */
-  .card-img-top.mobile {
-    width: 150px;
-    height: 200px; /* Ajuste conforme necessário */
+  .card-container:hover .card > div:nth-child(1) {
+    padding: 80px !important;
+    position: relative;
+    display: block;
+  }
+  .card:hover .card-body {
+    width: 200px;
+    height: 207px;
   }
 
-  .mt-5 {
-    top: 0px;
-    margin-left: 0.5%;
+  .card:hover .card-body {
+    width: 200px;
+  }
+
+  .carousel-button {
+    margin-left: 5px; /* Ajuste a margem esquerda para que os botões não fiquem muito próximos à borda */
+  }
+
+  .card-body {
+    display: none; /* Certifique-se de que o corpo do cartão seja visível */
+  }
+
+  .card-img-top.mobile {
+    max-width: 258px;
+    height: 188px;
+    object-fit: cover;
+  }
+
+  .card:hover .card-img-top.mobile {
+    cursor: default; /* Remova o cursor ao passar sobre a imagem */
+  }
+
+  .card-description-text {
+    font-size: 10px;
+  }
+
+  h4.card-title {
+    margin-left: 2%;
+    font-size: 17px;
+  }
+  .bi.bi-circle-fill {
+    top: 219px;
+    left: 54px;
+    width: 50px;
+    height: 32px;
+  }
+  .heart-icon {
+    top: 220px;
+    left: 64px;
+  }
+  i.fa-solid.fa-heart {
+    margin: -87px 205px 0px 0px;
+    z-index: 10;
+    width: 83px !important;
+    height: 0px;
+  }
+  .heart-icon-mobile {
+    top: auto; /* Remova a posição superior */
+  }
+  .icon-play {
+    margin: 21px 0px 0px -22px;
   }
 }
 </style>

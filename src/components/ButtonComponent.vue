@@ -136,6 +136,13 @@ button.btn.btn-secondary {
   border: none;
 }
 @media screen and (max-width: 600px) {
+  button.btn.btn-secondary.input-theme {
+    min-width: 285px !important;
+    margin-left: -47px !important;
+    height: 50px;
+    padding: 12px 20px;
+    color: rgb(255, 255, 255);
+  }
   .btn-secondary.btn-danger {
     min-width: 284px !important;
     height: 50px;

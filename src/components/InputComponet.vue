@@ -8,7 +8,7 @@
         v-on="$listeners"
         :type="type"
         v-model="value"
-        :style="{ minWidth: buttonSize + 'px' }"
+        :style="{ Width: buttonSize + 'px' }"
       />
       <font-awesome-icon :icon="icon" class="icon" />
     </div>

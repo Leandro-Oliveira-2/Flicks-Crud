@@ -88,6 +88,7 @@
             :buttonSize="250"
             :color="'input-theme'"
             @click="redirect"
+            class="mb-3"
           />
         </b-row>
       </b-form>
@@ -127,9 +128,6 @@ export default {
       if (this.nome == '' || this.cpf == '' || this.dataNascimento == '') {
         return Alert('Preencha todos os campos', 'd')
       }
-      if (this.validateCpf(this.cpf) == false) {
-        return Alert('CPF inválido', 'd')
-      }
       try {
         await signUp(this.email, this.password, this.additionalAttributes).then((res) => {
           this.uid = res.uid
@@ -167,28 +165,6 @@ export default {
 
         console.error('Erro ao cadastrar usuário:', error.message)
       }
-    },
-    async validateCpf(strCPF) {
-      strCPF = strCPF.replace(/[^\d]+/g, '')
-      Number(strCPF)
-      var Soma
-      var Resto
-      Soma = 0
-      if (strCPF == '00000000000') return false
-
-      for (let i = 1; i <= 9; i++) Soma = Soma + parseInt(strCPF.substring(i - 1, i)) * (11 - i)
-      Resto = (Soma * 10) % 11
-
-      if (Resto == 10 || Resto == 11) Resto = 0
-      if (Resto != parseInt(strCPF.substring(9, 10))) return false
-
-      Soma = 0
-      for (let i = 1; i <= 10; i++) Soma = Soma + parseInt(strCPF.substring(i - 1, i)) * (12 - i)
-      Resto = (Soma * 10) % 11
-
-      if (Resto == 10 || Resto == 11) Resto = 0
-      if (Resto != parseInt(strCPF.substring(10, 11))) return false
-      return true
     },
     redirect() {
       this.$router.push('/loginPage')
@@ -268,6 +244,12 @@ span {
     display: flex;
     width: 351px;
     flex-direction: column;
+  }
+  form.d-flex.flex-column.mb-3.justify-content-center {
+    margin-top: -6%;
+    display: flex;
+    align-items: center;
+    margin-left: 11%;
   }
 }
 </style>
