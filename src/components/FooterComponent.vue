@@ -88,11 +88,6 @@ export default {
 }
 
 @media (max-width: 600px) {
-  .footer {
-    text-align: center;
-    margin-top: 10%;
-  }
-
   .footer h5 {
     margin-top: 1rem;
   }
@@ -106,6 +101,10 @@ export default {
     padding: 10px 0;
   }
 
+  .footer {
+    text-align: center;
+    margin-top: 43%;
+  }
   ul {
     margin-top: 0;
     margin-bottom: -25px;

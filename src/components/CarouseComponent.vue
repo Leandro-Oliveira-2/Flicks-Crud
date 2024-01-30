@@ -22,7 +22,7 @@
     <div class="degrade-top">teste</div>
     <div class="degrade">teste</div>
     <div class="d-flex justify-content-between position-absolute w-100" style="z-index: 1">
-      <div class="heart-svg-icon">
+      <div class="heart-svg-icon" @click="favoritar(slides[activeSlide])">
         <svg
           xmlns="http://www.w3.org/2000/svg"
           width="50px"
@@ -140,6 +140,19 @@ export default {
     },
     abrirSite() {
       window.open('https://www.adorocinema.com/')
+    },
+    async favoritar(videoId) {
+      // Extrai o ID do filme da URL
+      let id
+
+      if ('url' in videoId) {
+        // Extrai o ID do objeto com a propriedade "url"
+        id = videoId.url.split('/').pop()
+      } else if ('movieId' in videoId) {
+        // Extrai o ID do objeto com a propriedade "movieId"
+        id = videoId.movieId.split('tt').pop()
+      }
+      console.log(videoId, id)
     },
     redirect(id) {
       store.commit('setSelectedMovieUrl', id)
@@ -310,6 +323,13 @@ svg.bi.bi-info-circle.ml-auto {
   }
   svg.bi.bi-info-circle.ml-auto {
     display: block;
+    left: 328px;
+  }
+  svg.font-icon-search.svg-inline--fa.fa-magnifying-glass.fa-xl {
+    margin-left: -39px;
+  }
+  svg.lupa.svg-inline--fa.fa-magnifying-glass.fa-xl {
+    margin-left: 18px;
   }
   .d-flex.justify-content-between.position-absolute.w-100 {
     margin-top: -10%;

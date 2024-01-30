@@ -347,6 +347,7 @@ button.btn.link-light.btn-secondary {
 
   .carousel-button {
     margin-left: 5px; /* Ajuste a margem esquerda para que os botões não fiquem muito próximos à borda */
+    width: 26px;
   }
 
   .card-body {
